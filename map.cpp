@@ -15,7 +15,7 @@ Map::Map()
 
 }
 
-vector<int> listeNombre(ofstream fichier)
+vector<int> listeNombre(ofstream& fichier)
 {
     // Extraire données du fichier
     if (fichier.is_open())
