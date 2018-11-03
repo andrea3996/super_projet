@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "player.h"
-#include "units.h"
+#include "unit.h"
 #include "map.h"
 
 #include <vector>
@@ -12,14 +12,14 @@ class Game
 {
 private:
     std::vector<Player> players;
-    std::vector<Units> units;
+    std::vector<Unit> units;
     int taille_cellule;
 
 public:
     Game();
     void crier();
     void set_taille_cellule(int i);
-    pair<int,int> calculer_cellule(int x, int y);
+    std::pair<int,int> calculer_cellule(int x, int y);
 
 };
 

@@ -4,10 +4,10 @@
 #include "player.h"
 
 
-class Units
+class Unit
 {
 public:
-    Units(int nx,int ny);
+    Unit(int nx,int ny);
     int get_x();
     int get_y();
 private:

@@ -96,6 +96,8 @@ vector<Cellule> listeCellule(vector<liste> liste)
                 greenearthbase
             if ls(i)== '26'
                 hbridge
+            if ls(i)== '125'
+                temple
 }
 
 /* int** a = new int*[rowCount];

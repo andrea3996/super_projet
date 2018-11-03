@@ -1,6 +1,6 @@
-#include "units.h"
+#include "unit.h"
 
-Units::Units(int nx,int ny)
+Unit::Unit(int nx,int ny)
 // faire constructeur
 {
     x=nx;
@@ -9,12 +9,12 @@ Units::Units(int nx,int ny)
 
 }
 
-int Units::get_x (){
+int Unit::get_x (){
     //redefini la fini dans le header
     return x;
 }
 
 
-int Units::get_y() {
+int Unit::get_y() {
     return y;
 }

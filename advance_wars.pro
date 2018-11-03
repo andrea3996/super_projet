@@ -29,17 +29,17 @@ SOURCES += \
         mainwindow.cpp \
     game.cpp \
     player.cpp \
-    units.cpp \
     map.cpp \
-    cellule.cpp
+    cellule.cpp \
+    unit.cpp
 
 HEADERS += \
         mainwindow.h \
     game.h \
     player.h \
-    units.h \
     map.h \
-    cellule.h
+    cellule.h \
+    unit.h
 
 FORMS += \
         mainwindow.ui
