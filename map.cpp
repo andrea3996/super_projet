@@ -69,7 +69,7 @@ void test() {
 
 
 
-vector<Cellule> listeCellule(vector<liste> liste)
+/*vector<Cellule> listeCellule(vector<liste> liste)
 {
 // renvoit liste de cellules
     for (i
@@ -102,7 +102,7 @@ vector<Cellule> listeCellule(vector<liste> liste)
                 hbridge
             if ls(i)== '125'
                 temple
-}
+}*/
 
 /* int** a = new int*[rowCount];
      for(int i = 0; i < rowCount; ++i)
