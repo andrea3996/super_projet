@@ -24,7 +24,7 @@ vector<int> listeNombre(ifstream& fichier)
         int mot;
         // Mettre slmt les nombres
         while(fichier >> mot)
-            if (mot != ',')
+            if (mot != ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
                 liste.push_back(mot);
                 // insert ne fonctionne pas pour vector, faire pushback !!
