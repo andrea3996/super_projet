@@ -8,14 +8,14 @@
 #include "cellule.h"
 
 using namespace std;
-using std::ofstream;
+using std::ifstream;
 
 Map::Map()
 {
 
 }
 
-vector<int> listeNombre(ofstream& fichier)
+vector<int> listeNombre(ifstream& fichier)
 {
     // Extraire données du fichier
     if (fichier.is_open())
@@ -42,7 +42,11 @@ vector<int> listeNombre(ofstream& fichier)
 }
 
 
-std::vector<std::vector<int> > v (rows, std::vector <int> (column, 4));
+void test() {
+    int rows = 5;
+    int column = 3;
+    std::vector<std::vector<int> > v (rows, std::vector <int> (column, 4));
+}
 
 
 //vector<vector<int>>
