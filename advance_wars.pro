@@ -31,7 +31,21 @@ SOURCES += \
     player.cpp \
     map.cpp \
     cellule.cpp \
-    unit.cpp
+    unit.cpp \
+    usine.cpp \
+    ville.cpp \
+    aeroport.cpp \
+    infantery.cpp \
+    bazooka.cpp \
+    recon.cpp \
+    tank.cpp \
+    antiair.cpp \
+    tankm.cpp \
+    megatank.cpp \
+    neotank.cpp \
+    bcopter.cpp \
+    fighter.cpp \
+    bomber.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,7 +53,21 @@ HEADERS += \
     player.h \
     map.h \
     cellule.h \
-    unit.h
+    unit.h \
+    usine.h \
+    ville.h \
+    aeroport.h \
+    infantery.h \
+    bazooka.h \
+    recon.h \
+    tank.h \
+    antiair.h \
+    tankm.h \
+    megatank.h \
+    neotank.h \
+    bcopter.h \
+    fighter.h \
+    bomber.h
 
 FORMS += \
         mainwindow.ui

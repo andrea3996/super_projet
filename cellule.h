@@ -6,6 +6,9 @@ class Cellule
 {
 public:
     Cellule();
+private:
+    int pointsDeCapture;
+
 };
 
 #endif // CELLULE_H
