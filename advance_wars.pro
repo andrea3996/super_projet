@@ -27,7 +27,6 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    game.cpp \
     player.cpp \
     map.cpp \
     cellule.cpp \
@@ -45,7 +44,30 @@ SOURCES += \
     neotank.cpp \
     bcopter.cpp \
     fighter.cpp \
-    bomber.cpp
+    bomber.cpp \
+    game.cpp \
+    Building/aeroport.cpp \
+    Building/usine.cpp \
+    Building/ville.cpp \
+    Units/antiair.cpp \
+    Units/bazooka.cpp \
+    Units/bcopter.cpp \
+    Units/bomber.cpp \
+    Units/fighter.cpp \
+    Units/infantery.cpp \
+    Units/megatank.cpp \
+    Units/neotank.cpp \
+    Units/recon.cpp \
+    Units/tank.cpp \
+    Units/tankm.cpp \
+    Units/unit.cpp \
+    cellule.cpp \
+    game.cpp \
+    main.cpp \
+    mainwindow.cpp \
+    map.cpp \
+    player.cpp \
+    fmove.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -67,7 +89,28 @@ HEADERS += \
     neotank.h \
     bcopter.h \
     fighter.h \
-    bomber.h
+    bomber.h \
+    Building/aeroport.h \
+    Building/usine.h \
+    Building/ville.h \
+    Units/antiair.h \
+    Units/bazooka.h \
+    Units/bcopter.h \
+    Units/bomber.h \
+    Units/fighter.h \
+    Units/infantery.h \
+    Units/megatank.h \
+    Units/neotank.h \
+    Units/recon.h \
+    Units/tank.h \
+    Units/tankm.h \
+    Units/unit.h \
+    cellule.h \
+    game.h \
+    mainwindow.h \
+    map.h \
+    player.h \
+    fmove.h
 
 FORMS += \
         mainwindow.ui
@@ -78,4 +121,18 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    map1.txt
+    map1.txt \
+    Resources/greenearthairport.gif \
+    Resources/greenearthbase.gif \
+    Resources/greenearthcity.gif \
+    Resources/greenearthcomtower.gif \
+    Resources/hbridge.gif \
+    Resources/hpipe.gif \
+    Resources/hriver.gif \
+    Resources/hroad.gif \
+    Resources/hshoal.gif \
+    Resources/mountain.gif \
+    Resources/plain.gif \
+    Resources/reef.gif \
+    Resources/sea.gif \
+    Resources/wood.gif
