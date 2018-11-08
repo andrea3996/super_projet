@@ -42,8 +42,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for (int i=0; i<10;i++){
         for(int j=0; j<10;j++){
             painter.fillRect(21*i, 21*j,20,20,Qt::red);
-            if(i==pos_circle_x && j==pos_circle_y,10,10){
-                painter.drawEllipse(21*pos_circle_x,21*pos_circle_y,10,10);
+            if(i == pos_circle_x && j == pos_circle_y){  // better
+                painter.drawEllipse(21*pos_circle_x, 21*pos_circle_y, 10, 10);
             }
 
         }
@@ -66,7 +66,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 
 void MainWindow::tick() {
-    std:: cout << 'hello ' << a << std::endl;
+    std:: cout << "hello " << a << std::endl;  // "hello": string mais 'h': char
     a++;
     update(); //appel paintEvent
 }

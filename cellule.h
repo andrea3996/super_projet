@@ -7,7 +7,8 @@ class Cellule
 public:
     Cellule();
 private:
-    int pointsDeCapture;
+    //int pointsDeCapture;
+    int nombre;
 
 };
 
