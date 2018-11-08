@@ -6,6 +6,7 @@ class Fmove
 {
 public:
     Fmove();
+    int bougerInfanterie();
 };
 
 #endif // FMOVE_H
