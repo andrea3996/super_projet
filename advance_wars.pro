@@ -25,26 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
+    main.cpp \
+    mainwindow.cpp \
     player.cpp \
     map.cpp \
     cellule.cpp \
-    unit.cpp \
-    usine.cpp \
-    ville.cpp \
-    aeroport.cpp \
-    infantery.cpp \
-    bazooka.cpp \
-    recon.cpp \
-    tank.cpp \
-    antiair.cpp \
-    tankm.cpp \
-    megatank.cpp \
-    neotank.cpp \
-    bcopter.cpp \
-    fighter.cpp \
-    bomber.cpp \
     game.cpp \
     Building/aeroport.cpp \
     Building/usine.cpp \
@@ -65,31 +50,14 @@ SOURCES += \
     game.cpp \
     main.cpp \
     mainwindow.cpp \
-    map.cpp \
-    player.cpp \
     fmove.cpp
 
 HEADERS += \
-        mainwindow.h \
-    game.h \
+    mainwindow.h \
     player.h \
     map.h \
     cellule.h \
-    unit.h \
-    usine.h \
-    ville.h \
-    aeroport.h \
-    infantery.h \
-    bazooka.h \
-    recon.h \
-    tank.h \
-    antiair.h \
-    tankm.h \
-    megatank.h \
-    neotank.h \
-    bcopter.h \
-    fighter.h \
-    bomber.h \
+    game.h \
     Building/aeroport.h \
     Building/usine.h \
     Building/ville.h \
@@ -106,10 +74,6 @@ HEADERS += \
     Units/tankm.h \
     Units/unit.h \
     cellule.h \
-    game.h \
-    mainwindow.h \
-    map.h \
-    player.h \
     fmove.h
 
 FORMS += \

@@ -2,6 +2,6 @@
 
 Fmove::Fmove()
 {
-    if Cellule.getLocation()== "hpipe"
+    //if Cellule.getLocation()== "hpipe"
 
 }
