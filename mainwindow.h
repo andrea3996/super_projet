@@ -20,8 +20,7 @@ public:
     ~MainWindow();
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event); // cliquer
-    //tracer
-    void mouseMoveEvent(QMouseEvent * event);
+    //tracers
 
     void keyPressEvent(QKeyEvent* event);
     void setGame(Game& g); // pointe vers l'adresse de g
