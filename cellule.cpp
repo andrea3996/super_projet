@@ -15,6 +15,7 @@ int Cellule::getDifficulte()
 }
 
 
-std::string Cellule::getLocation(){
+std::string Cellule::getLocation()
+{
 
 }
