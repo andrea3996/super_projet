@@ -21,5 +21,6 @@ int Cellule::getDifficulte()
 
 std::string Cellule::getLocation(){
     return ""; // TODO
+
 }
 
