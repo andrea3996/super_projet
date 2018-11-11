@@ -28,53 +28,25 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
-    map.cpp \
     cellule.cpp \
     game.cpp \
-    Building/aeroport.cpp \
-    Building/usine.cpp \
-    Building/ville.cpp \
-    Units/antiair.cpp \
-    Units/bazooka.cpp \
-    Units/bcopter.cpp \
-    Units/bomber.cpp \
-    Units/fighter.cpp \
-    Units/infantery.cpp \
-    Units/megatank.cpp \
-    Units/neotank.cpp \
-    Units/recon.cpp \
-    Units/tank.cpp \
-    Units/tankm.cpp \
-    Units/unit.cpp \
     cellule.cpp \
     game.cpp \
     main.cpp \
     mainwindow.cpp \
-    fmove.cpp
+    unit.cpp \
+    building.cpp \
+    gamemap.cpp
 
 HEADERS += \
     mainwindow.h \
     player.h \
-    map.h \
     cellule.h \
     game.h \
-    Building/aeroport.h \
-    Building/usine.h \
-    Building/ville.h \
-    Units/antiair.h \
-    Units/bazooka.h \
-    Units/bcopter.h \
-    Units/bomber.h \
-    Units/fighter.h \
-    Units/infantery.h \
-    Units/megatank.h \
-    Units/neotank.h \
-    Units/recon.h \
-    Units/tank.h \
-    Units/tankm.h \
-    Units/unit.h \
     cellule.h \
-    fmove.h
+    unit.h \
+    building.h \
+    gamemap.h
 
 FORMS += \
         mainwindow.ui

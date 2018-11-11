@@ -1,11 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QTimer>
-#include <game.h>
 #include <iostream>
 
+#include <QMainWindow>
+#include <QTimer>
+
+#include "game.h"
 
 namespace Ui {
 class MainWindow;

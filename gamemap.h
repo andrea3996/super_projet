@@ -3,10 +3,10 @@
 #include <vector>
 #include <fstream>
 
-class Map
+class GameMap
 {
 public:
-    Map();
+    GameMap();
 private:
     std::vector<int> listeMap(std::ifstream & fichier);  // attention, fichier n'est pas copiable
     int rows;
