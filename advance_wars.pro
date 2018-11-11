@@ -30,10 +30,6 @@ SOURCES += \
     player.cpp \
     cellule.cpp \
     game.cpp \
-    cellule.cpp \
-    game.cpp \
-    main.cpp \
-    mainwindow.cpp \
     unit.cpp \
     building.cpp \
     gamemap.cpp
@@ -41,7 +37,6 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     player.h \
-    cellule.h \
     game.h \
     cellule.h \
     unit.h \

@@ -17,5 +17,5 @@ int main(int argc, char *argv[])
 
     //std::pair<int,int> test = game.calculer_cellule(3,3);
 
-    return 1;
+    return a.exec();
 }
