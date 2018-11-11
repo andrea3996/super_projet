@@ -16,6 +16,7 @@ Map::Map()
 }
 
 vector<int> listeNombre(ifstream& fichier)
+//envoit ref de l'objet donc utilise comme un objet
 {
     // Extraire données du fichier
     if (fichier.is_open())
@@ -64,45 +65,58 @@ void test() {
     cout<<"output is "<<vec[2][4]; // output is 40 */
 
 
-
-
-
-
-
-/*vector<Cellule> listeCellule(vector<liste> liste)
+vector<Cellule> creerListeCellule(vector<int> listeATraduire)
 {
 // renvoit liste de cellules
-    for (i
-            if ls (i) == '2'
-             foret
-            insert li un carré bleu
+    vector<Cellule> listeCellule;
+    for (int i=0;i<listeATraduire.size();i++){
+        switch(listeATraduire.at(i)){
+            case 101: case 104: case 102: case 109: case 108:
+                listeCellule.push_back(Cellule("hpipe"));
+                    //hpipe Cellule(3,"hpipe.gif")
+                break;
+            case 2:
+                    //foret
+                break;
+            case 4: case 7: case 9:
+               //river
+                break;
+            case 3:
+                //wood
+                break;
+            case 1:
+                //plain
+                break;
+            case 34:
+                //greenearthcity
+                break;
+            case 15: case 16: case 18: case 19: case 20: case 21: case 23:
+                //hroad
+                break;
+            case 30:
+                //sea
+                break;
+            case 33:
+                //reef
+                break;
+            case 36:
+                //greenearthairport
+                break;
+            case 92:
+                //greenearthbase
+                break;
+            case 26:
+                //hbridge
+                break;
+            case 125:
+                //temple
+                break;
 
-            if ls(i) == '101' or '104' or '102' or '109' or '108'
-                hpipe
-
-            if ls(i)== '4' or '7' or '9'
-               river
-            if ls(i)=='3'
-                wood
-            if ls(i)== '1'
-                plain
-            if ls(i)=='34'
-                greenearthcity
-            if ls(i)== '15' or '16' or '18' or '19' or '20' or '21' or '23'
-                hroad
-            if ls(i)== '30'
-                sea
-            if ls(i)== '33'
-                reef
-            if ls(i)== '36'
-                greenearthairport
-            if ls(i)== '92'
-                greenearthbase
-            if ls(i)== '26'
-                hbridge
-            if ls(i)== '125'
-                temple
-}*/
+            default:
+                cout<<"error with number"<< i<< endl;
+            }
+        }
+}
 
 /* int** a = new int*[rowCount];
      for(int i = 0; i < rowCount; ++i)

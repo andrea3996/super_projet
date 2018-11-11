@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include <QApplication>
+#include <iostream>
 
 
 #include <QtWidgets>
@@ -15,5 +16,7 @@ int main(int argc, char *argv[])
     MainWindow w(&supergame);
     w.show();
 
-    return a.exec();
+    //std::pair<int,int> test = game.calculer_cellule(3,3);
+
+    return 1;
 }

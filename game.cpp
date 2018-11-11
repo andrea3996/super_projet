@@ -2,7 +2,7 @@
 #include <vector>
 #include "game.h"
 #include "player.h"
-#include "unit.h"
+#include "Units/unit.h"
 #include "map.h"
 
 
@@ -25,6 +25,7 @@ std:: pair<int,int>  Game::calculer_cellule(int x, int y) {
     std::pair<int,int> cell;
     cell.first= x/taille_cellule;
     cell.second= y/taille_cellule;
+    // attention aux bords !
 
     return cell;
 }
