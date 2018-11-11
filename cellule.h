@@ -10,15 +10,11 @@ public:
     int getDifficulte();
     std::string getLocation();
 private:
-<<<<<<< HEAD
+
     //int pointsDeCapture;
     int nombre;
-=======
-    int pointsDeCapture;
     int difficulte;
     std::string location;
->>>>>>> master
-
 };
 
 #endif // CELLULE_H

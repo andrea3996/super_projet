@@ -1,4 +1,4 @@
-#include "Units/infantery.h"
+#include "infantery.h"
 
 Infantery::Infantery()
 {

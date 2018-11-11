@@ -1,4 +1,4 @@
-#include "Units/fighter.h"
+#include "fighter.h"
 
 Fighter::Fighter()
 {
