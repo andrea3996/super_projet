@@ -4,15 +4,15 @@
 
 #include <QtWidgets>
 
+#include <iostream>
+using namespace std;
 
 int main(int argc, char *argv[])
 {
-
-    Game game;
+    Game supergame; // l'erreur n'est pas dans Game
 
     QApplication a(argc, argv);
-    MainWindow w;
-    w.setGame(game);
+    MainWindow w(&supergame);
     w.show();
 
     return a.exec();
