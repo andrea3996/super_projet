@@ -1,10 +1,11 @@
 #include "cellule.h"
 #include <map>
-
-
 #include <vector>
 
-    //std::vector<int> v= <102456>;  // quand tu attends que j'arrive regarder ton écran, n'hésite pas à laisser des commentaires
+    int myints[]= {1,0,2,4,5,6};
+    std::vector<int> v(const int myints);
+
+    // quand tu attends que j'arrive regarder ton écran, n'hésite pas à laisser des commentaires
     // comme ça quand j'arrive, hop, je vois "tiens elle galère sur ça" -- ok je cherche
     // ok, en python tu veux faire quoi ? rien je cherche la bonne syntaxe
     // oui mais en PYTHON c'est quoi que tu cherches à faire ? creer une liste // ok ded oncn eon PYTmHbONres // ok donc en python ?

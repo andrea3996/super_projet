@@ -12,7 +12,7 @@ MainWindow::MainWindow(Game* bla, QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     game = bla;
-    ui->setupUi(this);
+    ui->setupUi(this);0,
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     timer.start(10);
     game->set_taille_cellule(this->taille_cellule);
