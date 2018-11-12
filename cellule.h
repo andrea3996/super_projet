@@ -11,7 +11,8 @@ public:
     int getDifficulte();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure
-    std:: map <std::string,std::vector<int>> m()={std::string s, std::vector<int> v};
+    //std::string "s";
+    std:: map <std::string,std::vector<int>> m; //={std::string s, std::vector<int> v};
 
 private:
 

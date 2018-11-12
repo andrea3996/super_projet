@@ -31,9 +31,8 @@
 
 Cellule::Cellule(std::string type)
 {
-    int myints[]= {1,0,2,4,5,6};
-    std::vector<int> v(const int myints);
-    std:: map <std::string,std::vector<int>> my_map ={"grass", std::vector <int> ({1,1,1,2,1,0,0,0})};
+    std::vector<int> v={1,0,2,4,5,6};
+    std::map <std::string,std::vector<int>> my_map{{"grass",v}};
     this->difficulte=1;
     this->location="/Resources/hpipe.gif";
 }
@@ -51,4 +50,6 @@ std::string Cellule::getLocation(){
     //?
     //correcte ?
 }
+
+
 
