@@ -10,6 +10,9 @@ public:
     Cellule(std::string type);
     int getDifficulte();
     std::string getLocation();
+    std:: vector<int> v(int l); //pas sure
+    std:: map <std::string,std::vector<int>> m()={std::string s, std::vector<int> v};
+
 private:
 
     //int pointsDeCapture;
@@ -17,7 +20,7 @@ private:
     int difficulte;
     std::string location;
     static int myints;
-    std:: vector<int> v(int myints);
+
 };
 
 #endif // CELLULE_H
