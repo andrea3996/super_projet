@@ -1,6 +1,13 @@
 #include "cellule.h"
 #include <map>
+
 #include <vector>
+using std::map;
+using std::pair;
+using std::string;
+using std::vector;
+
+
     // quand tu attends que j'arrive regarder ton écran, n'hésite pas à laisser des commentaires
     // comme ça quand j'arrive, hop, je vois "tiens elle galère sur ça" -- ok je cherche
     // ok, en python tu veux faire quoi ? rien je cherche la bonne syntaxe
@@ -32,10 +39,31 @@
 Cellule::Cellule(std::string type)
 {
     std::vector<int> v={1,0,2,4,5,6};
-    std::map <std::string,std::vector<int>> my_map{{"grass",v}};
+    std::map <string,vector<int>> my_map = {{"grass",v}};
     this->difficulte=1;
-    this->location="/Resources/hpipe.gif";
+    //this->location="/Resources/hpipe.gif";
+
+//cf TP 5
+   std::map<string, vector<int>> liste;
+   liste.insert({"plain", {1,1,1,2,1,0,0,0} });
+   liste.insert({"mountain", {2,1,0,0,1,0,0,0}});
+/*    {"wood";{1,1,2,3,1,0,0,0;}}
+//COMMENT FAIRE LE INSERT ???
+{"hpipe"; {0,0,0,0,0,0,0,1}}
+{"river"; {2,1,0,0,1,0,0,0}}
+{"wood"; "foret"}
+{"greenearthcity"; {1,1,1,1,1,0,0,0}}
+{"hroad";{1,1,1,1,1,0,0,0}}
+//{"sea";{2,1,0,0,1,0,0,0}
+{"reef";{0,0,0,0,1,2,2,0}}
+{"greenearthairport";{1,1,1,1,1,0,0,0}}
+{"greenearthbase";{1,1,1,1,1,0,0,1}}
+*/
+
 }
+
+
+
 
 int Cellule::getDifficulte()
 {

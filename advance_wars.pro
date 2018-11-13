@@ -30,18 +30,18 @@ SOURCES += \
     player.cpp \
     cellule.cpp \
     game.cpp \
-    unit.cpp \
     building.cpp \
-    gamemap.cpp
+    gamemap.cpp \
+    unit.cpp
 
 HEADERS += \
     mainwindow.h \
     player.h \
     game.h \
     cellule.h \
-    unit.h \
     building.h \
-    gamemap.h
+    gamemap.h \
+    unit.h
 
 FORMS += \
         mainwindow.ui
