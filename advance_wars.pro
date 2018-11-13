@@ -25,92 +25,23 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    player.cpp \
-    map.cpp \
-    cellule.cpp \
-    unit.cpp \
-    usine.cpp \
-    ville.cpp \
-    aeroport.cpp \
-    infantery.cpp \
-    bazooka.cpp \
-    recon.cpp \
-    tank.cpp \
-    antiair.cpp \
-    tankm.cpp \
-    megatank.cpp \
-    neotank.cpp \
-    bcopter.cpp \
-    fighter.cpp \
-    bomber.cpp \
-    game.cpp \
-    Building/aeroport.cpp \
-    Building/usine.cpp \
-    Building/ville.cpp \
-    Units/antiair.cpp \
-    Units/bazooka.cpp \
-    Units/bcopter.cpp \
-    Units/bomber.cpp \
-    Units/fighter.cpp \
-    Units/infantery.cpp \
-    Units/megatank.cpp \
-    Units/neotank.cpp \
-    Units/recon.cpp \
-    Units/tank.cpp \
-    Units/tankm.cpp \
-    Units/unit.cpp \
-    cellule.cpp \
-    game.cpp \
     main.cpp \
     mainwindow.cpp \
-    map.cpp \
     player.cpp \
-    fmove.cpp
+    cellule.cpp \
+    game.cpp \
+    unit.cpp \
+    building.cpp \
+    gamemap.cpp
 
 HEADERS += \
-        mainwindow.h \
-    game.h \
+    mainwindow.h \
     player.h \
-    map.h \
+    game.h \
     cellule.h \
     unit.h \
-    usine.h \
-    ville.h \
-    aeroport.h \
-    infantery.h \
-    bazooka.h \
-    recon.h \
-    tank.h \
-    antiair.h \
-    tankm.h \
-    megatank.h \
-    neotank.h \
-    bcopter.h \
-    fighter.h \
-    bomber.h \
-    Building/aeroport.h \
-    Building/usine.h \
-    Building/ville.h \
-    Units/antiair.h \
-    Units/bazooka.h \
-    Units/bcopter.h \
-    Units/bomber.h \
-    Units/fighter.h \
-    Units/infantery.h \
-    Units/megatank.h \
-    Units/neotank.h \
-    Units/recon.h \
-    Units/tank.h \
-    Units/tankm.h \
-    Units/unit.h \
-    cellule.h \
-    game.h \
-    mainwindow.h \
-    map.h \
-    player.h \
-    fmove.h
+    building.h \
+    gamemap.h
 
 FORMS += \
         mainwindow.ui

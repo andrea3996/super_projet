@@ -2,8 +2,8 @@
 #define GAME_H
 
 #include "player.h"
-#include "Units/unit.h"
-#include "map.h"
+#include "unit.h"
+#include "gamemap.h"
 
 #include <vector>
 #include <iostream>

@@ -1,11 +1,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <QMainWindow>
-#include <QTimer>
-#include <game.h>
 #include <iostream>
 
+#include <QMainWindow>
+#include <QTimer>
+
+#include "game.h"
 
 namespace Ui {
 class MainWindow;
@@ -16,21 +17,19 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(Game* bla, QWidget *parent = nullptr);
     ~MainWindow();
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event); // cliquer
-    //tracer
-    void mouseMoveEvent(QMouseEvent * event);
+    //tracers
 
     void keyPressEvent(QKeyEvent* event);
-    void setGame(Game& g); // pointe vers l'adresse de g
 
 public slots:
     void tick();
 private:
 
-    Game* game;
+    Game* game = nullptr;
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;

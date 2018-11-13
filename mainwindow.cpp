@@ -7,21 +7,25 @@
 #include <QString>
 //#include
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(Game* bla, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    ui->setupUi(this);
+    game = bla;
+    ui->setupUi(this);0,
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     timer.start(10);
     game->set_taille_cellule(this->taille_cellule);
+    // why segfault andrea ?
+    // why you the only one working in the project andrea ?idk et si je fais un new projet ? whaat ? on recommence
+    // c'est ce que l'o
     // std::ifstream("map.txt")
     // lire les données et mettre ça dans un vector<vector<>>
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+   delete ui;
 }
 
 void MainWindow::paintEvent(QPaintEvent *event){
@@ -42,8 +46,8 @@ void MainWindow::paintEvent(QPaintEvent *event){
     for (int i=0; i<10;i++){
         for(int j=0; j<10;j++){
             painter.fillRect(21*i, 21*j,20,20,Qt::red);
-            if(i==pos_circle_x && j==pos_circle_y,10,10){
-                painter.drawEllipse(21*pos_circle_x,21*pos_circle_y,10,10);
+            if(i == pos_circle_x && j == pos_circle_y){  // better
+                painter.drawEllipse(21*pos_circle_x, 21*pos_circle_y, 10, 10);
             }
 
         }
@@ -66,11 +70,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 }
 
 void MainWindow::tick() {
-    std:: cout << 'hello ' << a << std::endl;
+    std:: cout << "hello " << a << std::endl;  // "hello": string mais 'h': char
     a++;
     update(); //appel paintEvent
-}
-
-void MainWindow::setGame(Game& g) {
-    this->game = &g;
 }

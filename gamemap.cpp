@@ -4,13 +4,13 @@
 #include <set>
 #include <vector>
 
-#include "map.h"
+#include "gamemap.h"
 #include "cellule.h"
 
 using namespace std;
 using std::ifstream;
 
-Map::Map()
+GameMap::GameMap()
 {
 
 }
