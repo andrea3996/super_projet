@@ -22,8 +22,4 @@ private:
     int cost;
     int range;
     int pointsDeVie;
-
-};
-
-
 #endif // UNITS_H
