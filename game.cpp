@@ -16,6 +16,19 @@ void Game::crier()
     std::cout << "yaaaaaaa" << std::endl;
 }
 
+/*
+ * void seDeplacer(int x, int y)
+{
+    map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);
+    if (map.getCell(x,y).deplacement)
+    {
+        this->x = x;
+        this->y = y;
+    }
+}
+ *
+*/
+
 void Game::set_taille_cellule(int i)
 {
     taille_cellule = i;
