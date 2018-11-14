@@ -1,6 +1,7 @@
 #ifndef CELLULE_H
 #define CELLULE_H
 #include <iostream>
+#include <ostream>
 #include <map>
 #include <vector>
 #include <string>

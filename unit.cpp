@@ -38,53 +38,54 @@ void AntiAir::identite() {
 
 }
 
-/*Bazooka::Bazooka()
+Bazooka::Bazooka(int x, int y, Player* ow)
 {
     Unit(x,y, ow);
 
 }
-*/
-BCopter::BCopter()
+
+BCopter::BCopter(int x, int y, Player* ow)
 {
+    Unit(x,y, ow);
 
 }
 
-Bomber::Bomber()
+Bomber::Bomber(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Fighter::Fighter()
+Fighter::Fighter(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Infantery::Infantery()
+Infantery::Infantery(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-MegaTank::MegaTank()
+MegaTank::MegaTank(int x, int y, Player *ow)
 {
-
+    Unit(x,y, ow);
 }
 
-NeoTank::NeoTank()
+NeoTank::NeoTank(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Recon::Recon()
+Recon::Recon(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Tank::Tank()
+Tank::Tank(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-TankM::TankM()
+TankM::TankM(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }

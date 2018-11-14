@@ -2,6 +2,9 @@
 #include <map>
 
 #include <vector>
+#include <ostream>
+#include <iostream>
+#include <QDebug>
 using std::map;
 using std::pair;
 using std::string;
@@ -44,21 +47,25 @@ Cellule::Cellule(std::string type)
     //this->location="/Resources/hpipe.gif";
 
 //cf TP 5
-   std::map<string, vector<int>> liste;
-   liste.insert({"plain", {1,1,1,2,1,0,0,0} });
-   liste.insert({"mountain", {2,1,0,0,1,0,0,0}});
-/*    {"wood";{1,1,2,3,1,0,0,0;}}
-//COMMENT FAIRE LE INSERT ???
-{"hpipe"; {0,0,0,0,0,0,0,1}}
-{"river"; {2,1,0,0,1,0,0,0}}
-{"wood"; "foret"}
-{"greenearthcity"; {1,1,1,1,1,0,0,0}}
-{"hroad";{1,1,1,1,1,0,0,0}}
-//{"sea";{2,1,0,0,1,0,0,0}
-{"reef";{0,0,0,0,1,2,2,0}}
-{"greenearthairport";{1,1,1,1,1,0,0,0}}
-{"greenearthbase";{1,1,1,1,1,0,0,1}}
-*/
+       std::map<string, vector<int>> liste;
+       liste.insert({"plain", {1,1,1,2,1,0,0,0} });
+       liste.insert({"mountain", {2,1,0,0,1,0,0,0}});
+       liste.insert({"wood",{1,1,2,3,1,0,0,0}});
+       liste.insert({"hpipe", {0,0,0,0,0,0,0,1}});
+       liste.insert({"river", {2,1,0,0,1,0,0,0}});
+       liste.insert({"greenearthcity", {1,1,1,1,1,0,0,0}});
+       liste.insert({"hroad",{1,1,1,1,1,0,0,0}});
+    //{"sea";{2,1,0,0,1,0,0,0}
+       liste.insert({"reef",{0,0,0,0,1,2,2,0}});
+       liste.insert({"greenearthairport",{1,1,1,1,1,0,0,0}});
+       liste.insert({"greenearthbase",{1,1,1,1,1,0,0,1}});
+       for (auto p : liste)
+           std::cout << p.first << ":"<< std::endl;
+
+       //std:: cout << liste << std:: endl;
+
+       //qDebug()<<liste;
+
 
 }
 
