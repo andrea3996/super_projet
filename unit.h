@@ -1,10 +1,13 @@
 #ifndef UNITS_H
 #define UNITS_H
+#include <iostream>
+#include "player.h"
+//polymorphisme = tableau d'objets
 
-class Unit
-{
+
+class Unit{
 public:
-    Unit(int nx,int ny);
+
     int get_x();
     int get_y();
 
@@ -12,84 +15,87 @@ public:
     void attendre();
     void grouper();
     void seDeplacer();
+    Unit(int nx,int ny, Player* ow);
+    Unit();
 
-private:
+protected:
     int x;
     int y;
     int cost;
     int range;
     int pointsDeVie;
-
+    int maxPointsDeVie;
+    Player* owner;
 };
 
 
-class AntiAir
-{
+class AntiAir : public Unit { //essai heritage
 public:
-    AntiAir();
+    AntiAir(int x, int y, Player* ow);
+    void identite();
 };
 
 
-class Bazooka
+class Bazooka: public Unit
 {
 public:
-    Bazooka();
+    Bazooka(int x, int y, Player* ow);
 };
 
 
 class BCopter
 {
 public:
-    BCopter();
+    BCopter(int x, int y, Player* ow);
 };
 
 class Bomber
 {
 public:
-    Bomber();
+    Bomber(int x, int y, Player* ow);
 };
 
 class Fighter
 {
 public:
-    Fighter();
+    Fighter(int x, int y, Player* ow);
 };
 
 class Infantery
 {
 public:
-    Infantery();
+    Infantery(int x, int y, Player* ow);
 };
 
 class MegaTank
 {
 public:
-    MegaTank();
+    MegaTank(int x, int y, Player* ow);
 };
 
 class NeoTank
 {
 public:
-    NeoTank();
+    NeoTank(int x, int y, Player* ow);
 };
 
 class Recon
 {
 public:
-    Recon();
+    Recon(int x, int y, Player* ow);
 };
 
 class Tank
 {
 public:
-    Tank();
+    Tank(int x, int y, Player* ow);
 };
 
 
 class TankM
 {
 public:
-    TankM();
+    TankM(int x, int y, Player* ow);
 };
 
 #endif // UNITS_H

@@ -1,10 +1,13 @@
 #include "unit.h"
 
-Unit::Unit(int nx,int ny)
-// faire constructeur
-{
-    x=nx;
-    y=ny;
+
+Unit::Unit(int nx,int ny, Player* ow) {
+        x=nx;
+        this->owner = ow;
+        y=ny;
+        pointsDeVie=10;
+        maxPointsDeVie=10;
+
 }
 
 int Unit::get_x (){
@@ -17,56 +20,72 @@ int Unit::get_y() {
     return y;
 }
 
-AntiAir::AntiAir()
-{
+
+Unit::Unit(){
 
 }
 
-Bazooka::Bazooka()
-{
+AntiAir::AntiAir(int x, int y, Player* ow){
+    Unit(x,y, ow);
+    cost=3000;
+    this->owner = ow;
 
-}
-BCopter::BCopter()
-{
-
-}
-
-Bomber::Bomber()
-{
 
 }
 
-Fighter::Fighter()
-{
+void AntiAir::identite() {
+    std::cout<< "Nous sommes l'unité AntiAir"<< std::endl;
 
 }
 
-Infantery::Infantery()
+Bazooka::Bazooka(int x, int y, Player* ow)
 {
+    Unit(x,y, ow);
 
 }
 
-MegaTank::MegaTank()
+BCopter::BCopter(int x, int y, Player* ow)
 {
+    Unit(x,y, ow);
 
 }
 
-NeoTank::NeoTank()
+Bomber::Bomber(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Recon::Recon()
+Fighter::Fighter(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-Tank::Tank()
+Infantery::Infantery(int x, int y, Player* ow)
 {
-
+    Unit(x,y, ow);
 }
 
-TankM::TankM()
+MegaTank::MegaTank(int x, int y, Player *ow)
 {
+    Unit(x,y, ow);
+}
 
+NeoTank::NeoTank(int x, int y, Player* ow)
+{
+    Unit(x,y, ow);
+}
+
+Recon::Recon(int x, int y, Player* ow)
+{
+    Unit(x,y, ow);
+}
+
+Tank::Tank(int x, int y, Player* ow)
+{
+    Unit(x,y, ow);
+}
+
+TankM::TankM(int x, int y, Player* ow)
+{
+    Unit(x,y, ow);
 }
