@@ -32,7 +32,8 @@ SOURCES += \
     game.cpp \
     building.cpp \
     gamemap.cpp \
-    unit.cpp
+    unit.cpp \
+    infantry.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -41,7 +42,8 @@ HEADERS += \
     cellule.h \
     building.h \
     gamemap.h \
-    unit.h
+    unit.h \
+    infantry.h
 
 FORMS += \
         mainwindow.ui
