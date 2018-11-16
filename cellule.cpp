@@ -69,16 +69,15 @@ Cellule::Cellule(std::string type)
 
 }
 
-/*
-private String type;
-private bool deplacement; // la case est envisageable dans le déplacement en cours
-private bool disponible; // il n'y a pas d'unité sur la case en question
+/* Cellule :: Cellule(int x, int y) : x(x), y(y)
+ * {
+ * }
 
 */
 
 /*fonction casesDispo à traduire en C++ (fonction Javaisée)
  *
- * void casesDispo(Unit unit, int mp,int a)
+ * void Cellule :: casesDispo(Unit unit, int mp,int a)
 {
   int x = this->x; int y = this->y;
   if (mp>0)

@@ -12,6 +12,7 @@ class Cellule
 {
 public:
     Cellule(std::string type);
+    // Cellule(int x, int y);
     int getDifficulte();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure
@@ -21,20 +22,21 @@ public:
 
 private:
 
-    //int pointsDeCapture;
+    int pointsDeCapture;
     int nombre;
 
-    // String moveType;
-    // bool deplacement;
-    // bool disponible;
+    std ::string type;
+    bool deplacement;
+    bool disponible;
 
     int difficulte;
     std::string location;
     static int myints;
 
-    // int valueMP(Unit unit){}
-    // void setDeplacement(bool a) {}
-    // bool getDisponible(){}
+    //int valueMP(Unit unit){}
+    //void setDeplacement(bool a) {}
+    bool getDisponible(){}
+
 };
 
 

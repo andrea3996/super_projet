@@ -127,7 +127,7 @@ vector<vector<Cellule>> plateau (int ligne, int colonne)
     {
         for (int j, j< colonne; j++)
         {
-            grille[i][j] = new Cell (i, j);
+            grille[i][j] = Cellule cellule(i, j);
         }
     }
     return grille;
