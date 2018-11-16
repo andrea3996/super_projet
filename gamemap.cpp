@@ -121,20 +121,20 @@ vector<Cellule> creerListeCellule(vector<int> listeATraduire)
 /*
  *
  *
-vector<vector<Cellule>> plateau (int ligne, int colonne)
-{
-    for (int i; i< ligne; i++)
+ * Gamemap :: Gamemap(int ligne, int colonne)
+ * {
+ *  vector<vector<Cellule>> grille;
+ *  for (int i; i< ligne; i++)
     {
         for (int j, j< colonne; j++)
         {
             grille[i][j] = Cellule cellule(i, j);
         }
     }
-    return grille;
-}
+    plateau = grille;
 
-
-
+ * }
+*
 */
 
 
