@@ -7,6 +7,7 @@ class GameMap
 {
 public:
     GameMap();
+    // Cellule getCell(int x, int y);
 private:
     std::vector<int> listeMap(std::ifstream & fichier);  // attention, fichier n'est pas copiable
     int rows;
@@ -14,6 +15,7 @@ private:
     std::vector<std::vector<int>> v;
 
 // vector<vector<Cellule>> plateau;
+
 
 
 

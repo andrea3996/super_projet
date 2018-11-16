@@ -135,6 +135,10 @@ vector<Cellule> creerListeCellule(vector<int> listeATraduire)
 
  * }
 *
+* Cellule getCell(int x, int y)
+* {
+*  return this->plateau[x][y];
+* }
 */
 
 
