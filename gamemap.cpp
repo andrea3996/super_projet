@@ -118,6 +118,27 @@ vector<Cellule> creerListeCellule(vector<int> listeATraduire)
         }
 }
 
+/*
+ *
+ *
+vector<vector<Cellule>> plateau (int ligne, int colonne)
+{
+    for (int i; i< ligne; i++)
+    {
+        for (int j, j< colonne; j++)
+        {
+            grille[i][j] = new Cell (i, j);
+        }
+    }
+    return grille;
+}
+
+
+
+*/
+
+
+
 /* int** a = new int*[rowCount];
      for(int i = 0; i < rowCount; ++i)
          a[i] = new int[colCount]; */

@@ -13,6 +13,10 @@ private:
     int column;
     std::vector<std::vector<int>> v;
 
+// vector<vector<Cellule>> plateau;
+
+
+
 };
 
 #endif // MAP_H
