@@ -75,45 +75,8 @@ Cellule::Cellule(std::string type)
 
 */
 
-/*fonction casesDispo à traduire en C++ (fonction Javaisée)
+/*
  *
- * void Cellule :: casesDispo(Unit unit, int mp,int a)
-{
-  int x = this->x; int y = this->y;
-  if (mp>0)
-  {
-    if (map.getCell(x+1, y).getDisponible() && a =! 3)
-    {
-        mp = mp - map.getCell(x+1, y).valueMP(unit);
-        a = 4;
-        map.getCell(x+1, y).setDeplacement(true);
-        map.getCell(x+1,y).casesDispo(unit,mp,a);
-    }
-    if (map.getCell(x-1,y).getDisponible() && a =! 4)
-    {
-        mp = mp - map.getCell(x-1,y).valueMP(unit);
-        a=3
-    map.getCell(x-1, y).setDeplacement(true);
-    map.getCell(x-1, y).casesDispo(unit, mp, a);
-    }
-    if (map.getCell(x, y+1).getDisponible() && a =! 1)
-    {
-    mp = mp - map.getCell(x, y+1).valueMP(unit);
-    a = 2;
-    map.getCell(x, y+1).setDeplacement(true);
-    map.getCell(x, y+1).casesDispo(unit, mp, a);
-    }
-    if (map.getCell(x, y-1).getDisponible() && a=!2)
-    {
-    mp = mp - map.getCell(x, y-1).valueMP(unit);
-    a = 1;
-    map.getCell(x, y-1).setDeplacement(true);
-    map.getCell(x, y+1).casesDispo(unit, mp,a);
-    }
-  }
-}
- *
-*/
 
 /* int valueMP(Unit unit)
  * {

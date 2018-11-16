@@ -12,7 +12,8 @@ class Cellule
 {
 public:
     Cellule(std::string type);
-    // Cellule(int x, int y);
+    Cellule(int x, int y);
+
     int getDifficulte();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure

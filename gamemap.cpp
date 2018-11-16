@@ -118,30 +118,66 @@ vector<Cellule> creerListeCellule(vector<int> listeATraduire)
         }
 }
 
+
 /*
- *
- *
- * Gamemap :: Gamemap(int ligne, int colonne)
- * {
- *  vector<vector<Cellule>> grille;
- *  for (int i; i< ligne; i++)
+
+  GameMap :: GameMap(int ligne, int colonne)
+  {
+   std :: vector<std :: vector<Cellule>> grille;
+   for (int i = 0; i< ligne; i++)
     {
-        for (int j, j< colonne; j++)
+        for (int j = 0; j< colonne; j++)
         {
-            grille[i][j] = Cellule cellule(i, j);
+            grille[i][j] = new Cellule(i, j);
         }
     }
     plateau = grille;
 
- * }
-*
-* Cellule getCell(int x, int y)
-* {
-*  return this->plateau[x][y];
-* }
+  }
+ /*
+
+  Cellule getCell(int x, int y)
+ {
+
+  return this->plateau[x][y];
+ }
+
+
+void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
+{
+  if (mp>0)
+  {
+    if (this.getCell(x+1, y).getDisponible() && a =! 3)
+    {
+        mp = mp - this.getCell(x+1, y).valueMP(unit);
+        a = 4;
+        this.getCell(x+1, y).setDeplacement(true);
+        this.casesDispo(unit,mp,a, x+1, y);
+    }
+    if (this.getCell(x-1,y).getDisponible() && a =! 4)
+    {
+        mp = mp - this.getCell(x-1,y).valueMP(unit);
+        a=3
+      this.getCell(x-1, y).setDeplacement(true);
+      this.casesDispo(unit, mp, a, x-1, y);
+    }
+    if (map.getCell(x, y+1).getDisponible() && a =! 1)
+    {
+    mp = mp - map.getCell(x, y+1).valueMP(unit);
+    a = 2;
+    this.getCell(x, y+1).setDeplacement(true);
+    this.casesDispo(unit, mp, a, x, y+1);
+    }
+    if (this.getCell(x, y-1).getDisponible() && a=!2)
+    {
+    mp = mp - map.getCell(x, y-1).valueMP(unit);
+    a = 1;
+    this.getCell(x, y-1).setDeplacement(true);
+    this.casesDispo(unit, mp,a, x, y-1);
+    }
+  }
+}
 */
-
-
 
 /* int** a = new int*[rowCount];
      for(int i = 0; i < rowCount; ++i)
