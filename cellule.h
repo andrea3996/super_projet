@@ -23,10 +23,18 @@ private:
 
     //int pointsDeCapture;
     int nombre;
+
+    // String moveType;
+    // bool deplacement;
+    // bool disponible;
+
     int difficulte;
     std::string location;
     static int myints;
 
+    // int valueMP(Unit unit){}
+    // void setDeplacement(bool a) {}
+    // bool getDisponible(){}
 };
 
 
