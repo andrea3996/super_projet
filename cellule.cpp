@@ -69,6 +69,13 @@ Cellule::Cellule(std::string type)
 
 }
 
+/*
+private String type;
+private bool deplacement; // la case est envisageable dans le déplacement en cours
+private bool disponible; // il n'y a pas d'unité sur la case en question
+
+*/
+
 /*fonction casesDispo à traduire en C++ (fonction Javaisée)
  *
  * void casesDispo(Unit unit, int mp,int a)
@@ -107,6 +114,28 @@ Cellule::Cellule(std::string type)
   }
 }
  *
+*/
+
+/* int valueMP(Unit unit)
+ * {
+ *      int a = liste[this->type][unit.getMoveType];
+ *      return a;
+ * }
+ *
+ * void setDeplacement(bool a)
+ * {
+ *      this->deplacement = a;
+ * }
+ *
+ * bool getDisponible()
+ * {
+ *      return this->disponible;
+ * }
+ *
+ *
+
+
+
 */
 
 int Cellule::getDifficulte()

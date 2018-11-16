@@ -31,6 +31,18 @@ void attaquer::attaquer() {
     direction y = rect y - position y;
 }
 */
+/*
+void seDeplacer(int x, int y)
+{
+    map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);
+    if (map.getCell(x,y).deplacement)
+    {
+        this->x = x;
+        this->y = y;
+    }
+} */
+
+
 
 Unit::Unit(){
 

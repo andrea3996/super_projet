@@ -18,6 +18,7 @@ public:
     Unit(int nx,int ny, Player* ow);
     Unit();
 
+
 protected:
     int x;
     int y;
