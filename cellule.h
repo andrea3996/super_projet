@@ -3,6 +3,7 @@
 #include <iostream>
 #include <ostream>
 #include <map>
+#include "unit.h"
 #include <vector>
 #include <string>
 using std:: pair;
@@ -19,6 +20,8 @@ public:
     std:: vector<int> v(int l); //pas sure
     std:: map <std::string,std::vector<int>> m; //={std::string s, std::vector<int> v};
     pair<std:: map <std::string,std::vector<int>>,bool> ret;
+    bool getDisponible();
+    void setDeplacement(bool a);
 
 
 private:
@@ -33,10 +36,11 @@ private:
     int difficulte;
     std::string location;
     static int myints;
+    Unit *unit;
 
-    //int valueMP(Unit unit){}
-    //void setDeplacement(bool a) {}
-    bool getDisponible(){}
+    int valueMP(Unit *unit);
+
+
 
 };
 

@@ -17,6 +17,7 @@ public:
     void seDeplacer();
     Unit(int nx,int ny, Player* ow);
     Unit();
+    int getMoveType();
 
 
 protected:
@@ -31,6 +32,7 @@ protected:
     int Rect = (x,y);
     int PositionOriginalUnit = (0,0);
     int Attacking = false ;
+    int moveType;
 
     Player* owner;
 };

@@ -69,36 +69,30 @@ Cellule::Cellule(std::string type)
 
 }
 
-/* Cellule :: Cellule(int x, int y) : x(x), y(y)
- * {
- * }
-
+/*Cellule :: Cellule(int x, int y) : x(x), y(y)
+ {
+ }
 */
 
-/*
- *
-
-/* int valueMP(Unit unit)
- * {
- *      int a = liste[this->type][unit.getMoveType];
- *      return a;
- * }
- *
- * void setDeplacement(bool a)
- * {
- *      this->deplacement = a;
- * }
- *
- * bool getDisponible()
- * {
- *      return this->disponible;
- * }
- *
- *
+ int Cellule :: valueMP(Unit *unit)
+  {
+       int a = this->m[this->type][unit->getMoveType()];
+       return a;
+  }
 
 
 
-*/
+  void Cellule :: setDeplacement(bool a)
+  {
+       this->deplacement = a;
+  }
+
+
+  bool Cellule :: getDisponible()
+  {
+       return this->disponible;
+  }
+
 
 int Cellule::getDifficulte()
 {

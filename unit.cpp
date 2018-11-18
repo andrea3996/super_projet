@@ -10,6 +10,13 @@ Unit::Unit(int nx,int ny, Player* ow) {
 
 }
 
+
+int Unit :: getMoveType()
+{
+    return this->moveType;
+}
+
+
 int Unit::get_x (){
     //redefini la fini dans le header
     return x;
