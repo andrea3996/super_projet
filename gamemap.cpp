@@ -72,7 +72,7 @@ vector<Cellule> creerListeCellule(vector<int> listeATraduire)
     for (int i=0;i<listeATraduire.size();i++){
         switch(listeATraduire.at(i)){
             case 101: case 104: case 102: case 109: case 108:
-                listeCellule.push_back(Cellule("hpipe"));
+                listeCellule.push_back(Cellule("hpipe", dico));
                     //hpipe Cellule(3,"hpipe.gif")
                 break;
             case 2:

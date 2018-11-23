@@ -20,8 +20,13 @@ public:
     std:: vector<int> v(int l); //pas sure
     std:: map <std::string,std::vector<int>> m; //={std::string s, std::vector<int> v};
     pair<std:: map <std::string,std::vector<int>>,bool> ret;
+
     bool getDisponible();
     void setDeplacement(bool a);
+    int test();
+    //void imprimerLaListe();
+
+
 
 
 private:
@@ -40,7 +45,7 @@ private:
 
     int valueMP(Unit *unit);
 
-
+    std::map<std::string, std::vector<int>>::iterator it;
 
 };
 
