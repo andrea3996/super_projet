@@ -7,15 +7,14 @@
 #include <QString>
 //#include
 
-MainWindow::MainWindow(Game* bla, QWidget *parent) :
+MainWindow::MainWindow(Game* game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-    game = bla;
-    ui->setupUi(this);0,
+    this->game = game;
+    ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     //timer.start(10);
-    game->set_taille_cellule(this->taille_cellule);
     // why segfault andrea ?
     // why you the only one working in the project andrea ?idk et si je fais un new projet ? whaat ? on recommence
     // c'est ce que l'o

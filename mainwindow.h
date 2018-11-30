@@ -33,7 +33,6 @@ private:
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;
-    int taille_cellule = 30;
 };
 
 #endif // MAINWINDOW_Hs

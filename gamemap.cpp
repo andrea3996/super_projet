@@ -9,45 +9,86 @@
 
 using namespace std;
 using std::ifstream;
+using std::string;
+using std::stoi;
+using std::infile;
 
-GameMap::GameMap()
-{
+GameMap::GameMap(int rows,int column){
+
+    this->rows = rows;
+    this->column= column;
+    this->board = new std::vector< std :: vector<Cellule>>();
+    this->creationBoard("map1.txt");
+
+     //modifier attribut board
 
 }
 
-vector<int> listeNombre(ifstream& fichier)
+std::map<string, vector<int> > GameMap::creationDico(){
+    std::map<string, vector<int> > dico;
+    dico.insert({"plain", {1,1,1,2,1,0,0,0} });
+    dico.insert({"mountain", {2,1,0,0,1,0,0,0}});
+    dico.insert({"wood",{1,1,2,3,1,0,0,0}});
+    dico.insert({"hpipe", {0,0,0,0,0,0,0,1}});
+    dico.insert({"river", {2,1,0,0,1,0,0,0}});
+    dico.insert({"greenearthcity", {1,1,1,1,1,0,0,0}});
+    dico.insert({"hroad",{1,1,1,1,1,0,0,0}});
+    //{"sea";{2,1,0,0,1,0,0,0}
+    dico.insert({"reef",{0,0,0,0,1,2,2,0}});
+    dico.insert({"greenearthairport",{1,1,1,1,1,0,0,0}});
+    dico.insert({"greenearthbase",{1,1,1,1,1,0,0,1}});
+    return dico;
+}
+void GameMap::creationBoard(std::ifstream fichier)
 //envoit ref de l'objet donc utilise comme un objet
 {
+    std::map<string, vector<int> > dico = this->creationDico();
+
     // Extraire données du fichier
     if (fichier.is_open())
     {
-        vector<int> liste;
-        int mot;
-        // Mettre slmt les nombres
+        int mot = 0;
+        string intType="";
+        string type = "";
+        std::vector<Cellule> * cells = new vector<Cellule>();
         while(fichier >> mot)
-            if (mot != ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
+            if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
-                liste.push_back(mot);
-                // insert ne fonctionne pas pour vector, faire pushback !!
+                int typeInteger = stoi(type);
+                string stringType = this->intTypeToStringType(typeInteger);
+                std::vector<int> value = dico[stringType];
+                Cellule * cell = new Cellule( stringType, value );
+                cells->push_back(*cell);
+                type="";
+            }
+            else if(mot == '\n')
+            {
+                int typeInteger = stoi(type);
+                string stringType = this->intTypeToStringType(typeInteger);
+                std::vector<int> value = dico[stringType];
+                Cellule * cell = new Cellule( stringType, value );
+                cells->push_back(*cell);
+                this->board->push_back(*cells);
+                cells = new vector<Cellule>();
 
             }
+            else
+            {
+                type << mot; //TODO
+             }
+             // insert ne fonctionne pas pour vector, faire pushback !! mot-'0' traduit de inttostring
+
+
 
 
         fichier.close();
         //printSet(liste);
-        return liste;
 
     }
 
 
 }
 
-
-void test() {
-    int rows = 5;
-    int column = 3;
-    std::vector<std::vector<int> > v (rows, std::vector <int> (column, 4));
-}
 
 
 //vector<vector<int>>
@@ -65,77 +106,60 @@ void test() {
     cout<<"output is "<<vec[2][4]; // output is 40 */
 
 
-vector<Cellule> creerListeCellule(vector<int> listeATraduire)
+string GameMap::intTypeToStringType(int value)
 {
-// renvoit liste de cellules
-    vector<Cellule> listeCellule;
-    for (int i=0;i<listeATraduire.size();i++){
-        switch(listeATraduire.at(i)){
+    string type;
+        switch(value){
             case 101: case 104: case 102: case 109: case 108:
-                listeCellule.push_back(Cellule("hpipe", dico));
+                type = "hpipe";
                     //hpipe Cellule(3,"hpipe.gif")
                 break;
             case 2:
-                    //foret
+                type = "foret";
                 break;
             case 4: case 7: case 9:
-               //river
+               type = "river";
                 break;
             case 3:
-                //wood
+                type = "wood";
                 break;
             case 1:
-                //plain
+                type = "plain";
                 break;
             case 34:
-                //greenearthcity
+                type = "greenearthcity";
                 break;
             case 15: case 16: case 18: case 19: case 20: case 21: case 23:
-                //hroad
+                type = "hroad";
                 break;
             case 30:
-                //sea
+                type = "sea";
                 break;
             case 33:
-                //reef
+                type = "reef";
                 break;
             case 36:
-                //greenearthairport
+                type = "greenearthairport";
                 break;
             case 92:
-                //greenearthbase
+                type = "greenearthbase";
                 break;
             case 26:
-                //hbridge
+                type = "hbridge";
                 break;
             case 125:
-                //temple
-                break;
-
-            default:
-                cout<<"error with number"<< i<< endl;
-            }
+                type = "temple";
+            break;
         }
+
+    return type;
 }
 
 
+
+
+
 /*
-
-  GameMap :: GameMap(int ligne, int colonne)
-  {
-   std :: vector<std :: vector<Cellule>> grille;
-   for (int i = 0; i< ligne; i++)
-    {
-        for (int j = 0; j< colonne; j++)
-        {
-            grille[i][j] = new Cellule(i, j);
-        }
-    }
-    plateau = grille;
-
-  }
- /*
-
   Cellule getCell(int x, int y)
  {
 

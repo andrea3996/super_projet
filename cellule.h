@@ -12,14 +12,15 @@ using std:: pair;
 class Cellule
 {
 public:
-    Cellule(std::string type);
+
+    Cellule(std::string type, std::vector<int> value);
     Cellule(int x, int y);
 
     int getDifficulte();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure
-    std:: map <std::string,std::vector<int>> m; //={std::string s, std::vector<int> v};
-    pair<std:: map <std::string,std::vector<int>>,bool> ret;
+    std:: map <std::string,std::vector<int> > m; //={std::string s, std::vector<int> v};
+    pair<std:: map <std::string,std::vector<int> >,bool> ret;
 
     bool getDisponible();
     void setDeplacement(bool a);
@@ -33,11 +34,11 @@ private:
 
     int pointsDeCapture;
     int nombre;
-
+    std::vector<int> value;
     std ::string type;
     bool deplacement;
     bool disponible;
-
+    
     int difficulte;
     std::string location;
     static int myints;
@@ -45,7 +46,7 @@ private:
 
     int valueMP(Unit *unit);
 
-    std::map<std::string, std::vector<int>>::iterator it;
+    std::map<std::string, std::vector<int> >::iterator it;
 
 };
 

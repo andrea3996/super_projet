@@ -10,16 +10,17 @@
 
 class Game
 {
-private:
-    std::vector<Player> players;
-    std::vector<Unit> units;
-    int taille_cellule;
+    private:
+        GameMap * map;
+        std::vector<Player> players;
+        std::vector<Unit> units;
+        int taille_cellule;
+        int rows;
+        int column;
 
-public:
-    Game();
-    void crier();
-    void set_taille_cellule(int i);
-    std::pair<int,int> calculer_cellule(int x, int y);
+    public:
+        Game();
+        std::pair<int,int> calculer_cellule(int x, int y);
 
 };
 
