@@ -81,13 +81,7 @@ void GameMap::creationBoard()
                 intType = mot;
                 type << intType;
              }
-             // insert ne fonctionne pas pour vector, faire pushback !! mot-'0' traduit de inttostring
-
-
-
-
         fichier.close();
-        //printSet(liste);
 
     }
 
