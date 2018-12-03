@@ -11,14 +11,14 @@ using namespace std;
 using std::ifstream;
 using std::string;
 using std::stoi;
-using std::infile;
+
 
 GameMap::GameMap(int rows,int column){
 
     this->rows = rows;
     this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
-    this->creationBoard("map1.txt");
+    //this->creationBoard("map1.txt"); //TODO
 
      //modifier attribut board
 
@@ -74,7 +74,7 @@ void GameMap::creationBoard(std::ifstream fichier)
             }
             else
             {
-                type << mot; //TODO
+                //type << mot; //TODO
              }
              // insert ne fonctionne pas pour vector, faire pushback !! mot-'0' traduit de inttostring
 
