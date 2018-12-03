@@ -3,6 +3,7 @@
 #include <string>
 #include <set>
 #include <vector>
+#include <sstream>
 
 #include "gamemap.h"
 #include "cellule.h"
@@ -18,7 +19,7 @@ GameMap::GameMap(int rows,int column){
     this->rows = rows;
     this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
-    //this->creationBoard("map1.txt"); //TODO
+    this->creationBoard();
 
      //modifier attribut board
 
@@ -39,42 +40,46 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"greenearthbase",{1,1,1,1,1,0,0,1}});
     return dico;
 }
-void GameMap::creationBoard(std::ifstream fichier)
+void GameMap::creationBoard()
 //envoit ref de l'objet donc utilise comme un objet
 {
     std::map<string, vector<int> > dico = this->creationDico();
 
+    ifstream fichier("map1.txt");
     // Extraire données du fichier
     if (fichier.is_open())
     {
         int mot = 0;
         string intType="";
-        string type = "";
+        std::stringstream type;
+        type<<"";
         std::vector<Cellule> * cells = new vector<Cellule>();
         while(fichier >> mot)
             if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
-                int typeInteger = stoi(type);
+                int typeInteger = stoi(type.str());
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
                 Cellule * cell = new Cellule( stringType, value );
                 cells->push_back(*cell);
-                type="";
+                type<<"";
             }
             else if(mot == '\n')
             {
-                int typeInteger = stoi(type);
+                int typeInteger = stoi(type.str());
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
                 Cellule * cell = new Cellule( stringType, value );
                 cells->push_back(*cell);
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
+                type<<"";
 
             }
             else
             {
-                //type << mot; //TODO
+                intType = mot;
+                type << intType;
              }
              // insert ne fonctionne pas pour vector, faire pushback !! mot-'0' traduit de inttostring
 
