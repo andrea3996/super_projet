@@ -11,7 +11,8 @@ Game::Game()
     this->taille_cellule=30;    //TODO
     this->rows = 17;
     this->column = 21;
-    //this->map = new GameMap(this->rows,this->column);
+    this->map = new GameMap(this->rows,this->column);
+
     this->players; //TODO = createPlayers();
     this->unitSelected;
     this->units;

@@ -20,7 +20,7 @@ Cellule::Cellule(std::string type, std::vector<int> value)
         this->value= value;
 
        //for (std::map<string, vector<int> >::iterator it = liste.begin(); it != liste.end(); it++){
-         //  std::cout << it ->first << ":"<< std::endl;
+       //  std::cout << it ->first << ":"<< std::endl;
 }
 
 

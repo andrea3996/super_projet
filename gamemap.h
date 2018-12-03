@@ -14,9 +14,8 @@ class GameMap
         Cellule getCell(int x, int y);
         void casesDispo(Unit unit, int mp,int a, int x, int y);
         std::map<std::string, std::vector<int> > creationDico();
-        std :: vector<std :: vector<Cellule>> creationBoard();
+        void creationBoard();
         std::string intTypeToStringType(int value);
-        void creationBoard(ifstream fichier);
 
 
     private:
