@@ -12,7 +12,6 @@ Game::Game()
     this->rows = 17;
     this->column = 21;
     this->map = new GameMap(this->rows,this->column);
-
     this->players; //TODO = createPlayers();
     this->unitSelected;
     this->units;
@@ -31,7 +30,9 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     {
         cell.first= x;
         cell.second= y;
-        std::cout << this->map->getCell(x,y) <<std::endl;
+        std::cout << "buongiorno" <<std::endl;
+        std::cout << this->map->getCell(x,y).getType() <<std::endl;
+        //std::cout << this->map->getCell(x,y).getType() <<std::endl;
 
     }
     return cell;

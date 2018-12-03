@@ -4,6 +4,7 @@
 #include <set>
 #include <vector>
 #include <sstream>
+#include <windows.h>
 
 #include "gamemap.h"
 #include "cellule.h"
@@ -20,6 +21,7 @@ GameMap::GameMap(int rows,int column){
     this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
     this->creationBoard();
+
 
      //modifier attribut board
 
@@ -44,11 +46,12 @@ void GameMap::creationBoard()
 //envoit ref de l'objet donc utilise comme un objet
 {
     std::map<string, vector<int> > dico = this->creationDico();
-
     ifstream fichier("map1.txt");
+
     // Extraire données du fichier
     if (fichier.is_open())
     {
+        std :: cout << "Yolo" << endl;
         int mot = 0;
         string intType="";
         std::stringstream type;
@@ -57,12 +60,15 @@ void GameMap::creationBoard()
         while(fichier >> mot)
             if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
-                int typeInteger = stoi(type.str());
-                string stringType = this->intTypeToStringType(typeInteger);
-                std::vector<int> value = dico[stringType];
-                Cellule * cell = new Cellule( stringType, value );
-                cells->push_back(*cell);
+
+                int typeInteger = stoi(type.str()); // traduction en entier ex : stoi("10") = 10
+                string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
+                std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
+                Cellule * cell = new Cellule( stringType, value ); // construction de la cellule
+                cells->push_back(*cell); // la cellule est rentrée dans le vecteur
                 type<<"";
+
+
             }
             else if(mot == '\n')
             {
@@ -83,6 +89,10 @@ void GameMap::creationBoard()
              }
         fichier.close();
 
+    }
+    else
+    {
+      std :: cout << " file not opened " << endl;
     }
 
 
@@ -161,6 +171,7 @@ string GameMap::intTypeToStringType(int value)
 
  Cellule GameMap::getCell(int x, int y)
  {
+    // std :: cout << "Hello" << endl;
     return (*this->board)[x][y];
  }
 
