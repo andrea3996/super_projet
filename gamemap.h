@@ -18,6 +18,7 @@ class GameMap
         std::string intTypeToStringType(int value);
         void creationBoard(ifstream fichier);
 
+
     private:
         std::vector<int> listeMap(std::ifstream&  fichier);  // attention, fichier n'est pas copiable
         int rows;

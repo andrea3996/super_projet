@@ -15,7 +15,7 @@ public:
 
     Cellule(std::string type, std::vector<int> value);
     Cellule(int x, int y);
-
+    std:: string getType();
     int getDifficulte();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure

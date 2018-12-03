@@ -26,10 +26,12 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     int y= yPixel/taille_cellule;
     cell.first= -1;
     cell.second= -1;
-    if (x > 0 and  x < this->column  and y > 0 and y < this->rows)
+    if (x >= 0 and  x < this->column  and y >= 0 and y < this->rows)
     {
         cell.first= x;
         cell.second= y;
+        std::cout << this->map->getCell(x,y) <<std::endl;
+
     }
     return cell;
 }

@@ -159,14 +159,14 @@ string GameMap::intTypeToStringType(int value)
 
 
 
-/*
-  Cellule getCell(int x, int y)
- {
 
-  return this->plateau[x][y];
+ Cellule GameMap::getCell(int x, int y)
+ {
+    return (*this->board)[x][y];
  }
 
 
+/*
 void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 {
   if (mp>0)

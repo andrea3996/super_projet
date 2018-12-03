@@ -24,6 +24,11 @@ Cellule::Cellule(std::string type, std::vector<int> value)
 }
 
 
+std:: string  Cellule :: getType()
+{
+    return this->type;
+}
+
 
 
 
