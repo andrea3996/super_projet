@@ -33,6 +33,21 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         std::cout << "buongiorno" <<std::endl;
         std::cout << this->map->getCell(x,y).getType() <<std::endl;
         //std::cout << this->map->getCell(x,y).getType() <<std::endl;
+        /*
+         *
+        Unit uniteee = this->map->getCell(x,y).getUnit();
+
+        if(uniteee!=NULL){
+            this->unitSelected = uniteee;
+            // TODO send to MainWIndow afficher case dispo
+        }
+        else{
+            if(this->unitSelected != NULL){
+            //TODO case dispo
+            }
+
+        }
+        */
 
     }
     return cell;
