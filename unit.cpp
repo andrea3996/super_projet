@@ -27,18 +27,6 @@ int Unit::get_y() {
     return y;
 }
 /*
-void attaquer::attaquer() {
-   rect x = position x ;
-   rect y = position y ;
-   if attacking ;
-    positionOriginalUnit;
-   else
-    positionOriginalUnit=vector(position x,position y);
-    direction x = rect x - position x;
-    direction y = rect y - position y;
-}
-*/
-/*
 void seDeplacer(int x, int y)
 {
     map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);

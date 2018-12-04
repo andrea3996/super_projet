@@ -13,7 +13,7 @@ Game::Game()
     this->column = 21;
     this->map = new GameMap(this->rows,this->column);
     this->players; //TODO = createPlayers();
-    this->unitSelected;
+    this->unitSelected = NULL;
     this->units;
 
 }
@@ -33,21 +33,33 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         std::cout << "buongiorno" <<std::endl;
         std::cout << this->map->getCell(x,y).getType() <<std::endl;
         //std::cout << this->map->getCell(x,y).getType() <<std::endl;
-        /*
-         *
-        Unit uniteee = this->map->getCell(x,y).getUnit();
 
-        if(uniteee!=NULL){
-            this->unitSelected = uniteee;
+        Unit unitClic = this->map->getCell(x,y).getUnit();
+
+        if( &unitClic != NULL){ // si on a cliqué sur une unité
+            this->unitSelected = &unitClic;   // assigner l'unité cliquée à l'attribut unitSelected de Game
             // TODO send to MainWIndow afficher case dispo
         }
-        else{
-            if(this->unitSelected != NULL){
-            //TODO case dispo
-            }
+        else{                   // si on n'a pas cliqué sur une unit
 
+            if(this->unitSelected != NULL)// si le clic précédent était une unité
+            {
+                if (this->map->getCell(x,y).getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
+                    {
+                    this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+                    }
+                else
+                {
+                    std :: cout << "Cette case n'est pas disponible !" << std :: endl;
+                }
+
+            }
+            else
+            {
+            std :: cout << "Il convient à ce stade, de sélectionner une unité" << std :: endl;
+            }
         }
-        */
+
 
     }
     return cell;

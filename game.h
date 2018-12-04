@@ -17,7 +17,7 @@ class Game
         int taille_cellule;
         int rows;
         int column;
-        Unit unitSelected;
+        Unit *unitSelected;
 
     public:
         Game();

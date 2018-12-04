@@ -181,14 +181,14 @@ void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 {
   if (mp>0)
   {
-    if (this.getCell(x+1, y).getDisponible() && a =! 3)
+    if (this->board[x+1][y].getDisponible() && a =! 3)
     {
-        mp = mp - this.getCell(x+1, y).valueMP(unit);
+        mp = mp - this->board[x+1][y].valueMP(unit);
         a = 4;
-        this.getCell(x+1, y).setDeplacement(true);
+        this->board[x+1][y].setDeplacement(true);
         this.casesDispo(unit,mp,a, x+1, y);
     }
-    if (this.getCell(x-1,y).getDisponible() && a =! 4)
+    if (this->board[x-1][y].getDisponible() && a =! 4)
     {
         mp = mp - this.getCell(x-1,y).valueMP(unit);
         a=3

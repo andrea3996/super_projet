@@ -14,7 +14,7 @@ public:
     void attaquer();
     void attendre();
     void grouper();
-    void seDeplacer();
+    void seDeplacer(int x, int y);
     Unit(int nx,int ny, Player* ow);
     Unit();
     int getMoveType();

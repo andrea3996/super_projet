@@ -17,6 +17,8 @@ public:
     Cellule(int x, int y);
     std:: string getType();
     int getDifficulte();
+    bool getDeplacement ();
+    Unit getUnit();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure
     std:: map <std::string,std::vector<int> > m; //={std::string s, std::vector<int> v};

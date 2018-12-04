@@ -32,30 +32,40 @@ std:: string  Cellule :: getType()
 }
 
 
+bool Cellule :: getDeplacement()
+{
+    return this->deplacement;
+}
+
+Unit Cellule :: getUnit()
+{
+    return *unit;
+}
+
+
+
+/*
 
 
 
 
 
-/*Cellule :: Cellule(int x, int y) : x(x), y(y)
- {
- }
+/*
+void attaquer::attaquer() {
+   rect x = position x ;
+   rect y = position y ;
+   if attacking ;
+    positionOriginalUnit;
+   else
+    positionOriginalUnit=vector(position x,position y);
+    direction x = rect x - position x;
+    direction y = rect y - position y;
+}
+*/
+
 
 
  int Cellule :: valueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
-
-fonction casesDispo à traduire en C++ (fonction Javaisée)
- *
- * void casesDispo(Unit unit, int mp,int a)
-{
-  int x = this->x; int y = this->y;
-  if (mp>0)
-     Stashed changes
-  {
-       int a = this->m[this->type][unit->getMoveType()];
-       return a;
-  }
-
 
 
   void Cellule :: setDeplacement(bool a)
