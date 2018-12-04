@@ -69,3 +69,6 @@ DISTFILES += \
     Resources/reef.gif \
     Resources/sea.gif \
     Resources/wood.gif
+
+RESOURCES += \
+    resources.qrc

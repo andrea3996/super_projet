@@ -46,7 +46,7 @@ void GameMap::creationBoard()
 //envoit ref de l'objet donc utilise comme un objet
 {
     std::map<string, vector<int> > dico = this->creationDico();
-    ifstream fichier("map1.txt");
+    ifstream fichier(":/maps/map1.txt"); // faire fonctionner
 
     // Extraire données du fichier
     if (fichier.is_open())
