@@ -4,10 +4,14 @@
 #include <set>
 #include <vector>
 #include <sstream>
-#include <windows.h>
 
+#include <windows.h>
 #include "gamemap.h"
 #include "cellule.h"
+
+#include"QFile"
+#include "QMessageBox"
+#include "QTextStream"
 
 using namespace std;
 using std::ifstream;
@@ -42,11 +46,20 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"greenearthbase",{1,1,1,1,1,0,0,1}});
     return dico;
 }
+
+
+/*
+
+
 void GameMap::creationBoard()
 //envoit ref de l'objet donc utilise comme un objet
 {
     std::map<string, vector<int> > dico = this->creationDico();
-    ifstream fichier(":/maps/map1.txt"); // faire fonctionner
+   ifstream fichier(":/maps/map1.txt"); // faire fonctionner
+
+
+
+
 
     // Extraire données du fichier
     if (fichier.is_open())
@@ -97,6 +110,73 @@ void GameMap::creationBoard()
 
 
 }
+
+*/
+
+
+
+void GameMap::creationBoard()
+//envoit ref de l'objet donc utilise comme un objet
+{
+    std::map<string, vector<int> > dico = this->creationDico();
+
+    QString fileName = ":/maps/map1.txt";
+    QFile fichier(fileName);
+    fichier.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream flux(&fichier);
+    QChar mot;
+
+
+    std :: cout << "Yolo" << endl;
+    string intType="";
+    std::stringstream type;
+    type<<"";
+    std::vector<Cellule> * cells = new vector<Cellule>();
+
+    while(! flux.atEnd())
+        {
+            flux >> mot;
+            if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
+            {
+
+                int typeInteger = stoi(type.str()); // traduction en entier ex : stoi("10") = 10
+                string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
+                std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
+                Cellule * cell = new Cellule( stringType, value ); // construction de la cellule
+                cells->push_back(*cell); // la cellule est rentrée dans le vecteur
+                type<<"";
+
+
+
+            }
+            else if(mot == '\n')
+            {
+                int typeInteger = stoi(type.str());
+                string stringType = this->intTypeToStringType(typeInteger);
+                std::vector<int> value = dico[stringType];
+                Cellule * cell = new Cellule( stringType, value );
+                cells->push_back(*cell);
+                this->board->push_back(*cells);
+                cells = new vector<Cellule>();
+                type<<"";
+
+            }
+            else
+            {
+                intType = mot;
+                type << intType;
+             }
+        fichier.close();
+
+    }
+
+    std :: cout << " file not opened " << endl;
+
+
+}
+
+
+
 
 
 

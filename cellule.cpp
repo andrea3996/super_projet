@@ -65,7 +65,7 @@ void attaquer::attaquer() {
 
 
 
- int Cellule :: valueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
+ //int Cellule :: valueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
 
 
   void Cellule :: setDeplacement(bool a)
@@ -111,5 +111,5 @@ std::string Cellule::getLocation(){
 
     // pour les erreurs en bas, on supprime le dossier "build"
 
-*/
+
 
