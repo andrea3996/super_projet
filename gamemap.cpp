@@ -168,13 +168,18 @@ void GameMap::creationBoard()
                 type = "";
 
             }
+            else if (mot == -1)
+            {
+
+                break;
+            }
             else
             {
                 int a = mot.toLatin1();
                 intType = a;
                 type += intType;
              }
-        fichier.close();
+       // fichier.close();
 
     }
 
