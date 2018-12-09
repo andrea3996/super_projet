@@ -10,6 +10,9 @@
 #include "cellule.h"
 
 #include"QFile"
+
+#include "QString"
+#include "QChar"
 #include "QMessageBox"
 #include "QTextStream"
 
@@ -129,42 +132,47 @@ void GameMap::creationBoard()
 
     std :: cout << "Yolo" << endl;
     string intType="";
-    std::stringstream type;
-    type<<"";
+    std::string type;
+    type = "";
     std::vector<Cellule> * cells = new vector<Cellule>();
 
     while(! flux.atEnd())
         {
+
             flux >> mot;
+           // std :: cout << mot.toLatin1()<< endl;
             if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
 
-                int typeInteger = stoi(type.str()); // traduction en entier ex : stoi("10") = 10
+                std :: cout << stoi(type) << endl;
+                int typeInteger = stoi(type); // traduction en entier ex : stoi("10") = 10
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
                 Cellule * cell = new Cellule( stringType, value ); // construction de la cellule
                 cells->push_back(*cell); // la cellule est rentrée dans le vecteur
-                type<<"";
+                type = "";
 
 
 
             }
             else if(mot == '\n')
             {
-                int typeInteger = stoi(type.str());
+                std :: cout << stoi(type) << endl;
+                int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
                 Cellule * cell = new Cellule( stringType, value );
                 cells->push_back(*cell);
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
-                type<<"";
+                type = "";
 
             }
             else
             {
-                intType = mot;
-                type << intType;
+                int a = mot.toLatin1();
+                intType = a;
+                type += intType;
              }
         fichier.close();
 
