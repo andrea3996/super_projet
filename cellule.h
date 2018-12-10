@@ -18,7 +18,7 @@ public:
     std:: string getType();
     int getDifficulte();
     bool getDeplacement ();
-    Unit getUnit();
+    Unit* getUnit();
     std::string getLocation();
     std:: vector<int> v(int l); //pas sure
     std:: map <std::string,std::vector<int> > m; //={std::string s, std::vector<int> v};
@@ -27,6 +27,7 @@ public:
     bool getDisponible();
     void setDeplacement(bool a);
     int test();
+    void setUnit(Unit unit);
     //void imprimerLaListe();
 
 

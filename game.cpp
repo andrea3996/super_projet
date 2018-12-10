@@ -6,6 +6,7 @@
 #include "gamemap.h"
 
 
+
 Game::Game()
 {
     this->taille_cellule=30;    //TODO
@@ -34,11 +35,16 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         std::cout << this->map->getCell(x,y).getType() <<std::endl;
         //std::cout << this->map->getCell(x,y).getType() <<std::endl;
 
-        Unit unitClic = this->map->getCell(x,y).getUnit();
+        Unit *wesh = new Unit();
 
-        if( &unitClic != NULL){ // si on a cliqué sur une unité
-            this->unitSelected = &unitClic;   // assigner l'unité cliquée à l'attribut unitSelected de Game
-            // TODO send to MainWIndow afficher case dispo
+        this->map->getCell(x,y).setUnit(*wesh);
+
+        Unit *unitClic = this->map->getCell(x,y).getUnit();
+
+        if( unitClic != NULL){ // si on a cliqué sur une unité, si y a un unit à l'endroit (x,y)
+            std::cout << "L'unité WESH" <<std::endl;
+            this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
+        //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
         }
         else{                   // si on n'a pas cliqué sur une unit
 
@@ -46,7 +52,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
             {
                 if (this->map->getCell(x,y).getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
                     {
-                    this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+                   // this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
                     }
                 else
                 {

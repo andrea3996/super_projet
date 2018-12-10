@@ -11,6 +11,7 @@ Unit::Unit(int nx,int ny, Player* ow) {
 }
 
 
+
 int Unit :: getMoveType()
 {
     return this->moveType;
@@ -37,6 +38,10 @@ void seDeplacer(int x, int y)
     }
 } */
 
+void seDeplacer(int x,int y)
+{
+
+}
 
 
 Unit::Unit(){

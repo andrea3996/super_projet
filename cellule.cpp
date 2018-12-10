@@ -27,7 +27,7 @@ Cellule::Cellule(std::string type, std::vector<int> value)
 std:: string  Cellule :: getType()
 {
 
-    std :: cout << this << endl;
+   // std :: cout << "GET FUCKING TYPE" << endl;
     return this->type;
 }
 
@@ -37,12 +37,15 @@ bool Cellule :: getDeplacement()
     return this->deplacement;
 }
 
-Unit Cellule :: getUnit()
+Unit *Cellule :: getUnit()
 {
-    return *unit;
+    return unit;
 }
 
-
+void Cellule :: setUnit(Unit unit)
+{
+    this->unit= &unit;
+}
 
 /*
 
