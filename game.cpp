@@ -21,7 +21,8 @@ Game::Game()
 
 }
 
-std::string Game:: getCellType(int x, int y){
+std::string Game::getCellType(int x, int y){
+
     return this->map->getCell(x,y).getType() ;
 }
 

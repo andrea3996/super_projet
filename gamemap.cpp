@@ -26,7 +26,7 @@ GameMap::GameMap(int rows,int column){
 
     this->rows = rows;
     this->column= column;
-    this->board = new std::vector< std :: vector<Cellule>>();
+    this->board = new Cellue[][];
     this->creationBoard();
 
 
@@ -62,9 +62,6 @@ void GameMap::creationBoard()
     fichier.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream flux(&fichier);
     QChar mot;
-
-
-    std :: cout << "Yolo" << endl;
     string intType="";
     std::string type;
     type = "";
@@ -85,6 +82,7 @@ void GameMap::creationBoard()
                 Cellule * cell = new Cellule( stringType, value ); // construction de la cellule
                 cells->push_back(*cell); // la cellule est rentrée dans le vecteur
                 type = "";
+                //std::cout << cell->getType()[0]<< cell->getType()[1]<<"-";
 
 
 
@@ -92,6 +90,7 @@ void GameMap::creationBoard()
             else if(mot == '\n')
             {
               //  std :: cout << stoi(type) << endl;
+                //std::cout << endl;
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
@@ -113,9 +112,10 @@ void GameMap::creationBoard()
                 intType = a;
                 type += intType;
              }
-       // fichier.close();
+        fichier.close(); //TODO
 
     }
+
 }
 
 
@@ -152,10 +152,10 @@ string GameMap::intTypeToStringType(int value)
             case 4: case 7: case 9:
                type = "river";
                 break;
-            case 3:
+            case 5: case 3:
                 type = "wood";
                 break;
-            case 1:
+            case 1: case 24:
                 type = "plain";
                 break;
             case 34:
@@ -164,7 +164,8 @@ string GameMap::intTypeToStringType(int value)
             case 15: case 16: case 18: case 19: case 20: case 21: case 23:
                 type = "hroad";
                 break;
-            case 30:
+
+            case 29: case 30:
                 type = "sea";
                 break;
             case 33:
@@ -173,7 +174,7 @@ string GameMap::intTypeToStringType(int value)
             case 36:
                 type = "greenearthairport";
                 break;
-            case 92:
+            case 25: case 92:case 110: //TODO
                 type = "greenearthbase";
                 break;
             case 26:
@@ -182,6 +183,8 @@ string GameMap::intTypeToStringType(int value)
             case 125:
                 type = "temple";
             break;
+            default:
+                type= "hpipe";
         }
 
     return type;
@@ -194,11 +197,17 @@ string GameMap::intTypeToStringType(int value)
 
  Cellule GameMap::getCell(int x, int y)
  {
-    std :: cout << "GET FUCKING CELL" << endl;
+    std :: cout << x << y<< endl;
     return (*this->board)[x][y];
  }
 
 
+
+
+std::vector< std :: vector<Cellule>> * GameMap::getBoard()
+ {
+    return this->board;
+ }
 /*
 void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 {

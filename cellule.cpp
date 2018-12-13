@@ -27,7 +27,7 @@ Cellule::Cellule(std::string type, std::vector<int> value)
 std:: string  Cellule :: getType()
 {
 
-   // std :: cout << "GET FUCKING TYPE" << endl;
+   std :: cout << "GET FUCKING TYPE:" << this << endl;
     return this->type;
 }
 

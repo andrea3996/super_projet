@@ -36,12 +36,13 @@ public:
     std::map<string, QPixmap> creationDicoQPixMap();
 
     void keyPressEvent(QKeyEvent* event);
+    Game* game = nullptr;
+
 
 public slots:
     void tick();
 private:
 
-    Game* game = nullptr;
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;
