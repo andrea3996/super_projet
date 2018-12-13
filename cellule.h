@@ -27,8 +27,8 @@ public:
     bool getDisponible();
     void setDeplacement(bool a);
     int test();
-    void setUnit(Unit unit);
-    //void imprimerLaListe();
+    void setUnit(Unit *unit);
+    //void imprimerLaLisste();
 
 
 

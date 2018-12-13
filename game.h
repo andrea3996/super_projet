@@ -7,6 +7,7 @@
 
 #include <vector>
 #include <iostream>
+using std::string;
 
 class Game
 {
@@ -22,7 +23,7 @@ class Game
     public:
         Game();
         std::pair<int,int> calculer_cellule(int x, int y);
-
+        std::string getCellType(int x, int y);
 };
 
 

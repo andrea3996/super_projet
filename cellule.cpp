@@ -42,9 +42,9 @@ Unit *Cellule :: getUnit()
     return unit;
 }
 
-void Cellule :: setUnit(Unit unit)
+void Cellule :: setUnit(Unit *unit)
 {
-    this->unit= &unit;
+    this->unit= unit;
 }
 
 /*

@@ -4,6 +4,8 @@
 #include "player.h"
 #include "unit.h"
 #include "gamemap.h"
+using std::string;
+
 
 
 
@@ -19,7 +21,9 @@ Game::Game()
 
 }
 
-
+std::string Game:: getCellType(int x, int y){
+    return this->map->getCell(x,y).getType() ;
+}
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     std::pair<int,int> cell;
@@ -37,7 +41,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
         Unit *wesh = new Unit();
 
-        this->map->getCell(x,y).setUnit(*wesh);
+        this->map->getCell(x,y).setUnit(wesh);
 
         Unit *unitClic = this->map->getCell(x,y).getUnit();
 
@@ -52,7 +56,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
             {
                 if (this->map->getCell(x,y).getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
                     {
-                   // this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+                    // this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
                     }
                 else
                 {

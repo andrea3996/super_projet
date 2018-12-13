@@ -5,7 +5,7 @@
 #include <vector>
 #include <sstream>
 
-#include <windows.h>
+//#include <windows.h>
 #include "gamemap.h"
 #include "cellule.h"
 

@@ -5,8 +5,19 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QPixmap>
+#include <QLabel>
+#include <vector>
+#include <string>
+
+#include <QWidget>
+#include <QPaintEvent>
+#include <QPainter>
+
 
 #include "game.h"
+
+using std::string;
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +33,7 @@ public:
     void paintEvent(QPaintEvent *event);
     void mousePressEvent(QMouseEvent *event); // cliquer
     //tracers
+    std::map<string, QPixmap> creationDicoQPixMap();
 
     void keyPressEvent(QKeyEvent* event);
 
