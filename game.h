@@ -24,8 +24,11 @@ class Game
         Game();
         std::pair<int,int> calculer_cellule(int x, int y);
         std::string getCellType(int x, int y);
+        int getRows();
+        int getColums();
+
 };
-
-
 // variable reste ; fonction constructeur redefinir
 #endif // GAME_H
+
+// Dimensionner fenetre

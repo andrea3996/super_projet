@@ -36,15 +36,20 @@ public:
     std::map<string, QPixmap> creationDicoQPixMap();
 
     void keyPressEvent(QKeyEvent* event);
+    void resizeEvent(QResizeEvent *event);
 
 public slots:
     void tick();
 private:
+    int xDesktop;
+    int yDesktop;
+
 
     Game* game = nullptr;
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;
+    std::map<std::string, QPixmap> dicoQPixMap;
 };
 
 #endif // MAINWINDOW_Hs

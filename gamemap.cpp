@@ -27,7 +27,9 @@ GameMap::GameMap(int rows,int column){
     this->rows = rows;
     this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
+    std::cout << "xd" << std::endl;
     this->creationBoard();
+    std::cout << "board $$$$$ " << (*this->board)[0][0].getType() << std::endl;
 
 
      //modifier attribut board
@@ -71,7 +73,7 @@ void GameMap::creationBoard()
     std::vector<Cellule> * cells = new vector<Cellule>();
 
     while(! flux.atEnd())
-        {
+    {
 
             flux >> mot;
            // std :: cout << mot.toLatin1()<< endl;
@@ -82,8 +84,9 @@ void GameMap::creationBoard()
                 int typeInteger = stoi(type); // traduction en entier ex : stoi("10") = 10
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
-                Cellule * cell = new Cellule( stringType, value ); // construction de la cellule
-                cells->push_back(*cell); // la cellule est rentrée dans le vecteur
+                Cellule cell( stringType, value ); // construction de la cellule
+                //std::cout << stringType <<std::endl;
+                cells->push_back(cell); // la cellule est rentrée dans le vecteur
                 type = "";
 
 
@@ -95,8 +98,9 @@ void GameMap::creationBoard()
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
-                Cellule * cell = new Cellule( stringType, value );
-                cells->push_back(*cell);
+                Cellule cell( stringType, value );
+                //std::cout << stringType <<std::endl;
+                cells->push_back(cell);
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
                 type = "";
@@ -115,65 +119,58 @@ void GameMap::creationBoard()
              }
        // fichier.close();
 
+
+    }/**
+    for (int i = 0; i < this->board->size(); i++) {
+        for (int j = 0; j < this->board->at(0).size(); j++) {
+            std::cout << (*this->board)[i][j].getType()[0] << (*this->board)[i][j].getType()[1] <<  " ";
+        }
+        std::cout << std::endl; // nouvelle ligne
     }
+**/
+    std::cout << "board "<< this->board << std::endl;
 }
 
 
 
 
 
-
-//vector<vector<int>>
-/*vector<vector<int>> vec; // declare 2D vector
-
-    for (int i=0; i<=17; i++) {
-        vector<int> row;  // create a row vector which adds a row to vec
-        for (int j=0; j<=21; j++) {
-            row.push_back(j); // push elements 0,10,20,30,40 to row
-        }
-        vec.push_back(row); // add this row to vec
-        // Repeat this procedure 4 times to make a 4*5 2D vector
-    }
-
-    cout<<"output is "<<vec[2][4]; // output is 40 */
-
-
 string GameMap::intTypeToStringType(int value)
 {
-    string type;
+    string type = "";
         switch(value){
-            case 101: case 104: case 102: case 109: case 108:
+            case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
                 type = "hpipe";
                     //hpipe Cellule(3,"hpipe.gif")
                 break;
             case 2:
                 type = "foret";
                 break;
-            case 4: case 7: case 9:
+            case 4: case 5: case 7: case 8: case 9: case 10:
                type = "river";
                 break;
             case 3:
                 type = "wood";
                 break;
-            case 1:
+            case 1: case 95:
                 type = "plain";
                 break;
             case 34:
                 type = "greenearthcity";
                 break;
-            case 15: case 16: case 18: case 19: case 20: case 21: case 23:
+            case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
                 type = "hroad";
                 break;
             case 30:
                 type = "sea";
                 break;
-            case 33:
+            case 33: case 29:
                 type = "reef";
                 break;
             case 36:
                 type = "greenearthairport";
                 break;
-            case 92:
+            case 92: case 35: case 123:
                 type = "greenearthbase";
                 break;
             case 26:
@@ -183,7 +180,9 @@ string GameMap::intTypeToStringType(int value)
                 type = "temple";
             break;
         }
-
+        if (type=="") {
+            std::cout << "cellule mal définie pour id " << value << std::endl;
+        }
     return type;
 }
 
@@ -193,8 +192,13 @@ string GameMap::intTypeToStringType(int value)
 
 
  Cellule GameMap::getCell(int x, int y)
+
  {
-    std :: cout << "GET FUCKING CELL" << endl;
+    std :: cout << "GET CELL" << std::endl;
+    //std::cout << this->board->at(x).at(y) << std::endl;
+    std::cout << "get cell passed" << std::endl;
+    std::cout << "board "<< this->board << std::endl;
+
     return (*this->board)[x][y];
  }
 
@@ -234,8 +238,24 @@ void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
     }
   }
 }
-*/
 
-/* int** a = new int*[rowCount];
+
+ int** a = new int*[rowCount];
      for(int i = 0; i < rowCount; ++i)
          a[i] = new int[colCount]; */
+
+
+ //vector<vector<int>>
+ /*vector<vector<int>> vec; // declare 2D vector
+
+     for (int i=0; i<=17; i++) {
+         vector<int> row;  // create a row vector which adds a row to vec
+         for (int j=0; j<=21; j++) {
+             row.push_back(j); // push elements 0,10,20,30,40 to row
+         }
+         vec.push_back(row); // add this row to vec
+         // Repeat this procedure 4 times to make a 4*5 2D vector
+     }
+
+     cout<<"output is "<<vec[2][4]; // output is 40
+*/

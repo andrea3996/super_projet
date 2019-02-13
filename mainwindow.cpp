@@ -6,16 +6,29 @@
 #include <QDebug> // bon pour les qpoint + mieux que cout
 #include <QString>
 #include <QPixmap>
+#include <QWidget>
+#include <QDesktopWidget>
+#include <QMainWindow>
 
-MainWindow::MainWindow(Game* game, QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
+
     this->game = game;
+
+
+        std::cout << "supergame->getCellType(0,0)" << std::endl;
+    std::cout << this->game->getCellType(0,0) << std::endl;
+        std::cout << "supergame->getCellType(0,0)" << std::endl;
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
-    this->creationDicoQPixMap();
+    dicoQPixMap = this->creationDicoQPixMap();
 
+    //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
+
+    QDesktopWidget dw;
+    this->xDesktop =dw.height()*0.7;
+    this->yDesktop=dw.height()*0.7;
+    setFixedSize(this->xDesktop,this->yDesktop);
     //timer.start(10);
 
 }
@@ -26,34 +39,34 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent *event){
-    //int a = 5;
-    int pos_circle_x=8; //faire appel
-    int pos_circle_y= 5;
+
     QPainter painter(this);
-    std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap();
-    std::string type;
+    //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres mauvaise idée car prend beaucoup de temps
+    std::string type; //pointeur
     // lire le vector vector et dessiner son qsas'écontenu
-    for (int i=0; i<10;i++){
-        for(int j=0; j<10;j++){
-            painter.fillRect(21*i, 21*j,20,20,Qt::red);
-            if(i == pos_circle_x && j == pos_circle_y){  // better
-                painter.drawEllipse(21*pos_circle_x, 21*pos_circle_y, 10, 10);
-                type = this->game->getCellType(i,j);
-                painter.drawPixmap(i,j,dicoQPixMap[type]);
+    // Remplacer 10 par variable size
+    int xSizeBlock = xDesktop/17;
+    int ySizeBlock = yDesktop/21;
+    for (int i=0; i<17; i++){
+        for(int j=0; j<21; j++){
+            std::cout << "call cell " << this->game->getColums() <<std::endl;
+            type = this->game->getCellType(i,j);
+            std::cout << "*******getcelltype "<< this->game << std::endl;
+            painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,ySizeBlock ,dicoQPixMap[type]);
+            std::cout << "testa" << std::endl;
 
             }
 
         }
-    }
-    //painter.drawPixmap(pix, x ,y)
-
 
 }
+
+
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
-    this->game->calculer_cellule(event->x(), event->y());
+    //this->game->calculer_cellule(event->x(), event->y());
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -71,17 +84,24 @@ void MainWindow::tick() {
 
 std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
     std::map<string, QPixmap > dicoQPixMap;
-    dicoQPixMap.insert({"plain", QPixmap(":/terrain/plain.png")});
-    dicoQPixMap.insert({"mountain", QPixmap(":/terrain/mountain.png")});
-    dicoQPixMap.insert({"wood",QPixmap(":/terrain/wood.png")});
-    dicoQPixMap.insert({"hpipe", QPixmap(":/terrain/hpipe.png")});
-    dicoQPixMap.insert({"river", QPixmap(":/terrain/river.png")});
-    dicoQPixMap.insert({"greenearthcity", QPixmap(":/terrain/greenearthcity.png")});
-    dicoQPixMap.insert({"hroad",QPixmap(":/terrain/hroad.png")});
-    dicoQPixMap.insert({"reef",QPixmap(":/terrain/reef.png")});
-    dicoQPixMap.insert({"greenearthairport",QPixmap(":/terrain/greenearthairport.png")});
-    dicoQPixMap.insert({"greenearthbase",QPixmap(":/terrain/greenearthbase.png")});
+    dicoQPixMap.insert({"plain", QPixmap(":/terrain/Resources/plain.png")});
+    dicoQPixMap.insert({"mountain", QPixmap(":/terrain/Resources/mountain.png")});
+    dicoQPixMap.insert({"wood",QPixmap(":/terrain/Resources/wood.png")});
+    dicoQPixMap.insert({"hpipe", QPixmap(":/terrain/Resources/hpipe.png")});
+    dicoQPixMap.insert({"river", QPixmap(":/terrain/Resources/river.png")});
+    dicoQPixMap.insert({"greenearthcity", QPixmap(":/terrain/Resources/greenearthcity.png")});
+    dicoQPixMap.insert({"hroad",QPixmap(":/terrain/Resources/hroad.png")});
+    dicoQPixMap.insert({"reef",QPixmap(":/terrain/Resources/reef.png")});
+    dicoQPixMap.insert({"greenearthairport",QPixmap(":/terrain/Resources/greenearthairport.png")});
+    dicoQPixMap.insert({"greenearthbase",QPixmap(":/terrain/Resources/greenearthbase.png")});
     return dicoQPixMap;
+}
+
+
+void MainWindow::resizeEvent (QResizeEvent *event)
+{
+// My signal
+emit iconSizeChanged(event->size());
 }
 
 

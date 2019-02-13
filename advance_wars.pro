@@ -55,7 +55,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 DISTFILES += \
     map1.txt \
-    Resources/greenearthairport.gif \
     Resources/greenearthbase.gif \
     Resources/greenearthcity.gif \
     Resources/greenearthcomtower.gif \

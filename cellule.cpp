@@ -26,8 +26,7 @@ Cellule::Cellule(std::string type, std::vector<int> value)
 
 std:: string  Cellule :: getType()
 {
-
-   // std :: cout << "GET FUCKING TYPE" << endl;
+    //std :: cout << "GET THE TYPE" << std::endl;
     return this->type;
 }
 
@@ -94,6 +93,7 @@ int Cellule::test()
     std::map<string,vector<int> > liste;
     liste.insert({"plain",{1,2,3,4,5}});
     std::cout << it ->first << ":"<< std::endl;
+    std::cout << "HALO" << std::endl;
     return 0 ;
 }
 std::string Cellule::getLocation(){

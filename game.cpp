@@ -15,14 +15,27 @@ Game::Game()
     this->rows = 17;
     this->column = 21;
     this->map = new GameMap(this->rows,this->column);
-    this->players; //TODO = createPlayers();
-    this->unitSelected = NULL;
-    this->units;
+    std::cout<< " type "<< getCellType(0,0) <<std::endl;
+    std::cout<< "$$$$$$$$$" <<std::endl;
+
+    //this->players; //TODO = createPlayers();
+    this->unitSelected = nullptr;
+    //this->units;
 
 }
 
 std::string Game:: getCellType(int x, int y){
-    return this->map->getCell(x,y).getType() ;
+    return this->map->getCell(x,y).getType();
+}
+
+int Game::getRows()
+{
+    return rows;
+}
+
+int Game::getColums()
+{
+    return column;
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
@@ -37,7 +50,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         cell.second= y;
         std::cout << "buongiorno" <<std::endl;
         std::cout << this->map->getCell(x,y).getType() <<std::endl;
-        //std::cout << this->map->getCell(x,y).getType() <<std::endl;
+        std::cout << this->map->getCell(x,y).getType() <<std::endl;
 
         Unit *wesh = new Unit();
 
@@ -45,7 +58,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
         Unit *unitClic = this->map->getCell(x,y).getUnit();
 
-        if( unitClic != NULL){ // si on a cliqué sur une unité, si y a un unit à l'endroit (x,y)
+        if( unitClic != NULL){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             std::cout << "L'unité WESH" <<std::endl;
             this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
         //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
@@ -66,10 +79,9 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
             }
             else
             {
-            std :: cout << "Il convient à ce stade, de sélectionner une unité" << std :: endl;
+                std :: cout << "Il convient à ce stade, de sélectionner une unité" << std :: endl;
             }
         }
-
 
     }
     return cell;

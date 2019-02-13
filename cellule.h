@@ -38,7 +38,7 @@ private:
     int pointsDeCapture;
     int nombre;
     std::vector<int> value;
-    std ::string type;
+    std ::string type; //
     bool deplacement;
     bool disponible;
     
