@@ -4,6 +4,7 @@
 #include "player.h"
 #include "unit.h"
 #include "gamemap.h"
+#include "cellule.h"
 
 #include <vector>
 #include <iostream>

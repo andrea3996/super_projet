@@ -16,6 +16,8 @@ class GameMap
         std::map<std::string, std::vector<int> > creationDico();
         void creationBoard();
         std::string intTypeToStringType(int value);
+        std::vector< std :: vector<Cellule>> * getBoard();
+        // Cellule[][]
 
 
     private:

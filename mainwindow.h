@@ -38,14 +38,15 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
 
+public:
+    Game* game = nullptr;
+
 public slots:
     void tick();
 private:
     int xDesktop;
     int yDesktop;
 
-
-    Game* game = nullptr;
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;

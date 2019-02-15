@@ -17,6 +17,7 @@ int main(int argc, char *argv[])
 
     MainWindow w(supergame);
     std::cout << "initialisation du game " << supergame->getCellType(0,0) << std::endl;
+
     w.show();
     //delete supergame //TODO
     return a.exec();

@@ -38,8 +38,7 @@ MainWindow::~MainWindow()
    delete ui;
 }
 
-void MainWindow::paintEvent(QPaintEvent *event){
-
+void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres mauvaise idée car prend beaucoup de temps
     std::string type; //pointeur
@@ -55,12 +54,9 @@ void MainWindow::paintEvent(QPaintEvent *event){
             painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,ySizeBlock ,dicoQPixMap[type]);
             std::cout << "testa" << std::endl;
 
-            }
-
         }
-
+    }
 }
-
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
@@ -100,18 +96,15 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
 
 void MainWindow::resizeEvent (QResizeEvent *event)
 {
-// My signal
-emit iconSizeChanged(event->size());
+    // My signal
+    emit iconSizeChanged(event->size());
 }
 
-
-
-
-                 //painter.drawRect(50, 100, 20, 40);
-                 //painter.fillRect(50+a, 100, 20, 40, Qt::red);
-                 //painter.save();
-                 //painter.translate(100,0);
-                 //painter.fillRect(50,100, 20, 48, Qt::red);
-                 //painter.fillRect(50,150, 20, 48, Qt::red);
-                 //painter.restore();
-                 //painter.fillRect(50, 100, 10, 20, Qt::blue);
+     //painter.drawRect(50, 100, 20, 40);
+     //painter.fillRect(50+a, 100, 20, 40, Qt::red);
+     //painter.save();
+     //painter.translate(100,0);
+     //painter.fillRect(50,100, 20, 48, Qt::red);
+     //painter.fillRect(50,150, 20, 48, Qt::red);
+     //painter.restore();
+     //painter.fillRect(50, 100, 10, 20, Qt::blue);
