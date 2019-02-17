@@ -18,7 +18,7 @@ Game::Game()
     std::cout<< " type "<< getCellType(0,0) <<std::endl;
     std::cout<< "$$$$$$$$$" <<std::endl;
 
-    //this->players; //TODO = createPlayers();
+    //this->players; //TODO = createPlayersga();
     this->unitSelected = nullptr;
     //this->units;
 

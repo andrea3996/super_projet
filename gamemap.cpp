@@ -144,10 +144,10 @@ string GameMap::intTypeToStringType(int value)
             case 4: case 5: case 7: case 8: case 9: case 10:
                type = "river";
                break;
-            case 5: case 3:
+            case 3:
                 type = "wood";
                 break;
-            case 1: case 24: // TODO: vérifier
+            case 1:
                 type = "plain";
                 break;
             case 34:
@@ -160,13 +160,13 @@ string GameMap::intTypeToStringType(int value)
             case 29: case 30:
                 type = "sea";
                 break;
-            case 33: case 29:
+            case 33:
                 type = "reef";
                 break;
             case 36:
                 type = "greenearthairport";
                 break;
-            case 25: case 92:case 110: //TODO: vérifier
+            case 92:
                 type = "greenearthbase";
                 break;
             case 26:

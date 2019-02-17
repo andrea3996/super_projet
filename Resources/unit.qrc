@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/unit">
+        <file>geanti-air.png</file>
+        <file>geb-copter.png</file>
+        <file>gebomber.png</file>
+        <file>gefighter.png</file>
+        <file>geinfantry.png</file>
+        <file>gemd.tank.png</file>
+        <file>gemegatank.png</file>
+        <file>geneotank.png</file>
+        <file>gerecon.png</file>
+    </qresource>
+</RCC>

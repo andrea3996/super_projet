@@ -51,7 +51,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             std::cout << "call cell " << this->game->getColums() <<std::endl;
             type = this->game->getCellType(i,j);
             std::cout << "*******getcelltype "<< this->game << std::endl;
-            painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,ySizeBlock ,dicoQPixMap[type]);
+            painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixMap[type]);
             std::cout << "testa" << std::endl;
 
         }

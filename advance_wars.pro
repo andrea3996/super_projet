@@ -70,4 +70,5 @@ DISTFILES += \
     Resources/wood.gif
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    Resources/unit.qrc

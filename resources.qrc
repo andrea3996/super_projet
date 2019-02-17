@@ -3,20 +3,6 @@
         <file>map1.txt</file>
     </qresource>
     <qresource prefix="/terrain">
-        <file>Resources/greenearthairport.gif</file>
-        <file>Resources/greenearthbase.gif</file>
-        <file>Resources/greenearthcity.gif</file>
-        <file>Resources/greenearthcomtower.gif</file>
-        <file>Resources/hbridge.gif</file>
-        <file>Resources/hpipe.gif</file>
-        <file>Resources/hriver.gif</file>
-        <file>Resources/hroad.gif</file>
-        <file>Resources/hshoal.gif</file>
-        <file>Resources/mountain.gif</file>
-        <file>Resources/plain.gif</file>
-        <file>Resources/reef.gif</file>
-        <file>Resources/sea.gif</file>
-        <file>Resources/wood.gif</file>
         <file>Resources/greenearthairport.png</file>
         <file>Resources/greenearthbase.png</file>
         <file>Resources/greenearthcity.png</file>
@@ -29,5 +15,7 @@
         <file>Resources/reef.png</file>
         <file>Resources/sea.png</file>
         <file>Resources/wood.png</file>
+        <file>Resources/mountain.png</file>
+        <file>Resources/greenearthcomtower.png</file>
     </qresource>
 </RCC>
