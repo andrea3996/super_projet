@@ -17,14 +17,15 @@ class GameMap
         void creationBoard();
         std::string intTypeToStringType(int value);
         std::vector< std :: vector<Cellule>> * getBoard();
+        void condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c);
         // Cellule[][]
 
 
     private:
-        std::vector<int> listeMap(std::ifstream&  fichier);  // attention, fichier n'est pas copiable
+        //std::vector<int> listeMap(std::ifstream&  fichier);  // attention, fichier n'est pas copiable
         int rows;
         int column;
-        std::vector<std::vector<int>> v;
+        std::vector<std::vector<int>> v; // ?????????????????????
         std :: vector< std :: vector<Cellule>> * board;
 
 

@@ -6,102 +6,102 @@
 
 
 class Unit{
-public:
+    public:
 
-    int get_x();
-    int get_y();
+        int get_x();
+        int get_y();
 
-    void attaquer();
-    void attendre();
-    void grouper();
-    void seDeplacer(int x, int y);
-    Unit(int nx,int ny, Player* ow);
-    Unit();
-    int getMoveType();
+        void attaquer();
+        void attendre();
+        void grouper();
+        void seDeplacer(int x, int y);
+        Unit(int nx,int ny, Player* ow);
+        Unit();
+        int getMoveType();
+        int getValueMP();
 
 
-protected:
-    int x;
-    int y;
-    int cost;
-    int range;
-    int pointsDeVie;
-    int maxPointsDeVie;
-    int vector = (0,0);
-    int Position =  (x,y);
-    int Rect = (x,y);
-    int PositionOriginalUnit = (0,0);
-    int Attacking = false ;
-    int moveType;
+    protected:
+        int x;
+        int y;
+        int cost;
+        int range;
+        int pointsDeVie;
+        int maxPointsDeVie;
+        int vector = (0,0);
+        int Position =  (x,y);
+        int Rect = (x,y);
+        int PositionOriginalUnit = (0,0);
+        int Attacking = false ;
+        int moveType;
+        int valueMP;
 
-    Player* owner;
+        Player* owner;
 };
 
 
 class AntiAir : public Unit { //essai heritage
-public:
-    AntiAir(int x, int y, Player* ow);
-    void identite();
+    public:
+        AntiAir(int x, int y, Player* ow);
+        void identite();
 };
 
 
-class Bazooka: public Unit
+class Bazooka: public Unit{
+    public:
+        Bazooka(int x, int y, Player* ow);
+};
+
+
+class BCopter: public Unit{
+    public:
+        BCopter(int x, int y, Player* ow);
+};
+
+class Bomber: public Unit
 {
-public:
-    Bazooka(int x, int y, Player* ow);
+    public:
+        Bomber(int x, int y, Player* ow);
 };
 
-
-class BCopter
+class Fighter: public Unit
 {
-public:
-    BCopter(int x, int y, Player* ow);
+    public:
+        Fighter(int x, int y, Player* ow);
 };
 
-class Bomber
-{
-public:
-    Bomber(int x, int y, Player* ow);
-};
-
-class Fighter
-{
-public:
-    Fighter(int x, int y, Player* ow);
-};
-
-class Infantery
+class Infantery: public Unit
 {
 public:
     Infantery(int x, int y, Player* ow);
 };
 
-class MegaTank
+class MegaTank: public Unit
 {
 public:
     MegaTank(int x, int y, Player* ow);
 };
 
-class NeoTank
+class NeoTank: public Unit
 {
 public:
     NeoTank(int x, int y, Player* ow);
 };
 
-class Recon
+class Recon: public Unit
 {
 public:
     Recon(int x, int y, Player* ow);
 };
 
-class Tank
+class Tank: public Unit
 {
 public:
     Tank(int x, int y, Player* ow);
 };
 
 
-class TankM
+class TankM: public Unit
 {
 public:
     TankM(int x, int y, Player* ow);

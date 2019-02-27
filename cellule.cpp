@@ -15,7 +15,6 @@ using std::vector;
 
 Cellule::Cellule(std::string type, std::vector<int> value)
 {
-
         this->type = type;
         this->value= value;
 
@@ -39,43 +38,31 @@ Unit *Cellule :: getUnit()
 {
     return unit;
 }
+// Probleme
 
 void Cellule :: setUnit(Unit *unit)
 {
     this->unit= unit;
 }
 
-/*
-
-
-
-
 
 /*
-void attaquer::attaquer() {
-   rect x = position x ;
-   rect y = position y ;
-   if attacking ;
-    positionOriginalUnit;
-   else
-    positionOriginalUnit=vector(position x,position y);
-    direction x = rect x - position x;
-    direction y = rect y - position y;
+
+int Cellule :: getValueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
+{
+    return this->valueMP(unit);
 }
 */
+// /////////////////////////////////////////////////////////////////Attention
 
 
-
- //int Cellule :: valueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
-
-
-  void Cellule :: setDeplacement(bool a)
+void Cellule :: setDeplacement(bool a)
   {
        this->deplacement = a;
   }
 
 
-  bool Cellule :: getDisponible()
+bool Cellule :: getDisponible()
   {
        return this->disponible;
   }
@@ -100,15 +87,19 @@ std::string Cellule::getLocation(){
 
 }
 
-    // v = ... ls =[] puis ls.append()
-    // ls = [], okay mais ici c'est pas "ls", c'est ?vector, nope
-    // # donc ta variable ici c'est pas "ls" c'est "v"
-    // et le type c'est vector<int>
-    //std::vector<int> v;
-    //int x = 5;
-    //v.push_back(nombre); // push_back: ajouter à la fin ok
-    //v.push_back(x); // vaeriable locale
-    //v.push_back(9);
+
+/*
+void attaquer::attaquer() {
+   rect x = position x ;
+   rect y = position y ;
+   if attacking ;
+    positionOriginalUnit;
+   else
+    positionOriginalUnit=vector(position x,position y);
+    direction x = rect x - position x;
+    direction y = rect y - position y;
+}
+*/
 
 
     // pour les erreurs en bas, on supprime le dossier "build"

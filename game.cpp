@@ -4,6 +4,7 @@
 #include "player.h"
 #include "unit.h"
 #include "gamemap.h"
+#include <typeinfo>
 using std::string;
 
 
@@ -28,6 +29,25 @@ std::string Game:: getCellType(int x, int y){
     return this->map->getCell(x,y).getType();
 }
 
+
+
+std::string Game::getUnitType(int x, int y){
+    Unit * u = this->map->getCell(x,y).getUnit();
+    std::string f;
+
+    std::cout<< typeid(u).name()<<std::endl;
+    if ( u == nullptr){
+        f= "";
+    }else{
+        f = typeid (u).name();
+        std::cout<< "HALLO" <<std::endl;
+        std::cout<< typeid(u).name()<<std::endl;
+    }
+    return f;
+}
+
+
+
 int Game::getRows()
 {
     return rows;
@@ -39,6 +59,11 @@ int Game::getColums()
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
+
+    // Indique si on clique sur une unité ou non et si on peut se deplacer
+    //Calcul la position du clic
+
+
     std::pair<int,int> cell;
     int x = xPixel/taille_cellule;
     int y= yPixel/taille_cellule;
@@ -89,7 +114,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
 
 /*
- * void seDeplacer(int x, int y)
+  void seDeplacer(int x, int y)
 {
     map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);
     if (map.getCell(x,y).deplacement)
@@ -98,5 +123,4 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         this->y = y;
     }
 }
- *
 */

@@ -34,6 +34,7 @@ public:
     void mousePressEvent(QMouseEvent *event); // cliquer
     //tracers
     std::map<string, QPixmap> creationDicoQPixMap();
+    std::map<string, QPixmap> creationDicoQPixUnit();
 
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
@@ -51,6 +52,7 @@ private:
     QTimer timer;
     int a=5;
     std::map<std::string, QPixmap> dicoQPixMap;
+    std::map<std::string, QPixmap> dicoQPixUnit;
 };
 
 #endif // MAINWINDOW_Hs

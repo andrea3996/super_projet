@@ -22,7 +22,7 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     dicoQPixMap = this->creationDicoQPixMap();
-
+    dicoQPixUnit = this->creationDicoQPixUnit();
     //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 
     QDesktopWidget dw;
@@ -42,16 +42,27 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres mauvaise idée car prend beaucoup de temps
     std::string type; //pointeur
+    std::string unitType;
+    std::vector<int> value;
     // lire le vector vector et dessiner son qsas'écontenu
     // Remplacer 10 par variable size
     int xSizeBlock = xDesktop/17;
     int ySizeBlock = yDesktop/21;
+    //painter.drawPixmap(3,4,xSizeBlock ,xSizeBlock ,dicoQPixUnit["AntiAir"]);
     for (int i=0; i<17; i++){
         for(int j=0; j<21; j++){
             std::cout << "call cell " << this->game->getColums() <<std::endl;
             type = this->game->getCellType(i,j);
+            unitType = this->game->getUnitType(i,j);
             std::cout << "*******getcelltype "<< this->game << std::endl;
-            painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixMap[type]);
+
+            //value = this->game->dico[stringType];
+
+            if (unitType != "") {
+                painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixUnit[unitType]);
+            }else {
+                painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixMap[type]);
+            }
             std::cout << "testa" << std::endl;
 
         }
@@ -84,27 +95,35 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
     dicoQPixMap.insert({"mountain", QPixmap(":/terrain/Resources/mountain.png")});
     dicoQPixMap.insert({"wood",QPixmap(":/terrain/Resources/wood.png")});
     dicoQPixMap.insert({"hpipe", QPixmap(":/terrain/Resources/hpipe.png")});
-    dicoQPixMap.insert({"river", QPixmap(":/terrain/Resources/river.png")});
+    dicoQPixMap.insert({"river", QPixmap(":/terrain/Resources/hriver.png")});
     dicoQPixMap.insert({"greenearthcity", QPixmap(":/terrain/Resources/greenearthcity.png")});
     dicoQPixMap.insert({"hroad",QPixmap(":/terrain/Resources/hroad.png")});
     dicoQPixMap.insert({"reef",QPixmap(":/terrain/Resources/reef.png")});
     dicoQPixMap.insert({"greenearthairport",QPixmap(":/terrain/Resources/greenearthairport.png")});
     dicoQPixMap.insert({"greenearthbase",QPixmap(":/terrain/Resources/greenearthbase.png")});
+    dicoQPixMap.insert({"sea", QPixmap(":/terrain/Resources/sea.png")});
     return dicoQPixMap;
 }
 
+std::map<string, QPixmap> MainWindow::creationDicoQPixUnit(){
+    std::map<string, QPixmap > dicoQPixUnit;
+    dicoQPixUnit.insert({"AntiAir", QPixmap(":/unit/Resources/AntiAir.png")});
+    dicoQPixUnit.insert({"BCopter", QPixmap(":/unit/Resources/BCopter.png")});
+    dicoQPixUnit.insert({"Bomber", QPixmap(":/unit/Resources/Bomber.png")});
+    dicoQPixUnit.insert({"Fighter", QPixmap(":/unit/Resources/Fighter.png")});
+    dicoQPixUnit.insert({"Infantery", QPixmap(":/unit/Resources/Infantery.png")});
+    dicoQPixUnit.insert({"MegaTank", QPixmap(":/unit/Resources/MegaTank.png")});
+    dicoQPixUnit.insert({"NeoTank", QPixmap(":/unit/Resources/NeoTank.png")});
+    dicoQPixUnit.insert({"Recon", QPixmap(":/unit/Resources/Recon.png")});
+    dicoQPixUnit.insert({"TankM", QPixmap(":/unit/Resources/TankM.png")});
 
+    return dicoQPixUnit;
+
+}
 void MainWindow::resizeEvent (QResizeEvent *event)
 {
     // My signal
     emit iconSizeChanged(event->size());
 }
 
-     //painter.drawRect(50, 100, 20, 40);
-     //painter.fillRect(50+a, 100, 20, 40, Qt::red);
-     //painter.save();
-     //painter.translate(100,0);
-     //painter.fillRect(50,100, 20, 48, Qt::red);
-     //painter.fillRect(50,150, 20, 48, Qt::red);
-     //painter.restore();
-     //painter.fillRect(50, 100, 10, 20, Qt::blue);
+

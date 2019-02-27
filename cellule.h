@@ -3,7 +3,9 @@
 #include <iostream>
 #include <ostream>
 #include <map>
+
 #include "unit.h"
+
 #include <vector>
 #include <string>
 using std:: pair;
@@ -18,15 +20,19 @@ public:
     std:: string getType();
     int getDifficulte();
     bool getDeplacement ();
-    Unit* getUnit();
+
     std::string getLocation();
-    std:: vector<int> v(int l); //pas sure
-    std:: map <std::string,std::vector<int> > m; //={std::string s, std::vector<int> v};
-    pair<std:: map <std::string,std::vector<int> >,bool> ret;
+    //sstd:: vector<int> v(int l); //pas sure
+    //std:: map <std::string,std::vector<int> > m; //={std::string s, std::vector<int> v};
+    //pair<std:: map <std::string,std::vector<int> >,bool> ret;
 
     bool getDisponible();
     void setDeplacement(bool a);
+
+    int getValueMP(Unit *unit);
+
     int test();
+    Unit* getUnit();
     void setUnit(Unit *unit);
     //void imprimerLaLisste();
 

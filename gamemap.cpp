@@ -134,21 +134,26 @@ string GameMap::intTypeToStringType(int value)
 {
     string type = "";
         switch(value){
-            case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
-                type = "hpipe";
-                    //hpipe Cellule(3,"hpipe.gif")
+            case 1:
+                type = "plain";
                 break;
+
             case 2:
-                type = "foret";
+                type = "mountain";
                 break;
-            case 4: case 5: case 7: case 8: case 9: case 10:
-               type = "river";
-               break;
+
             case 3:
                 type = "wood";
                 break;
-            case 1:
-                type = "plain";
+
+            case 4: case 5: case 7: case 8: case 9: case 10:
+               type = "river";
+               break;
+
+
+            case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
+                type = "hpipe";
+                //hpipe Cellule(3,"hpipe.gif")
                 break;
             case 34:
                 type = "greenearthcity";
@@ -195,7 +200,7 @@ Cellule GameMap::getCell(int x, int y)
     //std::cout << this->board->at(x).at(y) << std::endl;
     std::cout << "get cell passed" << std::endl;
     std::cout << "board "<< this->board << std::endl;
-    std::cout << x << y<< endl;
+    std::cout << x <<" "<< y<< endl;
     return (*this->board)[x][y];
 }
 
@@ -206,59 +211,33 @@ std::vector< std :: vector<Cellule>> * GameMap::getBoard()
  {
     return this->board;
  }
-/*
-void Gamemap :: casesDispo(Unit unit, int mp,int a, int x, int y)
+
+
+
+
+void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 {
   if (mp>0)
   {
-    if (this->board[x+1][y].getDisponible() && a =! 3)
-    {
-        mp = mp - this->board[x+1][y].valueMP(unit);
-        a = 4;
-        this->board[x+1][y].setDeplacement(true);
-        this.casesDispo(unit,mp,a, x+1, y);
-    }
-    if (this->board[x-1][y].getDisponible() && a =! 4)
-    {
-        mp = mp - this.getCell(x-1,y).valueMP(unit);
-        a=3
-      this.getCell(x-1, y).setDeplacement(true);
-      this.casesDispo(unit, mp, a, x-1, y);
-    }
-    if (map.getCell(x, y+1).getDisponible() && a =! 1)
-    {
-    mp = mp - map.getCell(x, y+1).valueMP(unit);
-    a = 2;
-    this.getCell(x, y+1).setDeplacement(true);
-    this.casesDispo(unit, mp, a, x, y+1);
-    }
-    if (this.getCell(x, y-1).getDisponible() && a=!2)
-    {
-    mp = mp - map.getCell(x, y-1).valueMP(unit);
-    a = 1;
-    this.getCell(x, y-1).setDeplacement(true);
-    this.casesDispo(unit, mp,a, x, y-1);
-    }
+    this->condCaseDispo(unit, mp,x+1, y, a, 3, 4);
+
+    this->condCaseDispo(unit, mp,x-1, y, a ,4, 3);
+
+    this->condCaseDispo(unit, mp,x, y+1 ,a ,1, 2);
+
+    this->condCaseDispo(unit, mp,x, y-1 ,a ,2, 1);
+
   }
 }
 
 
- int** a = new int*[rowCount];
-     for(int i = 0; i < rowCount; ++i)
-         a[i] = new int[colCount]; */
 
+void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
+    if ((this->getCell(x,y).getDisponible()) && a != b){
+        mp = mp - this->getCell(x,y).getUnit()->getValueMP();
+        a = c;
+        this->getCell(x,y).setDeplacement(true);
+        this->casesDispo(unit,mp,a, x, y);
+    }
 
- //vector<vector<int>>
- /*vector<vector<int>> vec; // declare 2D vector
-
-     for (int i=0; i<=17; i++) {
-         vector<int> row;  // create a row vector which adds a row to vec
-         for (int j=0; j<=21; j++) {
-             row.push_back(j); // push elements 0,10,20,30,40 to row
-         }
-         vec.push_back(row); // add this row to vec
-         // Repeat this procedure 4 times to make a 4*5 2D vector
-     }
-
-     cout<<"output is "<<vec[2][4]; // output is 40
-*/
+}
