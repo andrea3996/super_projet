@@ -5,7 +5,7 @@
 #include <map>
 
 #include "unit.h"
-
+#include "building.h"
 #include <vector>
 #include <string>
 using std:: pair;
@@ -36,6 +36,10 @@ public:
     void setUnit(Unit *unit);
     //void imprimerLaLisste();
 
+    void setBuilding(Building *building);
+
+
+
 
 
 
@@ -47,7 +51,9 @@ private:
     std ::string type; //
     bool deplacement;
     bool disponible;
-    
+
+    Building* building;
+
     int difficulte;
     std::string location;
     static int myints;

@@ -14,11 +14,6 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
 {
 
     this->game = game;
-
-
-        std::cout << "supergame->getCellType(0,0)" << std::endl;
-    std::cout << this->game->getCellType(0,0) << std::endl;
-        std::cout << "supergame->getCellType(0,0)" << std::endl;
     ui->setupUi(this);
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     dicoQPixMap = this->creationDicoQPixMap();
@@ -29,6 +24,8 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
     this->xDesktop =dw.height()*0.7;
     this->yDesktop=dw.height()*0.7;
     setFixedSize(this->xDesktop,this->yDesktop);
+    terrain = true;
+    shopWindow = false;
     //timer.start(10);
 
 }
@@ -39,6 +36,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
+
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres mauvaise idée car prend beaucoup de temps
     std::string type; //pointeur
@@ -48,22 +46,16 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     // Remplacer 10 par variable size
     int xSizeBlock = xDesktop/17;
     int ySizeBlock = yDesktop/21;
-    //painter.drawPixmap(3,4,xSizeBlock ,xSizeBlock ,dicoQPixUnit["AntiAir"]);
     for (int i=0; i<17; i++){
         for(int j=0; j<21; j++){
-            std::cout << "call cell " << this->game->getColums() <<std::endl;
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
-            std::cout << "*******getcelltype "<< this->game << std::endl;
-
-            //value = this->game->dico[stringType];
-
             if (unitType != "") {
                 painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixUnit[unitType]);
             }else {
                 painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixMap[type]);
             }
-            std::cout << "testa" << std::endl;
+
 
         }
     }
@@ -73,18 +65,24 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 void MainWindow::mousePressEvent(QMouseEvent *event){
     std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
-    //this->game->calculer_cellule(event->x(), event->y());
+    // si terrain afficher
+
+    if( terrain == true){
+        this->game->calculer_cellule(event->x(), event->y());}
+        //shopWindow =
+    else if(shopWindow == false){
+        this->game->calculer_unit(event->x(), event->y());
+    }
+    else{}
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     // savoir la touche qui à ete enfoncé (key)
-
     std:: cout << event->key()<< std:: endl;
 }
 
 void MainWindow::tick() {
-    std:: cout << "hello " << a << std::endl;  // "hello": string mais 'h': char
     a++;
     update(); //appel paintEvent
 }

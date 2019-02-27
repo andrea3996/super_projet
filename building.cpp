@@ -1,6 +1,6 @@
 #include "building.h"
 
-Building::Building()
+Building::Building(std::string type)
 {
-
+    this->type = type;
 }

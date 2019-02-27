@@ -16,13 +16,13 @@ Game::Game()
     this->rows = 17;
     this->column = 21;
     this->map = new GameMap(this->rows,this->column);
-    std::cout<< " type "<< getCellType(0,0) <<std::endl;
-    std::cout<< "$$$$$$$$$" <<std::endl;
-
     //this->players; //TODO = createPlayersga();
+    std::vector<Player> * players = new std::vector<Player>();
+    players->push_back(*new Player());
+
+    // player possede +ieurs units
     this->unitSelected = nullptr;
     //this->units;
-
 }
 
 std::string Game:: getCellType(int x, int y){
@@ -30,22 +30,17 @@ std::string Game:: getCellType(int x, int y){
 }
 
 
-
 std::string Game::getUnitType(int x, int y){
     Unit * u = this->map->getCell(x,y).getUnit();
     std::string f;
-
-    std::cout<< typeid(u).name()<<std::endl;
     if ( u == nullptr){
         f= "";
     }else{
-        f = typeid (u).name();
-        std::cout<< "HALLO" <<std::endl;
-        std::cout<< typeid(u).name()<<std::endl;
+        f = u->getIdentity();
+
     }
     return f;
 }
-
 
 
 int Game::getRows()
@@ -73,18 +68,16 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     {
         cell.first= x;
         cell.second= y;
-        std::cout << "buongiorno" <<std::endl;
-        std::cout << this->map->getCell(x,y).getType() <<std::endl;
-        std::cout << this->map->getCell(x,y).getType() <<std::endl;
-
-        Unit *wesh = new Unit();
-
-        this->map->getCell(x,y).setUnit(wesh);
-
         Unit *unitClic = this->map->getCell(x,y).getUnit();
 
-        if( unitClic != NULL){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
-            std::cout << "L'unité WESH" <<std::endl;
+        Building *buildingClic=this->map->getCell(x,y).getBuilding();
+
+
+        if(buildingClic != NULL){
+            //TODO openShopWindow() open a shopWindow
+
+        }
+        else if( unitClic != NULL){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
         //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
         }

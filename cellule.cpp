@@ -1,4 +1,5 @@
 #include "cellule.h"
+#include "Building.h"
 #include <map>
 
 #include <vector>
@@ -46,6 +47,7 @@ void Cellule :: setUnit(Unit *unit)
 }
 
 
+
 /*
 
 int Cellule :: getValueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
@@ -85,6 +87,11 @@ int Cellule::test()
 std::string Cellule::getLocation(){
     return ""; // TODO
 
+}
+
+
+void Cellule:: setBuilding(Building *building){
+    this->building=building;
 }
 
 

@@ -19,6 +19,10 @@ int Unit :: getMoveType(){
     return this->moveType;
 }
 
+std::string Unit :: getIdentity(){
+
+    return this->identity;
+}
 
 int Unit::get_x (){
     return x;
@@ -54,6 +58,7 @@ AntiAir::AntiAir(int x, int y, Player* ow){
     Unit(x,y, ow);
     cost=3000;
     valueMP=6;
+    identity = "AntiAir";
     //std:: string T;
     //moveType = string T;
 
@@ -71,6 +76,7 @@ Bazooka::Bazooka(int x, int y, Player* ow)
     Unit(x,y, ow);
     cost=3000;
     valueMP=3;
+    identity = "Bazooka";
 
     //moveType = string F;
 
@@ -83,6 +89,7 @@ BCopter::BCopter(int x, int y, Player* ow){
     Unit(x,y, ow);
     valueMP = 6;
     cost=9000;
+    identity = "BCopter";
 
     //moveType = string A;
 
@@ -93,6 +100,7 @@ Bomber::Bomber(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 7;
     cost=22000;
+    identity = "Bomber";
 
     //moveType = string A;
 }
@@ -102,6 +110,7 @@ Fighter::Fighter(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 9;
     cost=20000;
+    identity = "Fighter";
 
    // moveType =;
 }
@@ -115,6 +124,7 @@ Infantery::Infantery(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 3;
     cost=1000;
+    identity = "Infantery";
     //moveType = string F;
 }
 
@@ -126,6 +136,7 @@ Recon::Recon(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 8;
     cost=4000;
+    identity = "Recon";
 
     //moveType = string W;
 }
@@ -137,6 +148,7 @@ Tank::Tank(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 6;
     cost=7000;
+    identity = "Tank";
 
     //moveType = string T;
 }
@@ -146,6 +158,7 @@ TankM::TankM(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 5;
     cost=16000;
+    identity = "TankM";
     //moveType = string T;
 }
 
@@ -154,6 +167,7 @@ MegaTank::MegaTank(int x, int y, Player *ow)
     Unit(x,y, ow);
     valueMP = 4;
     cost=28000;
+    identity = "MegaTank";
     //moveType = string T;
 }
 
@@ -162,6 +176,7 @@ NeoTank::NeoTank(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 6;
     cost=22000;
+    identity = "NeoTank";
     //moveType = string T;
 }
 

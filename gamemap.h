@@ -19,6 +19,7 @@ class GameMap
         std::vector< std :: vector<Cellule>> * getBoard();
         void condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c);
         // Cellule[][]
+        void createBuilding(Cellule* cell,std::string type);
 
 
     private:

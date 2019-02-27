@@ -19,6 +19,7 @@ class Unit{
         Unit();
         int getMoveType();
         int getValueMP();
+        std::string getIdentity();
 
 
     protected:
@@ -35,6 +36,8 @@ class Unit{
         int Attacking = false ;
         int moveType;
         int valueMP;
+
+        std::string identity;
 
         Player* owner;
 };

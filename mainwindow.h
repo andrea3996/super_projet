@@ -53,6 +53,8 @@ private:
     int a=5;
     std::map<std::string, QPixmap> dicoQPixMap;
     std::map<std::string, QPixmap> dicoQPixUnit;
+    bool terrain;
+    bool shopWindow;
 };
 
 #endif // MAINWINDOW_Hs

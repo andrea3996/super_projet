@@ -28,6 +28,7 @@ class Game
         std::string getUnitType(int x, int y);
         int getRows();
         int getColums();
+        calculer_unit(event->x(), event->y())
 
 };
 // variable reste ; fonction constructeur redefinir

@@ -8,6 +8,8 @@
 //#include <windows.h>
 #include "gamemap.h"
 #include "cellule.h"
+#include "building.h"
+
 
 #include"QFile"
 
@@ -27,9 +29,7 @@ GameMap::GameMap(int rows,int column){
     this->rows = rows;
     this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
-    std::cout << "xd" << std::endl;
     this->creationBoard();
-    std::cout << "board $$$$$ " << (*this->board)[0][0].getType() << std::endl;
     // modifier attribut board
 }
 
@@ -58,6 +58,7 @@ void GameMap::creationBoard()
 
     QString fileName = ":/maps/map1.txt";
     QFile fichier(fileName);
+
     fichier.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream flux(&fichier);
     QChar mot;
@@ -74,37 +75,30 @@ void GameMap::creationBoard()
             if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
             {
 
-              //  std :: cout << stoi(type) << endl;
                 int typeInteger = stoi(type); // traduction en entier ex : stoi("10") = 10
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
                 Cellule cell( stringType, value ); // construction de la cellule
-                //std::cout << stringType <<std::endl;
                 cells->push_back(cell); // la cellule est rentrée dans le vecteur
                 type = "";
-                //std::cout << cell->getType()[0]<< cell->getType()[1]<<"-";
 
 
 
             }
             else if(mot == '\n')
             {
-              //  std :: cout << stoi(type) << endl;
-                //std::cout << endl;
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
                 Cellule cell( stringType, value );
-                //std::cout << stringType <<std::endl;
+                createBuilding(&cell, stringType);
                 cells->push_back(cell);
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
                 type = "";
-
             }
             else if (mot == -1)
             {
-
                 break;
             }
             else
@@ -112,8 +106,9 @@ void GameMap::creationBoard()
                 int a = mot.toLatin1();
                 intType = a;
                 type += intType;
+
              }
-        fichier.close(); //TODO
+        //fichier.close(); //TODO
 
 
     }/**
@@ -123,10 +118,19 @@ void GameMap::creationBoard()
         }
         std::cout << std::endl; // nouvelle ligne
     }**/
-    std::cout << "board "<< this->board << std::endl;
+
 }
 
 
+void GameMap::createBuilding(Cellule* cell,std::string type){
+    if(type == "greenearthairport" | type == "greenearthbase" | type == "greenearthcity" | type == "greenearthcomtower" ){
+        cell->setBuilding(new Building(type));
+
+    }
+
+
+
+}
 
 
 
@@ -194,25 +198,14 @@ string GameMap::intTypeToStringType(int value)
 
 
 
-Cellule GameMap::getCell(int x, int y)
-{
-    std::cout << "GET CELL" << std::endl;
-    //std::cout << this->board->at(x).at(y) << std::endl;
-    std::cout << "get cell passed" << std::endl;
-    std::cout << "board "<< this->board << std::endl;
-    std::cout << x <<" "<< y<< endl;
+Cellule GameMap::getCell(int x, int y){
     return (*this->board)[x][y];
 }
 
 
-
-
-std::vector< std :: vector<Cellule>> * GameMap::getBoard()
- {
+std::vector< std :: vector<Cellule>> * GameMap::getBoard(){
     return this->board;
  }
-
-
 
 
 void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
@@ -220,16 +213,12 @@ void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
   if (mp>0)
   {
     this->condCaseDispo(unit, mp,x+1, y, a, 3, 4);
-
     this->condCaseDispo(unit, mp,x-1, y, a ,4, 3);
-
     this->condCaseDispo(unit, mp,x, y+1 ,a ,1, 2);
-
     this->condCaseDispo(unit, mp,x, y-1 ,a ,2, 1);
 
   }
 }
-
 
 
 void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
