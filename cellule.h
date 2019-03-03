@@ -15,7 +15,7 @@ class Cellule
 {
 public:
 
-    Cellule(std::string type, std::vector<int> value);
+    Cellule(std::string type, std::vector<int> value, int x, int y);
     Cellule(int x, int y);
     std:: string getType();
     int getDifficulte();
@@ -37,14 +37,20 @@ public:
     //void imprimerLaLisste();
 
     void setBuilding(Building *building);
+    Building* getBuilding();
 
 
 
 
 
+
+    int getX() const;
+
+    int getY() const;
 
 private:
 
+    int x, y;
     int pointsDeCapture;
     int nombre;
     std::vector<int> value;

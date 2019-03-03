@@ -6,9 +6,18 @@
 class Player
 {
     public:
-        Player();
-    private:
-        std::vector<Unit> units;
+        Player(std::string teamColor);
+
+        std::string getTeamColor() const;
+
+        int getMoney() const;
+        void setMoney(int value);
+
+private:
+        std::string teamColor;
+        int money;
+
+
 };
 
 #endif // PLAYER_H

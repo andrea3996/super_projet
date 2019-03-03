@@ -14,13 +14,14 @@ using std::vector;
 
 
 
-Cellule::Cellule(std::string type, std::vector<int> value)
+Cellule::Cellule(std::string type, std::vector<int> value, int x, int y)
 {
-        this->type = type;
-        this->value= value;
-
-       //for (std::map<string, vector<int> >::iterator it = liste.begin(); it != liste.end(); it++){
-       //  std::cout << it ->first << ":"<< std::endl;
+    this->type = type;
+    this->value= value;
+    this->x = x;
+    this->y = y;
+   //for (std::map<string, vector<int> >::iterator it = liste.begin(); it != liste.end(); it++){
+   //  std::cout << it ->first << ":"<< std::endl;
 }
 
 
@@ -94,6 +95,19 @@ void Cellule:: setBuilding(Building *building){
     this->building=building;
 }
 
+Building* Cellule::getBuilding(){
+    return this->building;
+}
+
+int Cellule::getX() const
+{
+    return x;
+}
+
+int Cellule::getY() const
+{
+    return y;
+}
 
 /*
 void attaquer::attaquer() {

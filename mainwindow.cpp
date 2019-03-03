@@ -10,6 +10,8 @@
 #include <QDesktopWidget>
 #include <QMainWindow>
 
+
+
 MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
 
@@ -66,14 +68,15 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
     std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
     // si terrain afficher
+    this->game->calculer_cellule(event->x(), event->y());
+    /*} else if(shopWindow == false){
+        Building* building = this->game->getBuiling(event->x(), event->y());
+        if ( this->game->getLp() == building->getOwner() && this->game->getMap()->getCell(building->getX(),building->getY()).getUnit() == nullptr){
 
-    if( terrain == true){
-        this->game->calculer_cellule(event->x(), event->y());}
-        //shopWindow =
-    else if(shopWindow == false){
+            //openShopWindow
+        }
         this->game->calculer_unit(event->x(), event->y());
-    }
-    else{}
+   } else*/
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -94,11 +97,11 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
     dicoQPixMap.insert({"wood",QPixmap(":/terrain/Resources/wood.png")});
     dicoQPixMap.insert({"hpipe", QPixmap(":/terrain/Resources/hpipe.png")});
     dicoQPixMap.insert({"river", QPixmap(":/terrain/Resources/hriver.png")});
-    dicoQPixMap.insert({"greenearthcity", QPixmap(":/terrain/Resources/greenearthcity.png")});
+    dicoQPixMap.insert({"city", QPixmap(":/terrain/Resources/greenearthcity.png")});
     dicoQPixMap.insert({"hroad",QPixmap(":/terrain/Resources/hroad.png")});
     dicoQPixMap.insert({"reef",QPixmap(":/terrain/Resources/reef.png")});
-    dicoQPixMap.insert({"greenearthairport",QPixmap(":/terrain/Resources/greenearthairport.png")});
-    dicoQPixMap.insert({"greenearthbase",QPixmap(":/terrain/Resources/greenearthbase.png")});
+    dicoQPixMap.insert({"airport",QPixmap(":/terrain/Resources/greenearthairport.png")});
+    dicoQPixMap.insert({"base",QPixmap(":/terrain/Resources/greenearthbase.png")});
     dicoQPixMap.insert({"sea", QPixmap(":/terrain/Resources/sea.png")});
     return dicoQPixMap;
 }
@@ -124,4 +127,26 @@ void MainWindow::resizeEvent (QResizeEvent *event)
     emit iconSizeChanged(event->size());
 }
 
+void MainWindow::openShopWindow()
+{
+    ShopWindow shopWindow;
+    shopWindow.setModal(true);
+    shopWindow.exec();
+}
 
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    //Modal approach
+
+    ShopWindow shopWindow;
+    shopWindow.setModal(true);
+    shopWindow.exec();
+/*
+    // To access previous screen
+
+    shopWindow = new ShopWindow(this);
+    //shopWindow->show();
+    */
+}

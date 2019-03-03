@@ -17,5 +17,12 @@
         <file>Resources/wood.png</file>
         <file>Resources/mountain.png</file>
         <file>Resources/greenearthcomtower.png</file>
+        <file>Resources/neutralairport.png</file>
+        <file>Resources/neutralbase.png</file>
+        <file>Resources/neutralcity.png</file>
+        <file>Resources/orangestarairport.png</file>
+        <file>Resources/orangestarbase.png</file>
+        <file>Resources/orangestarcity.png</file>
+        <file>Resources/bluemooncity.png</file>
     </qresource>
 </RCC>

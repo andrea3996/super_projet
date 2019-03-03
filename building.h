@@ -8,12 +8,37 @@ class Building
 {
 public:
 
-    Building(std::string type);
+    Building();
 
 
-private:
+    Player *getOwner() const;
+    void setOwner(Player *value);
+
+    std::string getType() const;
+
+protected:
+    int x, y;
     std::string type;
-    std::vector<Unit> units;
+    //std::vector<Unit> units;
+    Player* owner = nullptr;
 };
 
+
+
+class Base: public Building{
+public:
+    Base();
+};
+
+
+class Airport: public Building{
+public:
+    Airport();
+};
+
+class City: public Building{
+public:
+    City();
+};
 #endif // BUILDING_H
+

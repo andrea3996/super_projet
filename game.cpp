@@ -4,13 +4,29 @@
 #include "player.h"
 #include "unit.h"
 #include "gamemap.h"
+#include "mainwindow.h"
 #include <typeinfo>
 using std::string;
 
 
 
 
-Game::Game()
+Player* Game::getLp()
+{
+    return &lp;
+}
+
+void Game::setLp(const Player &value)
+{
+    lp = value;
+}
+
+GameMap *Game::getMap()
+{
+    return this->map;
+}
+
+Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()), units(std::vector<Unit>()), lp(Player("green"))
 {
     this->taille_cellule=30;    //TODO
     this->rows = 17;
@@ -18,11 +34,15 @@ Game::Game()
     this->map = new GameMap(this->rows,this->column);
     //this->players; //TODO = createPlayersga();
     std::vector<Player> * players = new std::vector<Player>();
-    players->push_back(*new Player());
-
+    players->push_back(*new Player("green"));
     // player possede +ieurs units
     this->unitSelected = nullptr;
     //this->units;
+}
+
+void Game::setMainWindow(MainWindow *mw)
+{
+    this->mainWindow = mw;
 }
 
 std::string Game:: getCellType(int x, int y){
@@ -42,7 +62,6 @@ std::string Game::getUnitType(int x, int y){
     return f;
 }
 
-
 int Game::getRows()
 {
     return rows;
@@ -51,6 +70,54 @@ int Game::getRows()
 int Game::getColums()
 {
     return column;
+}
+
+int Game::getUnitCost(std::string type)
+{
+    //TODO: en fonction du type retourner la bonne valeur
+    return 1000;
+}
+
+/*
+Building *Game::getBuiling(int x, int y)
+{
+    for( Building b : buildings){
+        if (b.getX() == x && b.getY() == y)  {
+            return &b;
+            // Renvoit un pointeur vers le building afin de pouvoir le modifier par apres
+        }
+
+    }
+    return nullptr;
+    // Attention utilisation
+}*/
+
+
+std::pair<int,int> calculer_unit(int x, int y){
+
+}
+
+
+
+
+void Game::buy(std::string type, Cellule* cell){
+    int cost = this->getUnitCost(type);
+    // TODO: En fonction du type, vérifier si le cout est suffisant et construire l'unité en conséquence
+    Unit* u;
+    if (cost <= this->lp.getMoney()) {
+        if (type == "infantery") {
+            u = new Infantery(cell->get->ge)
+        }
+        if (costPlayer >= unit.getcost(type)){
+            //sousstraction
+            //add unit dans cellule
+            //new Bazooka in Cellule
+        }
+        else{
+            //std::cout << Vous n'avez pas assez d'argent pour acheter cette unité <<std::endl;
+        }
+    }
+
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
@@ -73,11 +140,12 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         Building *buildingClic=this->map->getCell(x,y).getBuilding();
 
 
-        if(buildingClic != NULL){
+        if(buildingClic != nullptr && buildingClic->getOwner() == &this->lp && unitClic==nullptr){
             //TODO openShopWindow() open a shopWindow
-
+            if (buildingClic->getType()=="base")
+            this->mainWindow->openShopWindow();
         }
-        else if( unitClic != NULL){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
+        else if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
         //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
         }

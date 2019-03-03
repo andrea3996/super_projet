@@ -40,12 +40,12 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"wood",{1,1,2,3,1,0,0,0}});
     dico.insert({"hpipe", {0,0,0,0,0,0,0,1}});
     dico.insert({"river", {2,1,0,0,1,0,0,0}});
-    dico.insert({"greenearthcity", {1,1,1,1,1,0,0,0}});
+    dico.insert({"city", {1,1,1,1,1,0,0,0}});
     dico.insert({"hroad",{1,1,1,1,1,0,0,0}});
     //{"sea";{2,1,0,0,1,0,0,0}
     dico.insert({"reef",{0,0,0,0,1,2,2,0}});
-    dico.insert({"greenearthairport",{1,1,1,1,1,0,0,0}});
-    dico.insert({"greenearthbase",{1,1,1,1,1,0,0,1}});
+    dico.insert({"airport",{1,1,1,1,1,0,0,0}});
+    dico.insert({"base",{1,1,1,1,1,0,0,1}});
     return dico;
 }
 
@@ -123,13 +123,13 @@ void GameMap::creationBoard()
 
 
 void GameMap::createBuilding(Cellule* cell,std::string type){
-    if(type == "greenearthairport" | type == "greenearthbase" | type == "greenearthcity" | type == "greenearthcomtower" ){
-        cell->setBuilding(new Building(type));
-
+    if(type == "airport" | type == "base" | type =="city") {
+        cell->setBuilding(new Airport());
+    } else if (type=="base") {
+        cell->setBuilding(new Base());
+    } else if (type=="city") {
+        cell->setBuilding(new City());
     }
-
-
-
 }
 
 
@@ -160,7 +160,7 @@ string GameMap::intTypeToStringType(int value)
                 //hpipe Cellule(3,"hpipe.gif")
                 break;
             case 34:
-                type = "greenearthcity";
+                type = "city";
                 break;
             case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
                 type = "hroad";
@@ -173,10 +173,10 @@ string GameMap::intTypeToStringType(int value)
                 type = "reef";
                 break;
             case 36:
-                type = "greenearthairport";
+                type = "airport";
                 break;
             case 92:
-                type = "greenearthbase";
+                type = "base";
                 break;
             case 26:
                 type = "hbridge";

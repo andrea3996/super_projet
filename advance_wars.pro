@@ -33,7 +33,8 @@ SOURCES += \
     building.cpp \
     gamemap.cpp \
     unit.cpp \
-    infantry.cpp
+    infantry.cpp \
+    shopwindow.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -43,10 +44,12 @@ HEADERS += \
     building.h \
     gamemap.h \
     unit.h \
-    infantry.h
+    infantry.h \
+    shopwindow.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    shopwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

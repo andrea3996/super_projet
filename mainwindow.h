@@ -16,6 +16,8 @@
 
 
 #include "game.h"
+#include "shopwindow.h"
+
 
 using std::string;
 
@@ -39,11 +41,19 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
 
+    void openShopWindow();
+
+
+
 public:
     Game* game = nullptr;
 
 public slots:
     void tick();
+
+private slots:
+    void on_pushButton_clicked();
+
 private:
     int xDesktop;
     int yDesktop;
@@ -55,6 +65,8 @@ private:
     std::map<std::string, QPixmap> dicoQPixUnit;
     bool terrain;
     bool shopWindow;
+
+    ShopWindow *shopwindow;
 };
 
 #endif // MAINWINDOW_Hs
