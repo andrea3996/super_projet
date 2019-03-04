@@ -65,10 +65,13 @@ void GameMap::creationBoard()
     string intType="";
     std::string type;
     type = "";
+    int x=0;
+    int y=0;
     std::vector<Cellule> * cells = new vector<Cellule>();
 
     while(! flux.atEnd())
     {
+            // TODO: Trouver un moyen de connaître la position des cellules et les donner dans le constructeur de cell
 
             flux >> mot;
            // std :: cout << mot.toLatin1()<< endl;
@@ -78,7 +81,9 @@ void GameMap::creationBoard()
                 int typeInteger = stoi(type); // traduction en entier ex : stoi("10") = 10
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
-                Cellule cell( stringType, value ); // construction de la cellule
+                x += 1 ;
+                std::cout<< x << std::endl;
+                Cellule cell( stringType, value, x, y); // construction de la cellule
                 cells->push_back(cell); // la cellule est rentrée dans le vecteur
                 type = "";
 
@@ -90,7 +95,12 @@ void GameMap::creationBoard()
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
-                Cellule cell( stringType, value );
+
+                x =0;
+                y += 1 ;
+                std::cout<< y << std::endl;
+
+                Cellule cell( stringType, value,x,y);
                 createBuilding(&cell, stringType);
                 cells->push_back(cell);
                 this->board->push_back(*cells);

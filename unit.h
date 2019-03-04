@@ -73,10 +73,10 @@ class Fighter: public Unit
         Fighter(int x, int y, Player* ow);
 };
 
-class Infantery: public Unit
+class Infantry: public Unit
 {
 public:
-    Infantery(int x, int y, Player* ow);
+    Infantry(int x, int y, Player* ow);
 };
 
 class MegaTank: public Unit

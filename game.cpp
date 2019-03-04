@@ -105,19 +105,48 @@ void Game::buy(std::string type, Cellule* cell){
     // TODO: En fonction du type, vérifier si le cout est suffisant et construire l'unité en conséquence
     Unit* u;
     if (cost <= this->lp.getMoney()) {
-        if (type == "infantery") {
-            u = new Infantery(cell->get->ge)
+        //Pq pas faire un switch ?
+        if (type == "Infantry") {
+            u = new Infantry(cell->getX(), cell->getY(), &lp);
         }
-        if (costPlayer >= unit.getcost(type)){
-            //sousstraction
-            //add unit dans cellule
-            //new Bazooka in Cellule
+        if (type == "Recon") {
+            u = new Recon(cell->getX(), cell->getY(), &lp);
         }
-        else{
+        if (type == "Tank") {
+            u = new Tank(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "TankM") {
+            u = new TankM(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "AntiAir") {
+            u = new AntiAir(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "BCopter") {
+            u = new BCopter(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "BCopter") {
+            u = new BCopter(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "Bomber") {
+            u = new Bomber(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "Fighter") {
+            u = new Fighter(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "MegaTank") {
+            u = new MegaTank(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "NeoTank") {
+            u = new NeoTank(cell->getX(), cell->getY(), &lp);
+        }
+        if (type == "Bazooka") {
+            u = new Bazooka(cell->getX(), cell->getY(), &lp);
+        }
+
+    }
+    else{
             //std::cout << Vous n'avez pas assez d'argent pour acheter cette unité <<std::endl;
         }
-    }
-
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {

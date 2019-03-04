@@ -117,7 +117,7 @@ Fighter::Fighter(int x, int y, Player* ow)
 
 // Unités terrestres d'infantrie:
 
-Infantery::Infantery(int x, int y, Player* ow)
+Infantry::Infantry(int x, int y, Player* ow)
 {
     // Infantery = Bazooka ?
 

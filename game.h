@@ -38,7 +38,8 @@ class Game
 
         int getUnitCost(std::string type);
 
-        void buy(std::string type, Building* building);
+
+        void buy(std::string type, Cellule* cell);
         //Building *getBuiling(int x, int y );
         // Verifie si Builidng sur (x,y)
 
