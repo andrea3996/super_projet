@@ -82,7 +82,7 @@ void GameMap::creationBoard()
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
                 x += 1 ;
-                std::cout<< x << std::endl;
+                //std::cout<< x << std::endl;
                 Cellule cell( stringType, value, x, y); // construction de la cellule
                 cells->push_back(cell); // la cellule est rentrée dans le vecteur
                 type = "";
@@ -98,7 +98,7 @@ void GameMap::creationBoard()
 
                 x =0;
                 y += 1 ;
-                std::cout<< y << std::endl;
+                //std::cout<< y << std::endl;
 
                 Cellule cell( stringType, value,x,y);
                 createBuilding(&cell, stringType);

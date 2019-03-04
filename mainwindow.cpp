@@ -127,7 +127,7 @@ void MainWindow::resizeEvent (QResizeEvent *event)
     emit iconSizeChanged(event->size());
 }
 
-void MainWindow::openShopWindow()
+void MainWindow::openShopWindow(Building building)
 {
     ShopWindow shopWindow;
     shopWindow.setModal(true);
@@ -135,7 +135,7 @@ void MainWindow::openShopWindow()
 }
 
 
-
+/*
 void MainWindow::on_pushButton_clicked()
 {
     //Modal approach
@@ -149,4 +149,4 @@ void MainWindow::on_pushButton_clicked()
     shopWindow = new ShopWindow(this);
     //shopWindow->show();
     */
-}
+//}

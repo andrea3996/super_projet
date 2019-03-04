@@ -1,13 +1,14 @@
 #include "shopwindow.h"
 #include "ui_shopwindow.h"
 
-ShopWindow::ShopWindow(QWidget *parent) :
-    // Building
+ShopWindow::ShopWindow(QWidget *parent, Building *building) :
+
     QDialog(parent),
     ui(new Ui::ShopWindow)
 {
     ui->setupUi(this);
     ui->infantryPushButton->setDefault(false);
+
 
 }
 
@@ -19,6 +20,7 @@ ShopWindow::~ShopWindow()
 void ShopWindow::on_infantryPushButton_clicked()
 {
     // TODO : acheter une infanterie
+    buy(std::string type, Cellule* cell)
 }
 
 void ShopWindow::on_reconPushButton_clicked()
@@ -47,10 +49,6 @@ void ShopWindow::on_pushButton_MegaTank_clicked()
 
 }
 
-void ShopWindow::on_pushButton_clicked()
-{
-
-}
 
 void ShopWindow::on_pushButton_Fighter_clicked()
 {

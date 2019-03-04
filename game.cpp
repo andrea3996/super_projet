@@ -172,7 +172,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         if(buildingClic != nullptr && buildingClic->getOwner() == &this->lp && unitClic==nullptr){
             //TODO openShopWindow() open a shopWindow
             if (buildingClic->getType()=="base")
-            this->mainWindow->openShopWindow();
+            this->mainWindow->openShopWindow(*buildingClic);
         }
         else if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game

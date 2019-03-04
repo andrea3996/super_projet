@@ -41,7 +41,7 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
 
-    void openShopWindow();
+    void openShopWindow(Building building);
 
 
 
