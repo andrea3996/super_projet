@@ -7,6 +7,7 @@ Unit::Unit(int nx,int ny, Player* ow) {
         this->owner=ow;
         pointsDeVie=10;
         maxPointsDeVie=10;
+        identity = nullptr;
 }
 
 

@@ -38,7 +38,7 @@ bool Cellule :: getDeplacement()
 
 Unit *Cellule :: getUnit()
 {
-    return unit;
+   return unit;
 }
 // Probleme
 

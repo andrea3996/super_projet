@@ -23,9 +23,8 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
     //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
 
     QDesktopWidget dw;
-    this->xDesktop =dw.height()*0.7;
-    this->yDesktop=dw.height()*0.7;
-    setFixedSize(this->xDesktop,this->yDesktop);
+
+    setFixedSize(game->getTailleCellule()*game->getColums(), game->getTailleCellule()*game->getRows());
     terrain = true;
     shopWindow = false;
     //timer.start(10);
@@ -40,23 +39,22 @@ MainWindow::~MainWindow()
 void MainWindow::paintEvent(QPaintEvent *event) {
 
     QPainter painter(this);
-    //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres mauvaise idée car prend beaucoup de temps
-    std::string type; //pointeur
-    std::string unitType;
+    //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres maruvaise idée car prend beaucoup de temps
+    std::string type=""; //pointeur
+    std::string unitType="";
     std::vector<int> value;
-    // lire le vector vector et dessiner son qsas'écontenu
-    // Remplacer 10 par variable size
-    int xSizeBlock = xDesktop/17;
-    int ySizeBlock = yDesktop/21;
-    for (int i=0; i<17; i++){
-        for(int j=0; j<21; j++){
+
+    for (int i=0; i<game->getRows(); i++){ // i= rows=17
+        for(int j=0; j<game->getColums(); j++){ // j=column=21
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
-            if (unitType != "") {
-                painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixUnit[unitType]);
-            }else {
-                painter.drawPixmap(xSizeBlock *i,ySizeBlock *j,xSizeBlock ,xSizeBlock ,dicoQPixMap[type]);
-            }
+            /*if (unitType != "") {
+                std::cout<< "Je ne suis pas"<< std::endl;
+                painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
+            }else {*/
+                std::cout<< "aaaaaa"<<unitType<<"bbbbbbbb"<< std::endl;
+                painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
+            //}
 
 
         }
@@ -68,7 +66,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
     std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
     // si terrain afficher
-    this->game->calculer_cellule(event->x(), event->y());
+    this->game->calculer_cellule(event->y(), event->x());
     /*} else if(shopWindow == false){
         Building* building = this->game->getBuiling(event->x(), event->y());
         if ( this->game->getLp() == building->getOwner() && this->game->getMap()->getCell(building->getX(),building->getY()).getUnit() == nullptr){
@@ -97,12 +95,14 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
     dicoQPixMap.insert({"wood",QPixmap(":/terrain/Resources/wood.png")});
     dicoQPixMap.insert({"hpipe", QPixmap(":/terrain/Resources/hpipe.png")});
     dicoQPixMap.insert({"river", QPixmap(":/terrain/Resources/hriver.png")});
-    dicoQPixMap.insert({"city", QPixmap(":/terrain/Resources/greenearthcity.png")});
+    dicoQPixMap.insert({"hbridge", QPixmap(":/terrain/Resources/hbridge.png")});
+    dicoQPixMap.insert({"city", QPixmap(":/terrain/Resources/neutralcity.png")});
     dicoQPixMap.insert({"hroad",QPixmap(":/terrain/Resources/hroad.png")});
     dicoQPixMap.insert({"reef",QPixmap(":/terrain/Resources/reef.png")});
-    dicoQPixMap.insert({"airport",QPixmap(":/terrain/Resources/greenearthairport.png")});
-    dicoQPixMap.insert({"base",QPixmap(":/terrain/Resources/greenearthbase.png")});
+    dicoQPixMap.insert({"airport",QPixmap(":/terrain/Resources/neutralairport.png")});
+    dicoQPixMap.insert({"base",QPixmap(":/terrain/Resources/neutralbase.png")});
     dicoQPixMap.insert({"sea", QPixmap(":/terrain/Resources/sea.png")});
+    dicoQPixMap.insert({"hshoal", QPixmap(":/terrain/Resources/hshoal.png")});
     return dicoQPixMap;
 }
 
@@ -127,26 +127,9 @@ void MainWindow::resizeEvent (QResizeEvent *event)
     emit iconSizeChanged(event->size());
 }
 
-void MainWindow::openShopWindow(Building building)
+void MainWindow::openShopWindow(Cellule* cellule)
 {
-    ShopWindow shopWindow;
+    ShopWindow shopWindow(nullptr, cellule, this->game); // variable de classe (this->)
     shopWindow.setModal(true);
     shopWindow.exec();
 }
-
-
-/*
-void MainWindow::on_pushButton_clicked()
-{
-    //Modal approach
-
-    ShopWindow shopWindow;
-    shopWindow.setModal(true);
-    shopWindow.exec();
-/*
-    // To access previous screen
-
-    shopWindow = new ShopWindow(this);
-    //shopWindow->show();
-    */
-//}

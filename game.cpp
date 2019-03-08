@@ -13,12 +13,12 @@ using std::string;
 
 Player* Game::getLp()
 {
-    return &lp;
+    return this->lp;
 }
 
-void Game::setLp(const Player &value)
+void Game::setLp( Player * value)
 {
-    lp = value;
+    this->lp = value;
 }
 
 GameMap *Game::getMap()
@@ -26,15 +26,17 @@ GameMap *Game::getMap()
     return this->map;
 }
 
-Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()), units(std::vector<Unit>()), lp(Player("green"))
+Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()), units(std::vector<Unit>())
 {
-    this->taille_cellule=30;    //TODO
+    this->taille_cellule=30;
     this->rows = 17;
     this->column = 21;
-    this->map = new GameMap(this->rows,this->column);
+    this->map = new GameMap();
     //this->players; //TODO = createPlayersga();
-    std::vector<Player> * players = new std::vector<Player>();
-    players->push_back(*new Player("green"));
+    std::vector<Player*> * players = new std::vector<Player*>();
+    this->lp = new Player("green");
+    players->push_back(lp);
+    this->map->getCell(12,4)->getBuilding()->setOwner(lp);
     // player possede +ieurs units
     this->unitSelected = nullptr;
     //this->units;
@@ -46,18 +48,15 @@ void Game::setMainWindow(MainWindow *mw)
 }
 
 std::string Game:: getCellType(int x, int y){
-    return this->map->getCell(x,y).getType();
+    return this->map->getCell(x,y)->getType();
 }
 
 
 std::string Game::getUnitType(int x, int y){
-    Unit * u = this->map->getCell(x,y).getUnit();
-    std::string f;
-    if ( u == nullptr){
-        f= "";
-    }else{
-        f = u->getIdentity();
-
+    Unit * u = this->map->getCell(x,y)->getUnit();
+    std::string f="";
+    if ( u != nullptr){
+        f= u->getIdentity();
     }
     return f;
 }
@@ -65,6 +64,10 @@ std::string Game::getUnitType(int x, int y){
 int Game::getRows()
 {
     return rows;
+}
+int Game::getTailleCellule()
+{
+    return taille_cellule;
 }
 
 int Game::getColums()
@@ -104,53 +107,53 @@ void Game::buy(std::string type, Cellule* cell){
     int cost = this->getUnitCost(type);
     // TODO: En fonction du type, vérifier si le cout est suffisant et construire l'unité en conséquence
     Unit* u;
-    if (cost <= this->lp.getMoney()) {
+    if (cost <= this->lp->getMoney()) {
         //Pq pas faire un switch ?
         if (type == "Infantry") {
-            u = new Infantry(cell->getX(), cell->getY(), &lp);
+            u = new Infantry(cell->getX(), cell->getY(), lp);
         }
         if (type == "Recon") {
-            u = new Recon(cell->getX(), cell->getY(), &lp);
+            u = new Recon(cell->getX(), cell->getY(), lp);
         }
         if (type == "Tank") {
-            u = new Tank(cell->getX(), cell->getY(), &lp);
+            u = new Tank(cell->getX(), cell->getY(), lp);
         }
         if (type == "TankM") {
-            u = new TankM(cell->getX(), cell->getY(), &lp);
+            u = new TankM(cell->getX(), cell->getY(), lp);
         }
         if (type == "AntiAir") {
-            u = new AntiAir(cell->getX(), cell->getY(), &lp);
+            u = new AntiAir(cell->getX(), cell->getY(), lp);
         }
         if (type == "BCopter") {
-            u = new BCopter(cell->getX(), cell->getY(), &lp);
+            u = new BCopter(cell->getX(), cell->getY(), lp);
         }
         if (type == "BCopter") {
-            u = new BCopter(cell->getX(), cell->getY(), &lp);
+            u = new BCopter(cell->getX(), cell->getY(), lp);
         }
         if (type == "Bomber") {
-            u = new Bomber(cell->getX(), cell->getY(), &lp);
+            u = new Bomber(cell->getX(), cell->getY(), lp);
         }
         if (type == "Fighter") {
-            u = new Fighter(cell->getX(), cell->getY(), &lp);
+            u = new Fighter(cell->getX(), cell->getY(), lp);
         }
         if (type == "MegaTank") {
-            u = new MegaTank(cell->getX(), cell->getY(), &lp);
+            u = new MegaTank(cell->getX(), cell->getY(), lp);
         }
         if (type == "NeoTank") {
-            u = new NeoTank(cell->getX(), cell->getY(), &lp);
+            u = new NeoTank(cell->getX(), cell->getY(), lp);
         }
         if (type == "Bazooka") {
-            u = new Bazooka(cell->getX(), cell->getY(), &lp);
+            u = new Bazooka(cell->getX(), cell->getY(), lp);
         }
 
     }
     else{
-            //std::cout << Vous n'avez pas assez d'argent pour acheter cette unité <<std::endl;
+            std::cout << "Vous n'avez pas assez d'argent pour acheter cette unité "<<std::endl;
         }
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
-
+    std::cout << "calculer cellule appelé" << std::endl;
     // Indique si on clique sur une unité ou non et si on peut se deplacer
     //Calcul la position du clic
 
@@ -160,19 +163,25 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     int y= yPixel/taille_cellule;
     cell.first= -1;
     cell.second= -1;
-    if (x >= 0 and  x < this->column  and y >= 0 and y < this->rows)
+    if (x >= 0 and  x < this->rows  and y >= 0 and y < this->column) // /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     {
+
         cell.first= x;
         cell.second= y;
-        Unit *unitClic = this->map->getCell(x,y).getUnit();
+        Unit *unitClic = this->map->getCell(x,y)->getUnit();
 
-        Building *buildingClic=this->map->getCell(x,y).getBuilding();
+        Building *buildingClic=this->map->getCell(x,y)->getBuilding();
+        std::cout << "type of cell : "<<this->getCellType(x,y) << std::endl;
 
-
-        if(buildingClic != nullptr && buildingClic->getOwner() == &this->lp && unitClic==nullptr){
-            //TODO openShopWindow() open a shopWindow
-            if (buildingClic->getType()=="base")
-            this->mainWindow->openShopWindow(*buildingClic);
+        if(buildingClic != nullptr){
+            std::cout << "building clic condition passé" << std::endl;
+            if (buildingClic->getOwner() == this->lp ) {
+                //TODO openShopWindow() open a shopWindow
+                std::cout << "Unit clic condition passé" << std::endl;
+                if (buildingClic->getType()=="base") {
+                    this->mainWindow->openShopWindow(this->map->getCell(x,y));
+                }
+            }
         }
         else if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
@@ -182,7 +191,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
             if(this->unitSelected != NULL)// si le clic précédent était une unité
             {
-                if (this->map->getCell(x,y).getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
+                if (this->map->getCell(x,y)->getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
                     {
                     // this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
                     }
@@ -199,6 +208,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         }
 
     }
+    std::cout << "calucler cellule terminé " << std::endl;
     return cell;
 }
 

@@ -10,8 +10,8 @@ using std::ifstream;
 class GameMap
 {
     public:
-        GameMap(int rows,int column);
-        Cellule getCell(int x, int y);
+        GameMap();
+        Cellule* getCell(int x, int y);
         void casesDispo(Unit unit, int mp,int a, int x, int y);
         std::map<std::string, std::vector<int> > creationDico();
         void creationBoard();
@@ -24,8 +24,6 @@ class GameMap
 
     private:
         //std::vector<int> listeMap(std::ifstream&  fichier);  // attention, fichier n'est pas copiable
-        int rows;
-        int column;
         std::vector<std::vector<int>> v; // ?????????????????????
         std :: vector< std :: vector<Cellule>> * board;
 

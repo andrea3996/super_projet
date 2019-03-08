@@ -24,10 +24,8 @@ using std::string;
 using std::stoi;
 
 
-GameMap::GameMap(int rows,int column){
+GameMap::GameMap(){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
 
-    this->rows = rows;
-    this->column= column;
     this->board = new std::vector< std :: vector<Cellule>>();
     this->creationBoard();
     // modifier attribut board
@@ -42,8 +40,10 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"river", {2,1,0,0,1,0,0,0}});
     dico.insert({"city", {1,1,1,1,1,0,0,0}});
     dico.insert({"hroad",{1,1,1,1,1,0,0,0}});
-    //{"sea";{2,1,0,0,1,0,0,0}
+    dico.insert({"sea",{2,1,0,0,1,0,0,0}}); // Verifier valeur
+    dico.insert({"hsoal",{0,0,0,0,0,0,0,0}});
     dico.insert({"reef",{0,0,0,0,1,2,2,0}});
+    dico.insert({"hbridge",{0,0,0,0,1,2,2,0}});
     dico.insert({"airport",{1,1,1,1,1,0,0,0}});
     dico.insert({"base",{1,1,1,1,1,0,0,1}});
     return dico;
@@ -82,8 +82,8 @@ void GameMap::creationBoard()
                 string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
                 std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
                 x += 1 ;
-                //std::cout<< x << std::endl;
                 Cellule cell( stringType, value, x, y); // construction de la cellule
+                createBuilding(&cell, stringType);
                 cells->push_back(cell); // la cellule est rentrée dans le vecteur
                 type = "";
 
@@ -103,6 +103,8 @@ void GameMap::creationBoard()
                 Cellule cell( stringType, value,x,y);
                 createBuilding(&cell, stringType);
                 cells->push_back(cell);
+                // vector -> tableau 17 21
+                // Pb de switch
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
                 type = "";
@@ -133,13 +135,18 @@ void GameMap::creationBoard()
 
 
 void GameMap::createBuilding(Cellule* cell,std::string type){
-    if(type == "airport" | type == "base" | type =="city") {
+    if(type == "airport") {
+        std::cout<<"airport : " <<type <<std::endl;
         cell->setBuilding(new Airport());
     } else if (type=="base") {
+        std::cout<< "base : "<<type <<std::endl;
         cell->setBuilding(new Base());
     } else if (type=="city") {
+        std::cout<< "city : "<<type <<std::endl;
         cell->setBuilding(new City());
     }
+    // if type =
+    // setPlayer ...
 }
 
 
@@ -164,36 +171,52 @@ string GameMap::intTypeToStringType(int value)
                type = "river";
                break;
 
-
             case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
                 type = "hpipe";
                 //hpipe Cellule(3,"hpipe.gif")
                 break;
-            case 34:
+            case 34: case 95: case 125:
                 type = "city";
+                // neutral city
                 break;
             case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
                 type = "hroad";
                 break;
-
-            case 29: case 30:
+            case 30: //28
                 type = "sea";
+                break;
+            case 29:
+                type = "hshoal";
                 break;
             case 33:
                 type = "reef";
                 break;
-            case 36:
+            case 35: // neutral ////////////////
+                type = "base";
+                break;
+            case 36: // neutral
                 type = "airport";
                 break;
-            case 92:
+
+            case 38: // Os city /////////////
+                type = "orangestarcity";
+                break;
+            case 39: //
+                type = "orangestarbase";
+                break;
+            case 40:
+                type = "orangestarairport";
+                break;
+            case 92: case 123:
                 type = "base";
                 break;
             case 26:
                 type = "hbridge";
                 break;
-            case 125:
-                type = "temple";
-            break;
+            /*case 125:
+                type = "city";
+            break;*/
+
             default:
                 type= "hpipe";
         }
@@ -208,8 +231,9 @@ string GameMap::intTypeToStringType(int value)
 
 
 
-Cellule GameMap::getCell(int x, int y){
-    return (*this->board)[x][y];
+Cellule* GameMap::getCell(int x, int y){
+    //std::cout << "Ca fait:"<<x+1 <<" "<< y+1 << std::endl;
+    return &(*this->board)[x][y]; // le premier = ligne
 }
 
 
@@ -232,10 +256,10 @@ void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 
 
 void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
-    if ((this->getCell(x,y).getDisponible()) && a != b){
-        mp = mp - this->getCell(x,y).getUnit()->getValueMP();
+    if ((this->getCell(x,y)->getDisponible()) && a != b){
+        mp = mp - this->getCell(x,y)->getUnit()->getValueMP();
         a = c;
-        this->getCell(x,y).setDeplacement(true);
+        this->getCell(x,y)->setDeplacement(true);
         this->casesDispo(unit,mp,a, x, y);
     }
 

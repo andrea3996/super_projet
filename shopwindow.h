@@ -2,7 +2,8 @@
 #define SHOPWINDOW_H
 
 #include <QDialog>
-#include "building.h"
+#include "cellule.h"
+#include "game.h"
 
 
 namespace Ui {
@@ -14,12 +15,10 @@ class ShopWindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit ShopWindow(QWidget *parent = nullptr, Building *building() );
+    explicit ShopWindow(QWidget *parent = nullptr, Cellule *cellule=nullptr, Game* game= nullptr );
     ~ShopWindow();
 
 private slots:
-
-    void on_reconPushButton_clicked();
 
     void on_infantryPushButton_clicked();
 
@@ -43,7 +42,8 @@ private slots:
 
 private:
     Ui::ShopWindow *ui;
-    //Building* building;
+    Cellule* cellule;
+    Game* game;
 };
 
 #endif // SHOPWINDOW_H

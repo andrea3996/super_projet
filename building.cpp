@@ -6,7 +6,7 @@ Building::Building()
     this->y = y;
 }
 
-Player *Building::getOwner() const
+Player* Building::getOwner() const
 {
     return owner;
 }

@@ -41,8 +41,7 @@ public:
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
 
-    void openShopWindow(Building building);
-
+    void openShopWindow(Cellule* cellule);
 
 
 public:
@@ -50,9 +49,6 @@ public:
 
 public slots:
     void tick();
-
-private slots:
-    void on_pushButton_clicked();
 
 private:
     int xDesktop;

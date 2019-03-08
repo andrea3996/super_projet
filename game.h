@@ -17,7 +17,7 @@ class Game
     private:
         MainWindow* mainWindow = nullptr;
         GameMap * map;
-        Player lp;
+        Player * lp;
         std::vector<Player> players;
         std::vector<Unit> units;
         int taille_cellule;
@@ -35,6 +35,7 @@ class Game
         int getRows();
         int getColums();
         std::pair<int,int> calculer_unit(int x, int y);
+        int getTailleCellule();
 
         int getUnitCost(std::string type);
 
@@ -44,7 +45,7 @@ class Game
         // Verifie si Builidng sur (x,y)
 
         Player* getLp();
-        void setLp(const Player &value);
+        void setLp(Player * value);
 
         GameMap * getMap();
 };
