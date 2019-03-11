@@ -22,7 +22,10 @@ class Unit{
         std::string getIdentity();
 
 
-    protected:
+        bool getActionnable() const;
+        void setActionnable(bool value);
+
+protected:
         int x;
         int y;
         int cost;
@@ -37,7 +40,9 @@ class Unit{
         int moveType;
         int valueMP;
 
-        std::string identity;
+        bool actionnable = true;
+
+        std::string identity = std::string("");
 
         Player* owner;
 };
@@ -46,7 +51,6 @@ class Unit{
 class AntiAir : public Unit { //essai heritage
     public:
         AntiAir(int x, int y, Player* ow);
-        void identite();
 };
 
 

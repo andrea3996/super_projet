@@ -63,6 +63,8 @@ private:
     bool shopWindow;
 
     ShopWindow *shopwindow;
+    int xCursor = 0;
+    int yCursor  = 0;
 };
 
 #endif // MAINWINDOW_Hs

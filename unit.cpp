@@ -1,5 +1,5 @@
 #include "unit.h"
-
+#include <iostream>
 
 Unit::Unit(int nx,int ny, Player* ow) {
         x=nx;
@@ -7,7 +7,7 @@ Unit::Unit(int nx,int ny, Player* ow) {
         this->owner=ow;
         pointsDeVie=10;
         maxPointsDeVie=10;
-        identity = nullptr;
+        identity = "";
 }
 
 
@@ -21,8 +21,18 @@ int Unit :: getMoveType(){
 }
 
 std::string Unit :: getIdentity(){
-
+    std::cout << "Test identité appelé: " << this->identity << std::endl;
     return this->identity;
+}
+
+bool Unit::getActionnable() const
+{
+    return actionnable;
+}
+
+void Unit::setActionnable(bool value)
+{
+    actionnable = value;
 }
 
 int Unit::get_x (){
@@ -59,17 +69,13 @@ AntiAir::AntiAir(int x, int y, Player* ow){
     Unit(x,y, ow);
     cost=3000;
     valueMP=6;
-    identity = "AntiAir";
+    this->identity = "AntiAir";
     //std:: string T;
     //moveType = string T;
 
 
 }
 
-void AntiAir::identite() {
-    std::cout<< "Nous sommes l'unité AntiAir"<< std::endl;
-
-}
 
 
 Bazooka::Bazooka(int x, int y, Player* ow)
@@ -77,7 +83,7 @@ Bazooka::Bazooka(int x, int y, Player* ow)
     Unit(x,y, ow);
     cost=3000;
     valueMP=3;
-    identity = "Bazooka";
+    this->identity = "Bazooka";
 
     //moveType = string F;
 
@@ -90,7 +96,7 @@ BCopter::BCopter(int x, int y, Player* ow){
     Unit(x,y, ow);
     valueMP = 6;
     cost=9000;
-    identity = "BCopter";
+    this->identity = "BCopter";
 
     //moveType = string A;
 
@@ -101,7 +107,7 @@ Bomber::Bomber(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 7;
     cost=22000;
-    identity = "Bomber";
+    this->identity = "Bomber";
 
     //moveType = string A;
 }
@@ -111,7 +117,7 @@ Fighter::Fighter(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 9;
     cost=20000;
-    identity = "Fighter";
+    this->identity = "Fighter";
 
    // moveType =;
 }
@@ -125,7 +131,7 @@ Infantry::Infantry(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 3;
     cost=1000;
-    identity = "Infantery";
+    this->identity = "Infantry";
     //moveType = string F;
 }
 
@@ -137,7 +143,7 @@ Recon::Recon(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 8;
     cost=4000;
-    identity = "Recon";
+    this->identity = "Recon";
 
     //moveType = string W;
 }
@@ -149,7 +155,7 @@ Tank::Tank(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 6;
     cost=7000;
-    identity = "Tank";
+    this->identity = "Tank";
 
     //moveType = string T;
 }
@@ -159,7 +165,7 @@ TankM::TankM(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 5;
     cost=16000;
-    identity = "TankM";
+    this->identity = "TankM";
     //moveType = string T;
 }
 
@@ -168,7 +174,7 @@ MegaTank::MegaTank(int x, int y, Player *ow)
     Unit(x,y, ow);
     valueMP = 4;
     cost=28000;
-    identity = "MegaTank";
+    this->identity = "MegaTank";
     //moveType = string T;
 }
 
@@ -177,7 +183,7 @@ NeoTank::NeoTank(int x, int y, Player* ow)
     Unit(x,y, ow);
     valueMP = 6;
     cost=22000;
-    identity = "NeoTank";
+    this->identity = "NeoTank";
     //moveType = string T;
 }
 

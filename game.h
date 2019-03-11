@@ -28,6 +28,7 @@ class Game
 
     public:
         Game();
+        ~Game();
         void setMainWindow(MainWindow* mw);
         std::pair<int,int> calculer_cellule(int x, int y);
         std::string getCellType(int x, int y);

@@ -58,12 +58,12 @@ private:
     bool deplacement;
     bool disponible;
 
-    Building* building;
+    Building* building = nullptr;
 
     int difficulte;
     std::string location;
     static int myints;
-    Unit *unit;
+    Unit *unit = nullptr;
 
     int valueMP(Unit *unit);
 

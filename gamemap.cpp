@@ -31,6 +31,11 @@ GameMap::GameMap(){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     // modifier attribut board
 }
 
+GameMap::~GameMap()
+{
+
+}
+
 std::map<string, vector<int> > GameMap::creationDico(){
     std::map<string, vector<int> > dico;
     dico.insert({"plain", {1,1,1,2,1,0,0,0} });
@@ -38,14 +43,25 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"wood",{1,1,2,3,1,0,0,0}});
     dico.insert({"hpipe", {0,0,0,0,0,0,0,1}});
     dico.insert({"river", {2,1,0,0,1,0,0,0}});
-    dico.insert({"city", {1,1,1,1,1,0,0,0}});
     dico.insert({"hroad",{1,1,1,1,1,0,0,0}});
     dico.insert({"sea",{2,1,0,0,1,0,0,0}}); // Verifier valeur
     dico.insert({"hsoal",{0,0,0,0,0,0,0,0}});
     dico.insert({"reef",{0,0,0,0,1,2,2,0}});
     dico.insert({"hbridge",{0,0,0,0,1,2,2,0}});
+
+
+    dico.insert({"city", {1,1,1,1,1,0,0,0}}); //
     dico.insert({"airport",{1,1,1,1,1,0,0,0}});
     dico.insert({"base",{1,1,1,1,1,0,0,1}});
+
+    dico.insert({"greenearthcitycity", {1,1,1,1,1,0,0,0}}); //
+    dico.insert({"greenearthbase", {0,0,0,0,0,0,0,0}}); //
+    dico.insert({"greenearthairport", {0,0,0,0,0,0,0,0}}); //
+
+    dico.insert({"orangestarcity", {0,0,0,0,0,0,0,0}}); //
+    dico.insert({"orangestarbase", {0,0,0,0,0,0,0,0}}); //
+    dico.insert({"orangestarairport", {0,0,0,0,0,0,0,0}}); //
+
     return dico;
 }
 
@@ -122,7 +138,6 @@ void GameMap::creationBoard()
              }
         //fichier.close(); //TODO
 
-
     }/**
     for (int i = 0; i < this->board->size(); i++) {
         for (int j = 0; j < this->board->at(0).size(); j++) {
@@ -144,6 +159,9 @@ void GameMap::createBuilding(Cellule* cell,std::string type){
     } else if (type=="city") {
         std::cout<< "city : "<<type <<std::endl;
         cell->setBuilding(new City());
+    } else if (type=="orangestarcity") {
+        City* city = new City();
+        //city->setOwner(//TODO chercher dans le game le joueur orange);
     }
     // if type =
     // setPlayer ...
@@ -175,9 +193,15 @@ string GameMap::intTypeToStringType(int value)
                 type = "hpipe";
                 //hpipe Cellule(3,"hpipe.gif")
                 break;
-            case 34: case 95: case 125:
-                type = "city";
-                // neutral city
+
+            case 95: case 91:
+                type = "greenearthcity";
+                break;
+            case 92:
+                type = "greenearthbase";
+                break;
+            case 93:
+                type = "greenearthairport";
                 break;
             case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
                 type = "hroad";
@@ -197,19 +221,20 @@ string GameMap::intTypeToStringType(int value)
             case 36: // neutral
                 type = "airport";
                 break;
-
-            case 38: // Os city /////////////
+            case 34:
+                type = "city";
+                // neutral city
+                break;
+            case 125: case 124: // Os city /////////////
                 type = "orangestarcity";
                 break;
-            case 39: //
+            case 123: //
                 type = "orangestarbase";
                 break;
-            case 40:
+            case 122:
                 type = "orangestarairport";
                 break;
-            case 92: case 123:
-                type = "base";
-                break;
+
             case 26:
                 type = "hbridge";
                 break;

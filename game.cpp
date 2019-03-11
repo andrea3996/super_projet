@@ -33,13 +33,24 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()
     this->column = 21;
     this->map = new GameMap();
     //this->players; //TODO = createPlayersga();
-    std::vector<Player*> * players = new std::vector<Player*>();
-    this->lp = new Player("green");
-    players->push_back(lp);
-    this->map->getCell(12,4)->getBuilding()->setOwner(lp);
+    //std::vector<Player*> * players = new std::vector<Player*>();
+    //this->lp = new Player("green");
+    Player localplayer("green"); // disparait a la fin
+    players.push_back(localplayer); // enregistre lp
+    this->lp = &players.at(0);
+    //players.push_back(*lp);
+    std::cout << "game init finished" << std::endl;
+    //this->map->getCell(12,4)->getBuilding()->setOwner(this->lp);
     // player possede +ieurs units
+    //delete GameMap();
     this->unitSelected = nullptr;
     //this->units;
+    this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
+}
+
+Game::~Game()
+{
+    delete map;
 }
 
 void Game::setMainWindow(MainWindow *mw)
@@ -54,9 +65,10 @@ std::string Game:: getCellType(int x, int y){
 
 std::string Game::getUnitType(int x, int y){
     Unit * u = this->map->getCell(x,y)->getUnit();
-    std::string f="";
+    std::string f = "";
     if ( u != nullptr){
-        f= u->getIdentity();
+        f = u->getIdentity();
+        std::cout << u->getIdentity() << std::endl;
     }
     return f;
 }
@@ -175,16 +187,17 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
         if(buildingClic != nullptr){
             std::cout << "building clic condition passé" << std::endl;
-            if (buildingClic->getOwner() == this->lp ) {
-                //TODO openShopWindow() open a shopWindow
+            if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
+                this->mainWindow->openShopWindow(this->map->getCell(x,y)); //open a shopWindow
                 std::cout << "Unit clic condition passé" << std::endl;
-                if (buildingClic->getType()=="base") {
-                    this->mainWindow->openShopWindow(this->map->getCell(x,y));
-                }
             }
         }
         else if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
-            this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
+            if (unitClic->getActionnable()){
+                this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
+                //this->mainWindow->showMovementOf(unitClic);
+                //TODO
+            }
         //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
         }
         else{                   // si on n'a pas cliqué sur une unit

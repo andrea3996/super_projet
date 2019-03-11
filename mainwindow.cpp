@@ -37,28 +37,39 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
-
+    std::cout << "paint event called" << std::endl;
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres maruvaise idée car prend beaucoup de temps
     std::string type=""; //pointeur
-    std::string unitType="";
+    std::string unitType= "";
     std::vector<int> value;
 
     for (int i=0; i<game->getRows(); i++){ // i= rows=17
         for(int j=0; j<game->getColums(); j++){ // j=column=21
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
-            /*if (unitType != "") {
-                std::cout<< "Je ne suis pas"<< std::endl;
+            if (unitType != "") {
+                //painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
+                std::cout << unitType << std::endl;
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
-            }else {*/
-                std::cout<< "aaaaaa"<<unitType<<"bbbbbbbb"<< std::endl;
+            }else {
+                /* TODO
+                //std::cout<< "aaaaaa "<<unitType<<" bbbbbbbb"<< std::endl;
+                if (type=="city") {
+                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
+
+                    }
+                } else if (type=="base") {
+
+                } else if (type=="airport") {
+
+                } else {
+                }*/
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
-            //}
-
-
+            }
         }
     }
+    std::cout << "paint event finished" << std::endl;
 }
 
 
@@ -67,19 +78,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug()<< event->pos();
     // si terrain afficher
     this->game->calculer_cellule(event->y(), event->x());
-    /*} else if(shopWindow == false){
-        Building* building = this->game->getBuiling(event->x(), event->y());
-        if ( this->game->getLp() == building->getOwner() && this->game->getMap()->getCell(building->getX(),building->getY()).getUnit() == nullptr){
 
-            //openShopWindow
-        }
-        this->game->calculer_unit(event->x(), event->y());
-   } else*/
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     // savoir la touche qui à ete enfoncé (key)
+    //Possibilité curseur
     std:: cout << event->key()<< std:: endl;
 }
 
@@ -103,20 +108,27 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
     dicoQPixMap.insert({"base",QPixmap(":/terrain/Resources/neutralbase.png")});
     dicoQPixMap.insert({"sea", QPixmap(":/terrain/Resources/sea.png")});
     dicoQPixMap.insert({"hshoal", QPixmap(":/terrain/Resources/hshoal.png")});
+    dicoQPixMap.insert({"greenearthbase", QPixmap(":/terrain/Resources/greenearthbase.png")});
+    dicoQPixMap.insert({"greenearthairport", QPixmap(":/terrain/Resources/greenearthairport.png")});
+    dicoQPixMap.insert({"greenearthcity", QPixmap(":/terrain/Resources/greenearthcity.png")});
+    dicoQPixMap.insert({"orangestarcity", QPixmap(":/terrain/Resources/orangestarcity.png")});
+    dicoQPixMap.insert({"orangestarairport", QPixmap(":/terrain/Resources/orangestarairport.png")});
+    dicoQPixMap.insert({"orangestarbase", QPixmap(":/terrain/Resources/orangestarbase.png")});
+
     return dicoQPixMap;
 }
 
 std::map<string, QPixmap> MainWindow::creationDicoQPixUnit(){
     std::map<string, QPixmap > dicoQPixUnit;
-    dicoQPixUnit.insert({"AntiAir", QPixmap(":/unit/Resources/AntiAir.png")});
-    dicoQPixUnit.insert({"BCopter", QPixmap(":/unit/Resources/BCopter.png")});
-    dicoQPixUnit.insert({"Bomber", QPixmap(":/unit/Resources/Bomber.png")});
-    dicoQPixUnit.insert({"Fighter", QPixmap(":/unit/Resources/Fighter.png")});
-    dicoQPixUnit.insert({"Infantery", QPixmap(":/unit/Resources/Infantery.png")});
-    dicoQPixUnit.insert({"MegaTank", QPixmap(":/unit/Resources/MegaTank.png")});
-    dicoQPixUnit.insert({"NeoTank", QPixmap(":/unit/Resources/NeoTank.png")});
-    dicoQPixUnit.insert({"Recon", QPixmap(":/unit/Resources/Recon.png")});
-    dicoQPixUnit.insert({"TankM", QPixmap(":/unit/Resources/TankM.png")});
+    dicoQPixUnit.insert({"AntiAir", QPixmap(":/unit/AntiAir.png")});
+    dicoQPixUnit.insert({"BCopter", QPixmap(":/unit/BCopter.png")});
+    dicoQPixUnit.insert({"Bomber", QPixmap(":/unit/Bomber.png")});
+    dicoQPixUnit.insert({"Fighter", QPixmap(":/unit/Fighter.png")});
+    dicoQPixUnit.insert({"Infantry", QPixmap(":/unit/Infantry.png")});
+    dicoQPixUnit.insert({"MegaTank", QPixmap(":/unit/MegaTank.png")});
+    dicoQPixUnit.insert({"NeoTank", QPixmap(":/unit/NeoTank.png")});
+    dicoQPixUnit.insert({"Recon", QPixmap(":/unit/Recon.png")});
+    dicoQPixUnit.insert({"TankM", QPixmap(":/unit/TankM.png")});
 
     return dicoQPixUnit;
 

@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     MainWindow w(supergame);
     supergame->setMainWindow(&w);
     w.show();
+    //delete Game();
     return a.exec();
 
 }
