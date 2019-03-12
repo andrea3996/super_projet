@@ -11,7 +11,7 @@ public:
     Building();
 
 
-    Player *getOwner() const;
+    Player* getOwner() const;
     void setOwner(Player *value);
 
     std::string getType() const;

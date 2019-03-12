@@ -17,13 +17,12 @@ class Game
     private:
         MainWindow* mainWindow = nullptr;
         GameMap * map;
-        Player * lp;
         std::vector<Player> players;
         std::vector<Unit> units;
         int taille_cellule;
         int rows;
         int column;
-        Unit *unitSelected;
+        Unit *unitSelected = nullptr;
         std::vector<Building> buildings;
 
     public:
@@ -37,7 +36,9 @@ class Game
         int getColums();
         std::pair<int,int> calculer_unit(int x, int y);
         int getTailleCellule();
-
+        Player* lp;
+        Player* orangePlayer;
+        Player* greenPlayer;
         int getUnitCost(std::string type);
 
 
@@ -48,7 +49,9 @@ class Game
         Player* getLp();
         void setLp(Player * value);
 
-        GameMap * getMap();
+        GameMap* getMap();
+        Player* getOrangePlayer();
+        Player* getGreenPlayer();
 };
 // variable reste ; fonction constructeur redefinir
 #endif // GAME_H

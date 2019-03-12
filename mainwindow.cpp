@@ -59,9 +59,25 @@ void MainWindow::paintEvent(QPaintEvent *event) {
                     if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
 
                     }
+                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
+
+                    }
+
                 } else if (type=="base") {
+                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
+
+                    }
+                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
+
+                    }
 
                 } else if (type=="airport") {
+                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
+
+                    }
+                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
+
+                    }
 
                 } else {
                 }*/
@@ -120,6 +136,8 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixMap(){
 
 std::map<string, QPixmap> MainWindow::creationDicoQPixUnit(){
     std::map<string, QPixmap > dicoQPixUnit;
+
+    // GreenEarth Units
     dicoQPixUnit.insert({"AntiAir", QPixmap(":/unit/AntiAir.png")});
     dicoQPixUnit.insert({"BCopter", QPixmap(":/unit/BCopter.png")});
     dicoQPixUnit.insert({"Bomber", QPixmap(":/unit/Bomber.png")});
@@ -129,6 +147,18 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixUnit(){
     dicoQPixUnit.insert({"NeoTank", QPixmap(":/unit/NeoTank.png")});
     dicoQPixUnit.insert({"Recon", QPixmap(":/unit/Recon.png")});
     dicoQPixUnit.insert({"TankM", QPixmap(":/unit/TankM.png")});
+
+    //OrangeStar/ Red Units #ou trouver les bonnes images ?
+    dicoQPixUnit.insert({"antiairR", QPixmap(":/unit/antiairR.png")});
+    dicoQPixUnit.insert({"bcopter", QPixmap(":/unit/bcopterR.png")});
+    dicoQPixUnit.insert({"bomberR", QPixmap(":/unit/bomberR.png")});
+    dicoQPixUnit.insert({"fighterR", QPixmap(":/unit/fighterR.png")});
+    dicoQPixUnit.insert({"osinfantry", QPixmap(":/unit/osinfantry.png")});
+    dicoQPixUnit.insert({"megatankR", QPixmap(":/unit/megatankR.png")});
+    dicoQPixUnit.insert({"neotankR", QPixmap(":/unit/neotankR.png")});
+    dicoQPixUnit.insert({"reconR", QPixmap(":/unit/reconR.png")});
+    dicoQPixUnit.insert({"tankR", QPixmap(":/unit/tankR.png")});
+
 
     return dicoQPixUnit;
 

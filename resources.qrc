@@ -24,5 +24,7 @@
         <file>Resources/orangestarbase.png</file>
         <file>Resources/orangestarcity.png</file>
         <file>Resources/bluemooncity.png</file>
+        <file>../../../Downloads/bluemoonairport.zip</file>
+        <file>Resources/bluemoonbase.png</file>
     </qresource>
 </RCC>

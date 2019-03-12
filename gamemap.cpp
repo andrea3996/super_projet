@@ -9,7 +9,7 @@
 #include "gamemap.h"
 #include "cellule.h"
 #include "building.h"
-
+#include "game.h"
 
 #include"QFile"
 
@@ -24,8 +24,8 @@ using std::string;
 using std::stoi;
 
 
-GameMap::GameMap(){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-
+GameMap::GameMap(Game* game){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+    this->game = game;
     this->board = new std::vector< std :: vector<Cellule>>();
     this->creationBoard();
     // modifier attribut board
@@ -153,18 +153,62 @@ void GameMap::createBuilding(Cellule* cell,std::string type){
     if(type == "airport") {
         std::cout<<"airport : " <<type <<std::endl;
         cell->setBuilding(new Airport());
+
     } else if (type=="base") {
         std::cout<< "base : "<<type <<std::endl;
         cell->setBuilding(new Base());
+
     } else if (type=="city") {
+
         std::cout<< "city : "<<type <<std::endl;
         cell->setBuilding(new City());
+
     } else if (type=="orangestarcity") {
         City* city = new City();
-        //city->setOwner(//TODO chercher dans le game le joueur orange);
+        //std::cout<< "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<std::endl;
+        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
+
+        city->setOwner(this->game->getOrangePlayer());
+
+        cell->setBuilding(city);
+
+    } else if (type=="orangestarairport") {
+        Airport* airport = new Airport();
+        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
+        airport->setOwner(this->game->getOrangePlayer());
+        cell->setBuilding(airport);
+
+    } else if (type=="greenearthcity") {
+        City* city = new City();
+        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
+        city->setOwner(this->game->getGreenPlayer());
+        //city->setOwner(this->game->lp);
+        cell->setBuilding(city);
+
+    } else if (type=="greenearthairport") {
+        Airport* airport = new Airport();
+        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
+        airport->setOwner(this->game->getGreenPlayer());
+        //airport->setOwner(this->game->lp);
+        cell->setBuilding(airport);
+
+    } else if (type=="greenearthbase") {
+        Base* base = new Base();
+        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
+        base->setOwner(this->game->getGreenPlayer());
+        //airport->setOwner(this->game->lp);
+        cell->setBuilding(base);
+
+    } else if (type=="orangestarbase") {
+        Base* base = new Base();
+        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
+        base->setOwner(this->game->getOrangePlayer());
+        //airport->setOwner(this->game->lp);
+        cell->setBuilding(base);
+
     }
-    // if type =
-    // setPlayer ...
+
+
 }
 
 

@@ -7,10 +7,12 @@ using std::ifstream;
 #include "cellule.h"
 #include "unit.h"
 
+class Game;
+
 class GameMap
 {
     public:
-        GameMap();
+        GameMap(Game* game);
         ~GameMap();
         Cellule* getCell(int x, int y);
         void casesDispo(Unit unit, int mp,int a, int x, int y);
@@ -24,6 +26,7 @@ class GameMap
 
 
     private:
+        Game* game;
         //std::vector<int> listeMap(std::ifstream&  fichier);  // attention, fichier n'est pas copiable
         std::vector<std::vector<int>> v; // ?????????????????????
         std :: vector< std :: vector<Cellule>> * board;

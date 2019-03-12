@@ -26,27 +26,37 @@ GameMap *Game::getMap()
     return this->map;
 }
 
+
+
+
 Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()), units(std::vector<Unit>())
 {
     this->taille_cellule=30;
     this->rows = 17;
     this->column = 21;
-    this->map = new GameMap();
-    //this->players; //TODO = createPlayersga();
-    //std::vector<Player*> * players = new std::vector<Player*>();
-    //this->lp = new Player("green");
-    Player localplayer("green"); // disparait a la fin
-    players.push_back(localplayer); // enregistre lp
-    this->lp = &players.at(0);
-    //players.push_back(*lp);
-    std::cout << "game init finished" << std::endl;
-    //this->map->getCell(12,4)->getBuilding()->setOwner(this->lp);
-    // player possede +ieurs units
-    //delete GameMap();
+    this->map = new GameMap(this);
+
+    players.push_back(Player("green"));
+    players.push_back(Player("orange"));
+    this->greenPlayer = &players.at(0);
+    this->lp = &players.at(0); // green player is local player
+    this->orangePlayer = &players.at(1);
     this->unitSelected = nullptr;
-    //this->units;
     this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
+    std::cout << this->lp << std::endl;
 }
+
+Player* Game::getGreenPlayer()
+{
+    return this->greenPlayer;
+}
+
+Player* Game::getOrangePlayer()
+{
+    return this->orangePlayer;
+}
+
+
 
 Game::~Game()
 {
@@ -180,19 +190,25 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
         cell.first= x;
         cell.second= y;
-        Unit *unitClic = this->map->getCell(x,y)->getUnit();
+        Unit* unitClic = this->map->getCell(x,y)->getUnit();
 
-        Building *buildingClic=this->map->getCell(x,y)->getBuilding();
+        Building* buildingClic=this->map->getCell(x,y)->getBuilding();
         std::cout << "type of cell : "<<this->getCellType(x,y) << std::endl;
 
         if(buildingClic != nullptr){
             std::cout << "building clic condition passé" << std::endl;
+            std::cout << buildingClic->getOwner() << " " << this->lp << " " << buildingClic->getType() << std::endl;
+            std::cout << buildingClic->getOwner() << " " << this->getOrangePlayer() << " " << buildingClic->getType() << std::endl;
             if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
+                // pas d'egalité gameMap cf
+
                 this->mainWindow->openShopWindow(this->map->getCell(x,y)); //open a shopWindow
                 std::cout << "Unit clic condition passé" << std::endl;
             }
+        } else {
+            std::cout << "buildingclic in nullptr" << std::endl;
         }
-        else if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
+        if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             if (unitClic->getActionnable()){
                 this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
                 //this->mainWindow->showMovementOf(unitClic);

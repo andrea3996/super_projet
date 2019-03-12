@@ -11,7 +11,7 @@ Player* Building::getOwner() const
     return owner;
 }
 
-void Building::setOwner(Player *value)
+void Building::setOwner(Player* value)
 {
     owner = value;
 }
