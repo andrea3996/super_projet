@@ -17,7 +17,7 @@ class Game
     private:
         MainWindow* mainWindow = nullptr;
         GameMap * map;
-        std::vector<Player> players;
+        std::vector<Player*> players;
         std::vector<Unit> units;
         int taille_cellule;
         int rows;

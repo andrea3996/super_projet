@@ -29,21 +29,23 @@ GameMap *Game::getMap()
 
 
 
-Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player>()), units(std::vector<Unit>())
+Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>()), units(std::vector<Unit>())
 {
+    greenPlayer = new Player("green");
+    orangePlayer = new Player("orange");
     this->taille_cellule=30;
     this->rows = 17;
     this->column = 21;
     this->map = new GameMap(this);
 
-    players.push_back(Player("green"));
-    players.push_back(Player("orange"));
-    this->greenPlayer = &players.at(0);
-    this->lp = &players.at(0); // green player is local player
-    this->orangePlayer = &players.at(1);
+
+    players.push_back(greenPlayer);
+    players.push_back(orangePlayer);
+    this->lp = greenPlayer; // green player is local player
+    //std::cout<< "lp = greenplayer" << greenPlayer << " lp "<<lp << std::endl ;
     this->unitSelected = nullptr;
     this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
-    std::cout << this->lp << std::endl;
+    //std::cout << this->lp << std::endl;
 }
 
 Player* Game::getGreenPlayer()
@@ -197,8 +199,9 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
         if(buildingClic != nullptr){
             std::cout << "building clic condition passé" << std::endl;
-            std::cout << buildingClic->getOwner() << " " << this->lp << " " << buildingClic->getType() << std::endl;
-            std::cout << buildingClic->getOwner() << " " << this->getOrangePlayer() << " " << buildingClic->getType() << std::endl;
+//            std::cout << buildingClic->getOwner() << " owner " << this->lp << " lp " << buildingClic->getType() << std::endl;
+//            std::cout << buildingClic->getOwner() << " owner " << this->getOrangePlayer() << " orange p " << buildingClic->getType() << std::endl;
+//            std::cout << buildingClic->getOwner() << " owner " << this->getGreenPlayer() << " green p " << buildingClic->getType() << std::endl;
             if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
                 // pas d'egalité gameMap cf
 
