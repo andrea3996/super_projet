@@ -39,6 +39,7 @@ private slots:
     void on_pushButton_AntiAir_clicked();
 
     void on_pushButton_Bazooka_clicked();
+    void on_reconPushButton_Recon_clicked();
 
 private:
     Ui::ShopWindow *ui;

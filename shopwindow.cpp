@@ -21,12 +21,13 @@ ShopWindow::~ShopWindow()
 void ShopWindow::on_infantryPushButton_clicked()
 {
 
-    this->game->buy("infantry", this->cellule);
-
-
+    this->game->buy("Infantry", this->cellule);
 }
 
-
+void ShopWindow::on_reconPushButton_Recon_clicked()
+{
+    this->game->buy("Recon", this->cellule);
+}
 
 void ShopWindow::on_pushButton_TankM_clicked()
 {
@@ -36,41 +37,45 @@ void ShopWindow::on_pushButton_TankM_clicked()
 
 void ShopWindow::on_pushButton_Tank_clicked()
 {
-
+    this->game->buy("Tank", this->cellule);
 }
 
 void ShopWindow::on_pushButton_NeoTank_clicked()
 {
-
+    this->game->buy("NeoTank", this->cellule);
 }
 
 void ShopWindow::on_pushButton_MegaTank_clicked()
 {
-
+    this->game->buy("MegaTank", this->cellule);
 }
 
 
 void ShopWindow::on_pushButton_Fighter_clicked()
 {
-
+    this->game->buy("Fighter", this->cellule);
 }
 
 void ShopWindow::on_pushButton_Bomber_clicked()
 {
-
+    this->game->buy("Bomber", this->cellule);
 }
 
 void ShopWindow::on_pushButton_BCopter_clicked()
 {
-
+    this->game->buy("BCopter", this->cellule);
 }
 
 void ShopWindow::on_pushButton_AntiAir_clicked()
 {
-
+    this->game->buy("AntiAir", this->cellule);
 }
 
 void ShopWindow::on_pushButton_Bazooka_clicked()
 {
-
+    this->game->buy("Bazooka", this->cellule);
 }
+
+
+
+

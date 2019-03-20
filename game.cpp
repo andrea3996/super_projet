@@ -44,7 +44,7 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
     this->lp = greenPlayer; // green player is local player
     //std::cout<< "lp = greenplayer" << greenPlayer << " lp "<<lp << std::endl ;
     this->unitSelected = nullptr;
-    this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
+    //this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
     //std::cout << this->lp << std::endl;
 }
 
@@ -120,7 +120,7 @@ Building *Game::getBuiling(int x, int y)
 }*/
 
 
-std::pair<int,int> calculer_unit(int x, int y){
+std::pair<int,int> calculer_unit(int x, int y){ //Plus besoin
 
 }
 
@@ -130,44 +130,61 @@ std::pair<int,int> calculer_unit(int x, int y){
 void Game::buy(std::string type, Cellule* cell){
     int cost = this->getUnitCost(type);
     // TODO: En fonction du type, vérifier si le cout est suffisant et construire l'unité en conséquence
+
     Unit* u;
     if (cost <= this->lp->getMoney()) {
         //Pq pas faire un switch ?
+        std::cout<< type <<std::endl;
         if (type == "Infantry") {
+            std::cout<<"Buy Infantry"<<std::endl;
+
             u = new Infantry(cell->getX(), cell->getY(), lp);
+            std::cout<<"Buy Infantry"<<std::endl;
+            cell->setUnit(u); // Remplacer getCEll par emplacement des factorie orange ou green
         }
         if (type == "Recon") {
             u = new Recon(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "Tank") {
             u = new Tank(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "TankM") {
             u = new TankM(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "AntiAir") {
             u = new AntiAir(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "BCopter") {
             u = new BCopter(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "BCopter") {
             u = new BCopter(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "Bomber") {
             u = new Bomber(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "Fighter") {
             u = new Fighter(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "MegaTank") {
             u = new MegaTank(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "NeoTank") {
             u = new NeoTank(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
         if (type == "Bazooka") {
             u = new Bazooka(cell->getX(), cell->getY(), lp);
+            cell->setUnit(u);
         }
 
     }

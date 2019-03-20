@@ -43,6 +43,8 @@ public:
 
     void openShopWindow(Cellule* cellule);
 
+    void paintEventBuilding(std::string a, int i, int j);
+
 
 public:
     Game* game = nullptr;

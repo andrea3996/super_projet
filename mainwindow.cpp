@@ -43,41 +43,36 @@ void MainWindow::paintEvent(QPaintEvent *event) {
     std::string type=""; //pointeur
     std::string unitType= "";
     std::vector<int> value;
+    std::string teamColor = "";
+    std::string a = "";
 
     for (int i=0; i<game->getRows(); i++){ // i= rows=17
         for(int j=0; j<game->getColums(); j++){ // j=column=21
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
             if (unitType != "") {
+                // verifie owner getOwner par defaut
                 //painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
                 std::cout << unitType << std::endl;
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
             }else {
-                /* TODO
+                /*
+
+                teamColor = this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor();
+
                 //std::cout<< "aaaaaa "<<unitType<<" bbbbbbbb"<< std::endl;
                 if (type=="city") {
-                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
-
-                    }
-                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
-
-                    }
+                    if (teamColor == "orangestar") {a = "orangestarcity";paintEventBuilding(a,i,j);}
+                    else if (teamColor == "greenearth") {a= "greenearthcity";paintEventBuilding(a,i,j);}
 
                 } else if (type=="base") {
-                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
+                    if (teamColor == "orangestar") {a="orangestarbase";paintEventBuilding(a,i,j);}
 
-                    }
-                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
-
-                    }
+                    else if (teamColor == "greenearth") {a = "greenearthcity";paintEventBuilding(a,i,j);}
 
                 } else if (type=="airport") {
-                    if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "orangestar") {
-
-                    }
-                    else if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor() == "greenearth") {
-
-                    }
+                    if (teamColor == "orangestar") {a= "orangestarairport";paintEventBuilding(a,i,j);}
+                    else if (teamColor == "greenearth") {a = "greenearthairport";paintEventBuilding(a,i,j);}
 
                 } else {
                 }*/
@@ -86,6 +81,13 @@ void MainWindow::paintEvent(QPaintEvent *event) {
         }
     }
     std::cout << "paint event finished" << std::endl;
+}
+
+
+
+void :: MainWindow:: paintEventBuilding(std::string a, int i, int j){
+    QPainter painter(this);
+    painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[a]);
 }
 
 
