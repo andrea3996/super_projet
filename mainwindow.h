@@ -56,6 +56,8 @@ private:
     int xDesktop;
     int yDesktop;
 
+    int tour;
+
     Ui::MainWindow *ui;
     QTimer timer;
     int a=5;

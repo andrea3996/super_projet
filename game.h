@@ -25,11 +25,12 @@ class Game
         Unit *unitSelected = nullptr;
         std::vector<Building> buildings;
 
+
     public:
         Game();
         ~Game();
         void setMainWindow(MainWindow* mw);
-        std::pair<int,int> calculer_cellule(int x, int y);
+        std::pair<int,int> calculer_cellule(int x, int y, int currentPlayer);
         std::string getCellType(int x, int y);
         std::string getUnitType(int x, int y);
         int getRows();

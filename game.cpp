@@ -41,7 +41,7 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
 
     players.push_back(greenPlayer);
     players.push_back(orangePlayer);
-    this->lp = greenPlayer; // green player is local player
+    this->lp; // green player is local player
     //std::cout<< "lp = greenplayer" << greenPlayer << " lp "<<lp << std::endl ;
     this->unitSelected = nullptr;
     //this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
@@ -193,12 +193,12 @@ void Game::buy(std::string type, Cellule* cell){
         }
 }
 
-std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
+std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current) {
     std::cout << "calculer cellule appelé" << std::endl;
     // Indique si on clique sur une unité ou non et si on peut se deplacer
     //Calcul la position du clic
 
-
+    this->lp = players[current];
     std::pair<int,int> cell;
     int x = xPixel/taille_cellule;
     int y= yPixel/taille_cellule;
