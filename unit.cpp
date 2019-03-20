@@ -49,17 +49,12 @@ int Unit :: getValueMP(){
 }
 
 
-/*
-void seDeplacer(int x, int y)
+void Unit::seDeplacer(int x, int y)
 {
-    map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);
-    if (map.getCell(x,y).deplacement)
-    {
-        this->x = x;
-        this->y = y;
-    }
+    this->x= x;
+    this->y= y;
 }
-*/
+
 
 
 

@@ -51,6 +51,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
             if (unitType != "") {
+
                 //painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
                 std::cout << unitType << std::endl;
                 //if getOwner != null

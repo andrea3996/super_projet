@@ -214,7 +214,14 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current)
         Building* buildingClic=this->map->getCell(x,y)->getBuilding();
         std::cout << "type of cell : "<<this->getCellType(x,y) << std::endl;
 
-        if(buildingClic != nullptr){
+        if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
+            if (unitClic->getActionnable()){
+                this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
+                //this->mainWindow->showMovementOf(unitClic);
+                //TODO
+            }
+        //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
+        }else if(buildingClic != nullptr){
             std::cout << "building clic condition passé" << std::endl;
 //            std::cout << buildingClic->getOwner() << " owner " << this->lp << " lp " << buildingClic->getType() << std::endl;
 //            std::cout << buildingClic->getOwner() << " owner " << this->getOrangePlayer() << " orange p " << buildingClic->getType() << std::endl;
@@ -224,25 +231,19 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current)
 
                 this->mainWindow->openShopWindow(this->map->getCell(x,y)); //open a shopWindow
                 std::cout << "Unit clic condition passé" << std::endl;
-            }
-        } else {
-            std::cout << "buildingclic in nullptr" << std::endl;
-        }
-        if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
-            if (unitClic->getActionnable()){
-                this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
-                //this->mainWindow->showMovementOf(unitClic);
-                //TODO
-            }
-        //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
-        }
-        else{                   // si on n'a pas cliqué sur une unit
-
+            }/*
+            else if( buildingClic->getOwner() != this->lp)
+                if( buildingClic is in caseDispo)//TODO
+                    attaque();//TODO */
+        }else{                   // si on n'a pas cliqué sur une unit
             if(this->unitSelected != NULL)// si le clic précédent était une unité
             {
                 if (this->map->getCell(x,y)->getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
                     {
-                    // this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+                        this->map->getCell(x,y)->setUnit(unitSelected);
+                        this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr);
+                        this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+
                     }
                 else
                 {
