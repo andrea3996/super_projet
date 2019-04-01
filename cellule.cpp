@@ -45,6 +45,8 @@ Unit *Cellule :: getUnit()
 
 void Cellule :: setUnit(Unit *unit)
 {
+    std::cout << "c'est la mer no***"
+                 "" <<unit << std::endl;
     this->unit= unit;
 }
 

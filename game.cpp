@@ -254,7 +254,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
 
 
                         this->map->getCell(x,y)->setUnit(unitSelected);
-                        this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr);
+                        this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr); //TODO : vérifier confusion unitClic/unitSelected
                         this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
                         this->unitSelected = nullptr;
 
