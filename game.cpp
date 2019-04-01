@@ -37,6 +37,8 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
     this->rows = 17;
     this->column = 21;
     this->map = new GameMap(this);
+    this->tour = 0;
+
 
 
     players.push_back(greenPlayer);
@@ -193,12 +195,12 @@ void Game::buy(std::string type, Cellule* cell){
         }
 }
 
-std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current) {
+std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     std::cout << "calculer cellule appelé" << std::endl;
     // Indique si on clique sur une unité ou non et si on peut se deplacer
     //Calcul la position du clic
 
-    this->lp = players[current];
+    this->lp = players[this->tour];
     std::pair<int,int> cell;
     int x = xPixel/taille_cellule;
     int y= yPixel/taille_cellule;
@@ -216,6 +218,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current)
 
         if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
             if (unitClic->getActionnable()){
+                std:: cout << "getActionnable" << std :: endl;
                 this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
                 //this->mainWindow->showMovementOf(unitClic);
                 //TODO
@@ -238,11 +241,31 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel, int current)
         }else{                   // si on n'a pas cliqué sur une unit
             if(this->unitSelected != NULL)// si le clic précédent était une unité
             {
+                std:: cout << "unitSelected" << std :: endl;
+
                 if (this->map->getCell(x,y)->getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
                     {
+
+                    std:: cout << "getDeplacement" << std :: endl;
+
+                    std:: cout << "before unitSelected: "<< unitSelected->get_x() <<" , "<< unitSelected->get_y() << std :: endl;
+                    std:: cout << "before Cell chosen: "<< x <<" , "<< y << std :: endl;
+
+
+
                         this->map->getCell(x,y)->setUnit(unitSelected);
                         this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr);
                         this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
+                        this->unitSelected = nullptr;
+
+
+                    std:: cout << "after Cell chosen: "<< this->map->getCell(x,y)->getUnit()->get_x()<<" , "<< this->map->getCell(x,y)->getUnit()->get_y()  << std :: endl;
+
+
+                    std:: cout << "getDeplacement" << std :: endl;
+
+
+
 
                     }
                 else

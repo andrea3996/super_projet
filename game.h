@@ -24,13 +24,14 @@ class Game
         int column;
         Unit *unitSelected = nullptr;
         std::vector<Building> buildings;
+        int tour;
 
 
     public:
         Game();
         ~Game();
         void setMainWindow(MainWindow* mw);
-        std::pair<int,int> calculer_cellule(int x, int y, int currentPlayer);
+        std::pair<int,int> calculer_cellule(int x, int y);
         std::string getCellType(int x, int y);
         std::string getUnitType(int x, int y);
         int getRows();

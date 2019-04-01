@@ -101,11 +101,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event){
     std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
     // si terrain afficher
-    this->game->calculer_cellule(event->y(), event->x(), this->tour);
-     if(tour==0)
-    tour = 1;
-     else
-     tour =0;
+    this->game->calculer_cellule(event->y(), event->x());
+     update(); //appel paintEvent
+
 
 }
 
