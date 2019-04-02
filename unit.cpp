@@ -21,7 +21,6 @@ int Unit :: getMoveType(){
 }
 
 std::string Unit :: getIdentity(){
-    std::cout << "Test identité appelé: " << this->identity << std::endl;
     return this->identity;
 }
 

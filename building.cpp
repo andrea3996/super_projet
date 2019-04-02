@@ -13,7 +13,6 @@ Player* Building::getOwner() const
 
 void Building::setOwner(Player* value)
 {
-    std::cout<< "setOwner"<<value<<std::endl;
     owner = value;
 }
 

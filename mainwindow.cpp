@@ -20,7 +20,6 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
     connect(&timer, SIGNAL(timeout()),this,SLOT(tick()));
     dicoQPixMap = this->creationDicoQPixMap();
     dicoQPixUnit = this->creationDicoQPixUnit();
-    //resize(QDesktopWidget().availableGeometry(this).size() * 0.7);
     tour = 0;
     QDesktopWidget dw;
 
@@ -37,7 +36,6 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
-    std::cout << "paint event called" << std::endl;
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres maruvaise idée car prend beaucoup de temps
     std::string type=""; //pointeur
@@ -51,10 +49,6 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             type = this->game->getCellType(i,j);
             unitType = this->game->getUnitType(i,j);
             if (unitType != "") {
-
-                //painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixMap[type]);
-                std::cout << unitType << std::endl;
-                //if getOwner != null
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
             }else {
                 if(this->game->getMap()->getCell(i, j)->getBuilding() != nullptr){
@@ -63,7 +57,6 @@ void MainWindow::paintEvent(QPaintEvent *event) {
 
                         teamColor = this->game->getMap()->getCell(i, j)->getBuilding()->getOwner()->getTeamColor();
 
-                        //std::cout<< "aaaaaa "<<unitType<<" bbbbbbbb"<< std::endl;
                         if (type=="city") {
                             if (teamColor == "orangestar") {a = "orangestarcity";paintEventBuilding(a,i,j);}
                             else if (teamColor == "greenearth") {a= "greenearthcity";paintEventBuilding(a,i,j);}
@@ -86,7 +79,6 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             }
         }
     }
-    std::cout << "paint event finished" << std::endl;
 }
 
 
@@ -98,19 +90,15 @@ void :: MainWindow:: paintEventBuilding(std::string a, int i, int j){
 
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
-    std:: cout << event->x()<<"," << event->y()<< std:: endl;
     qDebug()<< event->pos();
-    // si terrain afficher
     this->game->calculer_cellule(event->y(), event->x());
-     update(); //appel paintEvent
+    update();
 
 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    // savoir la touche qui à ete enfoncé (key)
-    //Possibilité curseur
     std:: cout << event->key()<< std:: endl;
 }
 

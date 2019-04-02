@@ -37,29 +37,17 @@ bool Cellule :: getDeplacement()
     return this->deplacement;
 }
 
-Unit *Cellule :: getUnit()
+Unit* Cellule :: getUnit()
 {
-   return unit;
-}
-// Probleme
-
-void Cellule :: setUnit(Unit *unit)
-{
-    std::cout << "c'est la mer no***"
-                 "" <<unit << std::endl;
-    this->unit= unit;
+   return this->unit;
 }
 
 
+void Cellule :: setUnit(Unit *unit){
 
-/*
+    this->unit = unit;
 
-int Cellule :: getValueMP(Unit *unit) // s'applique à une cellule. l'unite qui est dessus
-{
-    return this->valueMP(unit);
 }
-*/
-// /////////////////////////////////////////////////////////////////Attention
 
 
 void Cellule :: setDeplacement(bool a)
@@ -93,7 +81,6 @@ std::string Cellule::getLocation(){
 
 }
 
-
 void Cellule:: setBuilding(Building *building){
     this->building=building;
 }
@@ -112,18 +99,6 @@ int Cellule::getY() const
     return y;
 }
 
-/*
-void attaquer::attaquer() {
-   rect x = position x ;
-   rect y = position y ;
-   if attacking ;
-    positionOriginalUnit;
-   else
-    positionOriginalUnit=vector(position x,position y);
-    direction x = rect x - position x;
-    direction y = rect y - position y;
-}
-*/
 
 
     // pour les erreurs en bas, on supprime le dossier "build"

@@ -43,11 +43,8 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
 
     players.push_back(greenPlayer);
     players.push_back(orangePlayer);
-    this->lp; // green player is local player
-    //std::cout<< "lp = greenplayer" << greenPlayer << " lp "<<lp << std::endl ;
+    this->lp;
     this->unitSelected = nullptr;
-    //this->map->getCell(1,4)->setUnit(new Recon(1,4, this->lp) );
-    //std::cout << this->lp << std::endl;
 }
 
 Player* Game::getGreenPlayer()
@@ -82,7 +79,6 @@ std::string Game::getUnitType(int x, int y){
     std::string f = "";
     if ( u != nullptr){
         f = u->getIdentity();
-        std::cout << u->getIdentity() << std::endl;
     }
     return f;
 }
@@ -107,84 +103,62 @@ int Game::getUnitCost(std::string type)
     return 1000;
 }
 
-/*
-Building *Game::getBuiling(int x, int y)
-{
-    for( Building b : buildings){
-        if (b.getX() == x && b.getY() == y)  {
-            return &b;
-            // Renvoit un pointeur vers le building afin de pouvoir le modifier par apres
-        }
-
-    }
-    return nullptr;
-    // Attention utilisation
-}*/
-
 
 std::pair<int,int> calculer_unit(int x, int y){ //Plus besoin
 
 }
 
 
-
-
 void Game::buy(std::string type, Cellule* cell){
     int cost = this->getUnitCost(type);
-    // TODO: En fonction du type, vérifier si le cout est suffisant et construire l'unité en conséquence
-
-    Unit* u;
+    Unit* u = nullptr;
     if (cost <= this->lp->getMoney()) {
-        //Pq pas faire un switch ?
-        std::cout<< type <<std::endl;
         if (type == "Infantry") {
-            std::cout<<"Buy Infantry"<<std::endl;
 
             u = new Infantry(cell->getX(), cell->getY(), lp);
-            std::cout<<"Buy Infantry"<<std::endl;
-            cell->setUnit(u); // Remplacer getCEll par emplacement des factorie orange ou green
+            cell->setUnit(u);
         }
-        if (type == "Recon") {
+        else if (type == "Recon") {
             u = new Recon(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "Tank") {
+        else if (type == "Tank") {
             u = new Tank(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "TankM") {
+        else  if (type == "TankM") {
             u = new TankM(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "AntiAir") {
+        else if (type == "AntiAir") {
             u = new AntiAir(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "BCopter") {
+        else if (type == "BCopter") {
             u = new BCopter(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "BCopter") {
+        else if (type == "BCopter") {
             u = new BCopter(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "Bomber") {
+        else if (type == "Bomber") {
             u = new Bomber(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "Fighter") {
+        else if (type == "Fighter") {
             u = new Fighter(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "MegaTank") {
+        else if (type == "MegaTank") {
             u = new MegaTank(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "NeoTank") {
+        else if (type == "NeoTank") {
             u = new NeoTank(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
-        if (type == "Bazooka") {
+        else if (type == "Bazooka") {
             u = new Bazooka(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
         }
@@ -192,13 +166,10 @@ void Game::buy(std::string type, Cellule* cell){
     }
     else{
             std::cout << "Vous n'avez pas assez d'argent pour acheter cette unité "<<std::endl;
-        }
+    }
 }
 
 std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
-    std::cout << "calculer cellule appelé" << std::endl;
-    // Indique si on clique sur une unité ou non et si on peut se deplacer
-    //Calcul la position du clic
 
     this->lp = players[this->tour];
     std::pair<int,int> cell;
@@ -206,94 +177,54 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
     int y= yPixel/taille_cellule;
     cell.first= -1;
     cell.second= -1;
-    if (x >= 0 and  x < this->rows  and y >= 0 and y < this->column) // /// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+    if (x >= 0 and  x < this->rows  and y >= 0 and y < this->column)
     {
 
         cell.first= x;
         cell.second= y;
         Unit* unitClic = this->map->getCell(x,y)->getUnit();
-
         Building* buildingClic=this->map->getCell(x,y)->getBuilding();
-        std::cout << "type of cell : "<<this->getCellType(x,y) << std::endl;
-
-        if( unitClic != nullptr){ // si on a cliqué sur une unité, si il y a un unit à l'endroit (x,y)
+        if( unitClic != nullptr){
             if (unitClic->getActionnable()){
-                std:: cout << "getActionnable" << std :: endl;
-                this->unitSelected = unitClic;  // assigner l'unité cliquée à l'attribut unitSelected de Game
-                //this->mainWindow->showMovementOf(unitClic);
-                //TODO
+                this->unitSelected = unitClic;
             }
-        //  std :: cout << this->unitSelected << std :: endl;// TODO send to MainWIndow afficher case dispo
         }else if(buildingClic != nullptr){
-            std::cout << "building clic condition passé" << std::endl;
-//            std::cout << buildingClic->getOwner() << " owner " << this->lp << " lp " << buildingClic->getType() << std::endl;
-//            std::cout << buildingClic->getOwner() << " owner " << this->getOrangePlayer() << " orange p " << buildingClic->getType() << std::endl;
-//            std::cout << buildingClic->getOwner() << " owner " << this->getGreenPlayer() << " green p " << buildingClic->getType() << std::endl;
             if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
-                // pas d'egalité gameMap cf
-
-                this->mainWindow->openShopWindow(this->map->getCell(x,y)); //open a shopWindow
-                std::cout << "Unit clic condition passé" << std::endl;
-            }/*
-            else if( buildingClic->getOwner() != this->lp)
+                this->mainWindow->openShopWindow(this->map->getCell(x,y));
+            }
+            /* else if( buildingClic->getOwner() != players[this->tour])
                 if( buildingClic is in caseDispo)//TODO
                     attaque();//TODO */
-        }else{                   // si on n'a pas cliqué sur une unit
-            if(this->unitSelected != NULL)// si le clic précédent était une unité
-            {
-                std:: cout << "unitSelected" << std :: endl;
-
-                if (this->map->getCell(x,y)->getDeplacement()) // et si la case sur laquelle on a cliqué (x,y) est une case disponible au déplacement
-                    {
-
-                    std:: cout << "getDeplacement" << std :: endl;
-
-                    std:: cout << "before unitSelected: "<< unitSelected->get_x() <<" , "<< unitSelected->get_y() << std :: endl;
-                    std:: cout << "before Cell chosen: "<< x <<" , "<< y << std :: endl;
-
-
-
-                        this->map->getCell(x,y)->setUnit(unitSelected);
-                        this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr); //TODO : vérifier confusion unitClic/unitSelected
-                        this->unitSelected->seDeplacer(x,y); // déplacer l'unité en question en (x,y)
-                        this->unitSelected = nullptr;
-
-
-                    std:: cout << "after Cell chosen: "<< this->map->getCell(x,y)->getUnit()->get_x()<<" , "<< this->map->getCell(x,y)->getUnit()->get_y()  << std :: endl;
-
-
-                    std:: cout << "getDeplacement" << std :: endl;
-
-
-
-
+        }else{
+            if(this->unitSelected != NULL){
+                if (this->map->getCell(x,y)->getDeplacement()){
+                        this->deplacement(x,y);
                     }
-                else
-                {
+                else{
                     std :: cout << "Cette case n'est pas disponible !" << std :: endl;
                 }
 
-            }
-            else
-            {
+            }else{
                 std :: cout << "Il convient à ce stade, de sélectionner une unité" << std :: endl;
             }
         }
 
     }
-    std::cout << "calucler cellule terminé " << std::endl;
     return cell;
+
 }
 
+void Game::deplacement(int x, int y){
 
-/*
-  void seDeplacer(int x, int y)
-{
-    map.getCell(this->x, this->y).casesDispo(this, this->mp, 5);
-    if (map.getCell(x,y).deplacement)
-    {
-        this->x = x;
-        this->y = y;
-    }
+    std::cout << unitSelected << std::endl;
+    std::cout << unitSelected->get_x() << " --- " << unitSelected->get_y() << std::endl;
+
+    this->map->getCell(x,y)->setUnit(unitSelected);
+    this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr);
+    this->unitSelected->seDeplacer(x,y);
+    std::cout << this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->getUnit() << std::endl;
+    this->unitSelected = nullptr;
+
 }
-*/
+

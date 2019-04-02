@@ -87,41 +87,28 @@ void GameMap::creationBoard()
 
     while(! flux.atEnd())
     {
-            // TODO: Trouver un moyen de connaître la position des cellules et les donner dans le constructeur de cell
-
             flux >> mot;
-           // std :: cout << mot.toLatin1()<< endl;
-            if (mot == ',')  // en python: chr(mot) != ',' mais en c, char c'est un byte, donc ',' = code unicode (ascii) de ',' = ord(',') = 44
+            if (mot == ',')
             {
-
-                int typeInteger = stoi(type); // traduction en entier ex : stoi("10") = 10
-                string stringType = this->intTypeToStringType(typeInteger); // traduction d'un entier à son équivalent type (forêt, montagne, etc)
-                std::vector<int> value = dico[stringType]; // liste des difficultés associée au type (stringType)
+                int typeInteger = stoi(type);
+                string stringType = this->intTypeToStringType(typeInteger);
+                std::vector<int> value = dico[stringType];
                 x += 1 ;
-                Cellule cell( stringType, value, x, y); // construction de la cellule
+                Cellule cell( stringType, value, x, y);
                 createBuilding(&cell, stringType);
-                cells->push_back(cell); // la cellule est rentrée dans le vecteur
+                cells->push_back(cell);
                 type = "";
-
-
-
             }
             else if(mot == '\n')
             {
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
-
                 std::vector<int> value = dico[stringType];
-
                 x =0;
                 y += 1 ;
-                //std::cout<< y << std::endl;
-
                 Cellule cell( stringType, value,x,y);
                 createBuilding(&cell, stringType);
                 cells->push_back(cell);
-                // vector -> tableau 17 21
-                // Pb de switch
                 this->board->push_back(*cells);
                 cells = new vector<Cellule>();
                 type = "";
@@ -139,75 +126,48 @@ void GameMap::creationBoard()
              }
         //fichier.close(); //TODO
 
-    }/**
-    for (int i = 0; i < this->board->size(); i++) {
-        for (int j = 0; j < this->board->at(0).size(); j++) {
-            std::cout << (*this->board)[i][j].getType()[0] << (*this->board)[i][j].getType()[1] <<  " ";
-        }
-        std::cout << std::endl; // nouvelle ligne
-    }**/
-
+    }
 }
 
 
 void GameMap::createBuilding(Cellule* cell,std::string type){
     if(type == "airport") {
-        std::cout<<"airport : " <<type <<std::endl;
         cell->setBuilding(new Airport());
 
     } else if (type=="base") {
-        std::cout<< "base : "<<type <<std::endl;
         cell->setBuilding(new Base());
 
     } else if (type=="city") {
-
-        std::cout<< "city : "<<type <<std::endl;
-        std::cout<< "**********************************************" <<std::endl;
         cell->setBuilding(new City());
 
     } else if (type == "orangestarcity") {
         City* city = new City();
-        std::cout<< "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"<<std::endl;
-        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
-        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
-        std::cout<<"getGreenPlayer" << this->game->lp <<std::endl;
         city->setOwner(this->game->getOrangePlayer());
-
         cell->setBuilding(city);
 
     } else if (type == "orangestarairport") {
         Airport* airport = new Airport();
-        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
         airport->setOwner(this->game->getOrangePlayer());
         cell->setBuilding(airport);
 
     } else if (type=="greenearthcity") {
         City* city = new City();
-        std::cout<<"*******************************************" <<std::endl;
-        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
         city->setOwner(this->game->getGreenPlayer());
-        //city->setOwner(this->game->lp);
         cell->setBuilding(city);
 
     } else if (type=="greenearthairport") {
         Airport* airport = new Airport();
-        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
         airport->setOwner(this->game->getGreenPlayer());
-        //airport->setOwner(this->game->lp);
         cell->setBuilding(airport);
 
     } else if (type=="greenearthbase") {
         Base* base = new Base();
-        std::cout<<"getGreenPlayer" << this->game->getGreenPlayer() <<std::endl;
         base->setOwner(this->game->getGreenPlayer());
-        //airport->setOwner(this->game->lp);
         cell->setBuilding(base);
 
     } else if (type=="orangestarbase") {
         Base* base = new Base();
-        std::cout<<"getOrangePlayer" << this->game->getOrangePlayer() <<std::endl;
         base->setOwner(this->game->getOrangePlayer());
-        //airport->setOwner(this->game->lp);
         cell->setBuilding(base);
 
     }

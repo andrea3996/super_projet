@@ -25,6 +25,8 @@ class Game
         Unit *unitSelected = nullptr;
         std::vector<Building> buildings;
         int tour;
+        void deplacement(int x, int y);
+
 
 
     public:
