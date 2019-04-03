@@ -28,6 +28,7 @@ GameMap::GameMap(Game* game){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     this->game = game;
     this->board = new std::vector< std :: vector<Cellule>>();
     this->creationBoard();
+    this->dico = this->creationDico();
     // modifier attribut board
 }
 
@@ -290,7 +291,10 @@ void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 
 void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
     if ((this->getCell(x,y)->getDisponible()) && a != b){
-        mp = mp - this->getCell(x,y)->getUnit()->getValueMP();
+        std :: string cellType = this->getCell(x,y)->getType();
+        int moveType = unit.getMoveType();
+        //this->dico[cellType]
+        //mp = mp - this->getCell(x,y)->getUnit()->getValueMP();
         a = c;
         this->getCell(x,y)->setDeplacement(true);
         this->casesDispo(unit,mp,a, x, y);
