@@ -65,7 +65,7 @@ AntiAir::AntiAir(int x, int y, Player* ow){
     valueMP=6;
     this->identity = "AntiAir";
     //std:: string T;
-    //moveType = string T;
+    moveType = 2;
 
 
 }
@@ -78,8 +78,8 @@ Bazooka::Bazooka(int x, int y, Player* ow)
     cost=3000;
     valueMP=3;
     this->identity = "Bazooka";
-
-    //moveType = string F;
+//F
+    moveType = 0;
 
 }
 
@@ -91,8 +91,8 @@ BCopter::BCopter(int x, int y, Player* ow){
     valueMP = 6;
     cost=9000;
     this->identity = "BCopter";
-
-    //moveType = string A;
+//A
+    moveType = 4;
 
 }
 
@@ -102,8 +102,8 @@ Bomber::Bomber(int x, int y, Player* ow)
     valueMP = 7;
     cost=22000;
     this->identity = "Bomber";
-
-    //moveType = string A;
+//A
+    moveType = 4;
 }
 
 Fighter::Fighter(int x, int y, Player* ow)
@@ -112,8 +112,8 @@ Fighter::Fighter(int x, int y, Player* ow)
     valueMP = 9;
     cost=20000;
     this->identity = "Fighter";
-
-   // moveType =;
+//A
+   moveType = 4;
 }
 
 // Unités terrestres d'infantrie:
@@ -126,7 +126,7 @@ Infantry::Infantry(int x, int y, Player* ow)
     valueMP = 3;
     cost=1000;
     this->identity = "Infantry";
-    //moveType = string F;
+    moveType = 0; // (F)
 }
 
 
@@ -138,8 +138,8 @@ Recon::Recon(int x, int y, Player* ow)
     valueMP = 8;
     cost=4000;
     this->identity = "Recon";
-
-    //moveType = string W;
+// W
+    moveType = 3;
 }
 
 
@@ -150,8 +150,8 @@ Tank::Tank(int x, int y, Player* ow)
     valueMP = 6;
     cost=7000;
     this->identity = "Tank";
-
-    //moveType = string T;
+//T
+    moveType = 2;
 }
 
 TankM::TankM(int x, int y, Player* ow)
@@ -160,7 +160,8 @@ TankM::TankM(int x, int y, Player* ow)
     valueMP = 5;
     cost=16000;
     this->identity = "TankM";
-    //moveType = string T;
+  //T
+    moveType = 2;
 }
 
 MegaTank::MegaTank(int x, int y, Player *ow)
@@ -169,7 +170,8 @@ MegaTank::MegaTank(int x, int y, Player *ow)
     valueMP = 4;
     cost=28000;
     this->identity = "MegaTank";
-    //moveType = string T;
+    //T
+    moveType = 2;
 }
 
 NeoTank::NeoTank(int x, int y, Player* ow)
@@ -178,7 +180,8 @@ NeoTank::NeoTank(int x, int y, Player* ow)
     valueMP = 6;
     cost=22000;
     this->identity = "NeoTank";
-    //moveType = string T;
+//T
+    moveType = 2;
 }
 
 
