@@ -26,6 +26,7 @@ class Game
         std::vector<Building> buildings;
         int tour;
         void deplacement(int x, int y);
+        void nextPlayer();
 
 
 
@@ -33,7 +34,7 @@ class Game
         Game();
         ~Game();
         void setMainWindow(MainWindow* mw);
-        std::pair<int,int> calculer_cellule(int x, int y);
+        std::pair<int,int> play(int x, int y);
         std::string getCellType(int x, int y);
         std::string getUnitType(int x, int y);
         int getRows();

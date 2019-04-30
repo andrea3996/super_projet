@@ -24,6 +24,7 @@ class Unit{
 
         bool getActionnable() const;
         void setActionnable(bool value);
+        Player* getOwner();
 
 protected:
         int x;

@@ -45,6 +45,10 @@ Unit* Cellule :: getUnit()
 
 void Cellule :: setUnit(Unit *unit){
 
+    printf("checking if unit has owner\n");
+    if(unit->getOwner() == nullptr){
+        exit(89);
+    }
     this->unit = unit;
 
 }

@@ -12,6 +12,8 @@ class Player
 
         int getMoney() const;
         void setMoney(int value);
+        void buy(int price);
+        bool hasEnoughMoney(int price);
 
 private:
         std::string teamColor;

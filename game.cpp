@@ -43,7 +43,7 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
 
     players.push_back(greenPlayer);
     players.push_back(orangePlayer);
-    this->lp;
+    this->lp = greenPlayer;
     this->unitSelected = nullptr;
 }
 
@@ -108,11 +108,15 @@ std::pair<int,int> calculer_unit(int x, int y){ //Plus besoin
 
 }
 
-
+/**
+ * @brief Game::buy
+ * @param type type of object bought
+ * @param cell cellule sur laquelle se trouve l'usine quoi !
+ */
 void Game::buy(std::string type, Cellule* cell){
-    int cost = this->getUnitCost(type);
+    int price = this->getUnitCost(type);
     Unit* u = nullptr;
-    if (cost <= this->lp->getMoney()) {
+    if (this->lp->hasEnoughMoney(price)) {
         if (type == "Infantry") {
 
             u = new Infantry(cell->getX(), cell->getY(), lp);
@@ -161,7 +165,20 @@ void Game::buy(std::string type, Cellule* cell){
         else if (type == "Bazooka") {
             u = new Bazooka(cell->getX(), cell->getY(), lp);
             cell->setUnit(u);
+        } else {
+            printf("JE NE DEVRAIS JAMAIS ETRE ICI\n");
         }
+
+        if(cell->getUnit()->getOwner() == nullptr){
+            printf("MUHAHAHHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH \n");
+
+        }
+
+        //printf("unite[%s] achete par %s\n", cell->getUnit()->getIdentity().c_str(), cell->getUnit()->getOwner()->getTeamColor().c_str());
+
+        this->lp->buy(price);
+        nextPlayer();
+
 
     }
     else{
@@ -169,14 +186,15 @@ void Game::buy(std::string type, Cellule* cell){
     }
 }
 
-std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
+std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 
-    this->lp = players[this->tour];
+    this->lp = players.at(this->tour);
     std::pair<int,int> cell;
     int x = xPixel/taille_cellule;
     int y= yPixel/taille_cellule;
     cell.first= -1;
     cell.second= -1;
+
 
     if (x >= 0 and  x < this->rows  and y >= 0 and y < this->column)
     {
@@ -185,34 +203,64 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
         cell.second= y;
         Unit* unitClic = this->map->getCell(x,y)->getUnit();
         Building* buildingClic=this->map->getCell(x,y)->getBuilding();
+        std::string me = this->lp->getTeamColor();
+
         if( unitClic != nullptr){
-            if (unitClic->getActionnable()){
-                this->unitSelected = unitClic;
+
+            if(unitClic->getOwner() != players.at(0) && unitClic->getOwner() != players.at(1)){
+                printf("NAWAAAAAAAAK owner_address=%d , p[0]=%d p[1]=%d and this->lp=%d!\n", unitClic->getOwner(), players.at(0), players.at(1), this->lp);
+
+
+                if(unitClic->getOwner() == nullptr){
+                    exit(56);
+                }
             }
-        }else if(buildingClic != nullptr){
+
+            if(this->lp != unitClic->getOwner()){
+//                printf("This belongs to %s and I'm %s !!!\n", unitClic->getOwner()->getTeamColor().c_str(), me.c_str());
+            } else {
+
+                this->unitSelected = unitClic;
+
+                if (unitClic->getActionnable()){
+                    this->unitSelected = unitClic;
+                }
+            }
+
+
+        } else if(buildingClic != nullptr){
             if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
                 this->mainWindow->openShopWindow(this->map->getCell(x,y));
+
             }
             /* else if( buildingClic->getOwner() != players[this->tour])rt
                 if( buildingClic is in caseDispo)//TODO
                     attaque();//TODO */
         }else{
-            if(this->unitSelected != NULL){
+            if(this->unitSelected != nullptr){
                 if (this->map->getCell(x,y)->getDeplacement()){
                         this->deplacement(x,y);
+                        printf("active_player[%s] made a movement played\n", this->lp->getTeamColor().c_str());
+                        nextPlayer();
                     }
                 else{
-                    std :: cout << "Cette case n'est pas disponible !" << std :: endl;
+                    std :: cout << "not available" << std :: endl;
                 }
 
             }else{
-                std :: cout << "Il convient à ce stade, de sélectionner une unité" << std :: endl;
+                std :: cout << "select a location" << std :: endl;
             }
         }
 
     }
+
     return cell;
 
+}
+
+void Game::nextPlayer(){
+    printf("active_player[%s] just played\n", this->lp->getTeamColor().c_str());
+    this->tour = (this->tour + 1) % static_cast<int>(players.size());
 }
 
 void Game::deplacement(int x, int y){

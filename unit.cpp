@@ -55,6 +55,9 @@ void Unit::seDeplacer(int x, int y)
 }
 
 
+Player* Unit::getOwner(){
+    return owner;
+}
 
 
 
@@ -72,22 +75,22 @@ AntiAir::AntiAir(int x, int y, Player* ow){
 
 
 
-Bazooka::Bazooka(int x, int y, Player* ow)
+Bazooka::Bazooka(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
+
     cost=3000;
     valueMP=3;
     this->identity = "Bazooka";
 //F
     moveType = 0;
+    printf("owner of this Bazooka is %s\n", owner->getTeamColor().c_str());
 
 }
 
 
 // Unités aeriennes:
 
-BCopter::BCopter(int x, int y, Player* ow){
-    Unit(x,y, ow);
+BCopter::BCopter(int x, int y, Player* ow): Unit(x,y, ow){
     valueMP = 6;
     cost=9000;
     this->identity = "BCopter";
@@ -96,9 +99,8 @@ BCopter::BCopter(int x, int y, Player* ow){
 
 }
 
-Bomber::Bomber(int x, int y, Player* ow)
+Bomber::Bomber(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
     valueMP = 7;
     cost=22000;
     this->identity = "Bomber";
@@ -106,9 +108,9 @@ Bomber::Bomber(int x, int y, Player* ow)
     moveType = 4;
 }
 
-Fighter::Fighter(int x, int y, Player* ow)
+Fighter::Fighter(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
+
     valueMP = 9;
     cost=20000;
     this->identity = "Fighter";
@@ -118,11 +120,11 @@ Fighter::Fighter(int x, int y, Player* ow)
 
 // Unités terrestres d'infantrie:
 
-Infantry::Infantry(int x, int y, Player* ow)
+Infantry::Infantry(int x, int y, Player* ow): Unit(x,y, ow)
 {
     // Infantery = Bazooka ?
 
-    Unit(x,y, ow);
+
     valueMP = 3;
     cost=1000;
     this->identity = "Infantry";
@@ -132,9 +134,9 @@ Infantry::Infantry(int x, int y, Player* ow)
 
 // Unités terrestres non infantrie :
 
-Recon::Recon(int x, int y, Player* ow)
+Recon::Recon(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
+
     valueMP = 8;
     cost=4000;
     this->identity = "Recon";
@@ -144,19 +146,18 @@ Recon::Recon(int x, int y, Player* ow)
 
 
 
-Tank::Tank(int x, int y, Player* ow)
+Tank::Tank(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
-    valueMP = 6;
+
+    this->valueMP = 6;
     cost=7000;
     this->identity = "Tank";
 //T
     moveType = 2;
 }
 
-TankM::TankM(int x, int y, Player* ow)
+TankM::TankM(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
     valueMP = 5;
     cost=16000;
     this->identity = "TankM";
@@ -164,9 +165,8 @@ TankM::TankM(int x, int y, Player* ow)
     moveType = 2;
 }
 
-MegaTank::MegaTank(int x, int y, Player *ow)
+MegaTank::MegaTank(int x, int y, Player *ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
     valueMP = 4;
     cost=28000;
     this->identity = "MegaTank";
@@ -174,9 +174,8 @@ MegaTank::MegaTank(int x, int y, Player *ow)
     moveType = 2;
 }
 
-NeoTank::NeoTank(int x, int y, Player* ow)
+NeoTank::NeoTank(int x, int y, Player* ow): Unit(x,y, ow)
 {
-    Unit(x,y, ow);
     valueMP = 6;
     cost=22000;
     this->identity = "NeoTank";

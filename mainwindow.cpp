@@ -36,6 +36,7 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::paintEvent(QPaintEvent *event) {
+
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres maruvaise idée car prend beaucoup de temps
     std::string type=""; //pointeur
@@ -50,7 +51,7 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             unitType = this->game->getUnitType(i,j);
             if (unitType != "") {
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
-            }else {
+            } else {
                 if(this->game->getMap()->getCell(i, j)->getBuilding() != nullptr){
 
                     if (this->game->getMap()->getCell(i, j)->getBuilding()->getOwner() != nullptr){
@@ -91,7 +92,7 @@ void :: MainWindow:: paintEventBuilding(std::string a, int i, int j){
 
 void MainWindow::mousePressEvent(QMouseEvent *event){
     qDebug()<< event->pos();
-    this->game->calculer_cellule(event->y(), event->x());
+    this->game->play(event->y(), event->x());
     update();
 
 
