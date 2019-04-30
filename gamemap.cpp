@@ -293,8 +293,8 @@ void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int 
     if ((this->getCell(x,y)->getDisponible()) && a != b){
         std :: string cellType = this->getCell(x,y)->getType();
         int moveType = unit.getMoveType();
-        //this->dico[cellType]
-        //mp = mp - this->getCell(x,y)->getUnit()->getValueMP();
+        int movePoint = this->dico[cellType][moveType];
+        mp = mp - movePoint ;
         a = c;
         this->getCell(x,y)->setDeplacement(true);
         this->casesDispo(unit,mp,a, x, y);

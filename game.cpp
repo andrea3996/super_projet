@@ -193,7 +193,7 @@ std:: pair<int,int>  Game::calculer_cellule(int xPixel, int yPixel) {
             if (buildingClic->getOwner() == this->lp && buildingClic->getType() == "base" ) {
                 this->mainWindow->openShopWindow(this->map->getCell(x,y));
             }
-            /* else if( buildingClic->getOwner() != players[this->tour])
+            /* else if( buildingClic->getOwner() != players[this->tour])rt
                 if( buildingClic is in caseDispo)//TODO
                     attaque();//TODO */
         }else{
