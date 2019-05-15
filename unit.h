@@ -33,10 +33,6 @@ protected:
         int range;
         int pointsDeVie;
         int maxPointsDeVie;
-        int vector = (0,0);
-        int Position =  (x,y);
-        int Rect = (x,y);
-        int PositionOriginalUnit = (0,0);
         int Attacking = false ;
         int moveType;
         int valueMP;

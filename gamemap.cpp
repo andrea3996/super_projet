@@ -26,7 +26,8 @@ using std::stoi;
 
 GameMap::GameMap(Game* game){ // $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
     this->game = game;
-    this->board = new std::vector< std :: vector<Cellule>>();
+    this->board = {};
+    this->celluleBoard = {};
     this->creationBoard();
     this->dico = this->creationDico();
     // modifier attribut board
@@ -67,6 +68,9 @@ std::map<string, vector<int> > GameMap::creationDico(){
 }
 
 
+int identifier(int x, int y){
+    return x * 1000 + y;
+}
 
 void GameMap::creationBoard()
 //envoit ref de l'objet donc utilise comme un objet
@@ -84,35 +88,45 @@ void GameMap::creationBoard()
     type = "";
     int x=0;
     int y=0;
-    std::vector<Cellule> * cells = new vector<Cellule>();
+    std::vector<Cellule*> * cells = new vector<Cellule*>();
 
     while(! flux.atEnd())
     {
             flux >> mot;
             if (mot == ',')
             {
+                x += 1 ;
+
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
-                x += 1 ;
-                Cellule cell( stringType, value, x, y);
-                createBuilding(&cell, stringType);
+                Cellule* cell = new Cellule( stringType, value, x, y);
+                createBuilding(cell, stringType);
+
+                celluleBoard[identifier(x,y)] = cell;
+
                 cells->push_back(cell);
                 type = "";
+
             }
             else if(mot == '\n')
             {
+                printf("max columns (x) = %d\n", x);
+                x =0;
+
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
                 std::vector<int> value = dico[stringType];
-                x =0;
-                y += 1 ;
-                Cellule cell( stringType, value,x,y);
-                createBuilding(&cell, stringType);
+                Cellule* cell = new Cellule( stringType, value,x,y);
+                createBuilding(cell, stringType);
                 cells->push_back(cell);
-                this->board->push_back(*cells);
-                cells = new vector<Cellule>();
+                celluleBoard[identifier(x,y)] = cell;
+
+                this->board.push_back(*cells);
+                cells = new vector<Cellule*>();
                 type = "";
+                y += 1 ;
+
             }
             else if (mot == -1)
             {
@@ -125,8 +139,26 @@ void GameMap::creationBoard()
                 type += intType;
 
              }
+
+
+
         //fichier.close(); //TODO
 
+    }
+    printf("max rows (y) = %d\n", y);
+
+    bool error = false;
+    for (int x = 0; x < 21; x++) {
+        for (int y = 0; y < 17; y++) {
+            if(celluleBoard.find(identifier(x, y)) == celluleBoard.end()){
+                printf("cellule [%d,%d] is not loaded\n", x, y);
+                error = true;
+            }
+        }
+    }
+
+    if(error){
+        exit(4);
     }
 }
 
@@ -267,13 +299,18 @@ string GameMap::intTypeToStringType(int value)
 
 Cellule* GameMap::getCell(int x, int y){
     //std::cout << "Ca fait:"<<x+1 <<" "<< y+1 << std::endl;
-    return &(*this->board)[x][y]; // le premier = ligne
+
+    if(celluleBoard.find(identifier(x,y)) == celluleBoard.end()){
+        printf("cellule does not exist at location [%d, %d] for a size =%d\n", x, y, celluleBoard.size());
+        exit(0);
+    }
+
+    return celluleBoard.find(identifier(x,y))->second;
+
+
+    //return (this->board)[x][y]; // le premier = colonne
 }
 
-
-std::vector< std :: vector<Cellule>> * GameMap::getBoard(){
-    return this->board;
- }
 
 
 void GameMap :: casesDispo(Unit unit, int mp, int x, int y)

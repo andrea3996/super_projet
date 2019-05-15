@@ -6,6 +6,8 @@
 #include "gamemap.h"
 #include "mainwindow.h"
 #include <typeinfo>
+#include <QDebug> // bon pour les qpoint + mieux que cout
+
 using std::string;
 
 
@@ -70,7 +72,12 @@ void Game::setMainWindow(MainWindow *mw)
 }
 
 std::string Game:: getCellType(int x, int y){
-    return this->map->getCell(x,y)->getType();
+
+
+    Cellule* cellule = this->map->getCell(x,y);
+
+
+    return cellule->getType();
 }
 
 
@@ -104,9 +111,7 @@ int Game::getUnitCost(std::string type)
 }
 
 
-std::pair<int,int> calculer_unit(int x, int y){ //Plus besoin
 
-}
 
 /**
  * @brief Game::buy
@@ -169,10 +174,6 @@ void Game::buy(std::string type, Cellule* cell){
             printf("JE NE DEVRAIS JAMAIS ETRE ICI\n");
         }
 
-        if(cell->getUnit()->getOwner() == nullptr){
-            printf("MUHAHAHHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAH \n");
-
-        }
 
         //printf("unite[%s] achete par %s\n", cell->getUnit()->getIdentity().c_str(), cell->getUnit()->getOwner()->getTeamColor().c_str());
 
@@ -190,13 +191,14 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 
     this->lp = players.at(this->tour);
     std::pair<int,int> cell;
-    int x = xPixel/taille_cellule;
-    int y= yPixel/taille_cellule;
+    int x = xPixel / taille_cellule;
+    int y = yPixel / taille_cellule;
     cell.first= -1;
     cell.second= -1;
 
+    printf("selected block [%d, %d]\n", x, y);
 
-    if (x >= 0 and  x < this->rows  and y >= 0 and y < this->column)
+    if (x >= 0 and  x < this->column  and y >= 0 and y < this->rows)
     {
 
         cell.first= x;
@@ -207,25 +209,26 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 
         if( unitClic != nullptr){
 
+            // TODO: remove when everything works
             if(unitClic->getOwner() != players.at(0) && unitClic->getOwner() != players.at(1)){
                 printf("NAWAAAAAAAAK owner_address=%d , p[0]=%d p[1]=%d and this->lp=%d!\n", unitClic->getOwner(), players.at(0), players.at(1), this->lp);
-
-
-                if(unitClic->getOwner() == nullptr){
-                    exit(56);
-                }
+                exit(56);
             }
 
-            if(this->lp != unitClic->getOwner()){
-//                printf("This belongs to %s and I'm %s !!!\n", unitClic->getOwner()->getTeamColor().c_str(), me.c_str());
+            if(unitClic->getOwner() != this->lp){
+                qDebug() << "It's not your turn to play \n";
             } else {
-
-                this->unitSelected = unitClic;
-
                 if (unitClic->getActionnable()){
                     this->unitSelected = unitClic;
+                    qDebug() << "user selected a unit \n";
+                } else {
+                    qDebug() << "yser selected a NON selectable unit\n";
                 }
             }
+
+
+
+
 
 
         } else if(buildingClic != nullptr){
@@ -240,7 +243,6 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
             if(this->unitSelected != nullptr){
                 if (this->map->getCell(x,y)->getDeplacement()){
                         this->deplacement(x,y);
-                        printf("active_player[%s] made a movement played\n", this->lp->getTeamColor().c_str());
                         nextPlayer();
                     }
                 else{
@@ -268,8 +270,13 @@ void Game::deplacement(int x, int y){
     std::cout << unitSelected << std::endl;
     std::cout << unitSelected->get_x() << " --- " << unitSelected->get_y() << std::endl;
 
-    this->map->getCell(x,y)->setUnit(unitSelected);
-    this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->setUnit(nullptr);
+    Cellule* destinationCell = this->map->getCell(x,y);
+    Cellule* sourceCell = this->map->getCell(unitSelected->get_x(),unitSelected->get_y());
+    //1.
+
+    destinationCell->setUnit(unitSelected);
+//    sourceCell->setUnit(nullptr);
+    sourceCell->clearUnit();
     this->unitSelected->seDeplacer(x,y);
     std::cout << this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->getUnit() << std::endl;
     this->unitSelected = nullptr;

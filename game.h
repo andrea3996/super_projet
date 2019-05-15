@@ -23,8 +23,8 @@ class Game
         int rows;
         int column;
         Unit *unitSelected = nullptr;
-        std::vector<Building> buildings;
-        int tour;
+        std::vector<Building> buildings{};
+        unsigned int tour;
         void deplacement(int x, int y);
         void nextPlayer();
 

@@ -62,8 +62,7 @@ Player* Unit::getOwner(){
 
 
 
-AntiAir::AntiAir(int x, int y, Player* ow){
-    Unit(x,y, ow);
+AntiAir::AntiAir(int x, int y, Player* ow) : Unit(x,y, ow){
     cost=3000;
     valueMP=6;
     this->identity = "AntiAir";
@@ -182,7 +181,6 @@ NeoTank::NeoTank(int x, int y, Player* ow): Unit(x,y, ow)
 //T
     moveType = 2;
 }
-
 
 
 

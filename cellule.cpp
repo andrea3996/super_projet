@@ -43,13 +43,14 @@ Unit* Cellule :: getUnit()
 }
 
 
-void Cellule :: setUnit(Unit *unit){
-
-    printf("checking if unit has owner\n");
-    if(unit->getOwner() == nullptr){
-        exit(89);
-    }
+void Cellule::setUnit(Unit *unit){
     this->unit = unit;
+}
+
+void Cellule::clearUnit(){
+    if(this->unit != nullptr){
+        this->unit = nullptr;
+    }
 
 }
 
@@ -106,6 +107,3 @@ int Cellule::getY() const
 
 
     // pour les erreurs en bas, on supprime le dossier "build"
-
-
-

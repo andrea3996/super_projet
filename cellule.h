@@ -20,6 +20,7 @@ public:
     std:: string getType();
     int getDifficulte();
     bool getDeplacement ();
+    void clearUnit();
 
     std::string getLocation();
     //sstd:: vector<int> v(int l); //pas sure
