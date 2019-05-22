@@ -38,27 +38,28 @@ GameMap::~GameMap()
 
 }
 
+
+/* Création du dictionnaire dont la clef est un type
+ * de case et la valeur une liste d'entiers.
+ *
+ * L'indice des éléments de la liste correspond à un
+ * type de mouvement d'unités (moveType,
+ * attribut int).
+ *
+ * L'élément de la liste correspond au nombre de points
+ * de déplacement retranchés quand une unité de moveType
+ * égale à l'indice de l'élément, traverse une case décrite
+ * par la clef de cette liste.
+ *
+ * Exemple : Si une unité de moveType = 0 traverse une
+ * case "plain", elle se voit retrancher 1 point de movePoint.
+ *
+ *           Si une unité de moveType = 3 traverse une
+ * case "wood", elle se voit retrancher 3 points de movePoints.
+ *
+ **/
 std::map<string, vector<int> > GameMap::creationDico(){
 
-    /* Création du dictionnaire dont la clef est un type
-     * de case et la valeur une liste d'entiers.
-     *
-     * L'indice des éléments de la liste correspond à un
-     * type de mouvement d'unités (moveType,
-     * attribut int).
-     *
-     * L'élément de la liste correspond au nombre de points
-     * de déplacement retranchés quand une unité de moveType
-     * égale à l'indice de l'élément, traverse une case décrite
-     * par la clef de cette liste.
-     *
-     * Exemple : Si une unité de moveType = 0 traverse une
-     * case "plain", elle se voit retrancher 1 point de movePoint.
-     *
-     *           Si une unité de moveType = 3 traverse une
-     * case "wood", elle se voit retrancher 3 points de movePoints.
-     *
-     **/
     std::map<string, vector<int> > dico;
     dico.insert({"plain", {1,1,1,2,1,0,0,0} });
     dico.insert({"mountain", {2,1,0,0,1,0,0,0}});
@@ -92,7 +93,9 @@ int identifier(int x, int y){
     return x * 1000 + y;
 }
 
-void GameMap::creationBoard()
+
+
+
 
 /* Lit le fichier texte caractère après caractère.
  *
@@ -107,7 +110,7 @@ void GameMap::creationBoard()
  * C'est le tableau du jeu.
  */
 
-
+void GameMap::creationBoard()
 
 {
     std::map<string, vector<int> > dico = this->creationDico();

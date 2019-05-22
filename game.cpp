@@ -113,12 +113,14 @@ int Game::getUnitCost(std::string type)
 
 
 
-
+/*
+ *
+*/
 
 /**
- * @brief Game::buy
- * @param type type of object bought
- * @param cell cellule sur laquelle se trouve l'usine quoi !
+ * @brief Game:: buy
+ * @param type : type de l'objet acheté
+ * @param cell : cellule sur laquelle se trouve l'usine quoi !
  */
 void Game::buy(std::string type, Cellule* cell){
     int price = this->getUnitCost(type);
@@ -265,6 +267,7 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 
 }
 
+// Switche le tour de joueur
 void Game::nextPlayer(){
     printf("active_player[%s] just played\n", this->lp->getTeamColor().c_str());
     this->tour = (this->tour + 1) % static_cast<int>(players.size());
@@ -272,6 +275,7 @@ void Game::nextPlayer(){
     this->mainWindow->update();
 }
 
+// Déplace une unité vers la case (x,y)
 void Game::deplacement(int x, int y){
 
     std::cout << unitSelected << std::endl;
