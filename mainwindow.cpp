@@ -35,7 +35,8 @@ MainWindow::~MainWindow()
    delete ui;
 }
 
-void MainWindow::paintEvent(QPaintEvent *event) {
+
+void MainWindow::drawCells(){
 
     QPainter painter(this);
     //std::map<string, QPixmap > dicoQPixMap = this->creationDicoQPixMap(); Tres maruvaise idée car prend beaucoup de temps
@@ -82,6 +83,62 @@ void MainWindow::paintEvent(QPaintEvent *event) {
             }
         }
     }
+}
+void MainWindow::drawDestinationCells(){
+    if(this->game != nullptr){
+        Unit* sourceUnit = this->game->getUnitSelected();
+        if(sourceUnit != nullptr){
+
+
+        }
+    }
+}
+
+void MainWindow::drawSelectableUnits(){
+    QPainter painter(this);
+    int squareSize = game->getTailleCellule();
+    int opacity = 150;
+
+
+    if(this->game != nullptr){
+        Player* activePlayer = this->game->lp;
+
+        QColor activeColor;
+        if(activePlayer->getTeamColor() == "orange"){
+            activeColor = QColor(255, 128, 0, opacity);
+        } else {
+            activeColor = QColor(0, 204, 0, opacity);
+        }
+
+
+        //iteration sur les cellules -> unités
+        for (int x = 0; x < this->game->getColums(); x++) {
+            for(int y = 0; y < this->game->getRows(); y++){
+                Cellule* cell = this->game->getMap()->getCell(x, y);
+                Unit* currentUnit = cell->getUnit();
+
+                // si la cellule possède une unité
+                if(currentUnit != nullptr){
+                    // et que l'unité a le même owner que le joueur actif
+                    if(currentUnit->getOwner() == activePlayer){
+                        printf("trouvé une unité !!!! à afficher\n");
+
+                        // definition rectangle
+                        QRect rectangle(x * squareSize, y * squareSize, squareSize, squareSize);
+                        QBrush brush(activeColor);
+                        painter.fillRect(rectangle, brush);
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void MainWindow::paintEvent(QPaintEvent *event) {
+    drawCells();
+    drawSelectableUnits();
 }
 
 
@@ -176,3 +233,4 @@ void MainWindow::openShopWindow(Cellule* cellule)
     shopWindow.setModal(true);
     shopWindow.exec();
 }
+

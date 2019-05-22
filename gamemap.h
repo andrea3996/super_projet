@@ -22,12 +22,12 @@ class GameMap
         GameMap(Game* game);
         ~GameMap();
         Cellule* getCell(int x, int y);
-        void casesDispo(Unit unit, int mp,int x, int y);
+        void casesDispo(Unit unit, int mp,int a, int x, int y);
         std::map<std::string, std::vector<int> > creationDico();
         void creationBoard();
         std::string intTypeToStringType(int value);
         std::vector< std :: vector<Cellule>> getBoard();
-        void condCaseDispo(Unit unit,int mp, int x, int y);
+        void condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c);
         // Cellule[][]
         void createBuilding(Cellule* cell,std::string type);
 
@@ -46,8 +46,6 @@ class GameMap
 };
 
 #endif // MAP_H
-
-
 
 
 

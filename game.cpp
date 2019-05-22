@@ -113,6 +113,8 @@ int Game::getUnitCost(std::string type)
 
 
 
+
+
 /**
  * @brief Game::buy
  * @param type type of object bought
@@ -185,6 +187,9 @@ void Game::buy(std::string type, Cellule* cell){
     else{
             std::cout << "Vous n'avez pas assez d'argent pour acheter cette unité "<<std::endl;
     }
+}
+Unit* Game::getUnitSelected(){
+    return this->unitSelected;
 }
 
 std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
@@ -263,6 +268,8 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 void Game::nextPlayer(){
     printf("active_player[%s] just played\n", this->lp->getTeamColor().c_str());
     this->tour = (this->tour + 1) % static_cast<int>(players.size());
+    this->lp = players.at(this->tour);
+    this->mainWindow->update();
 }
 
 void Game::deplacement(int x, int y){
@@ -282,4 +289,6 @@ void Game::deplacement(int x, int y){
     this->unitSelected = nullptr;
 
 }
+
+
 

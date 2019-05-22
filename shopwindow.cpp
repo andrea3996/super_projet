@@ -84,3 +84,7 @@ void ShopWindow::on_pushButton_Bazooka_clicked()
     this->game->buy("Bazooka", this->cellule);
     this->close();
 }
+
+
+
+

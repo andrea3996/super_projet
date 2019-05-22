@@ -313,27 +313,29 @@ Cellule* GameMap::getCell(int x, int y){
 
 
 
-void GameMap :: casesDispo(Unit unit, int mp, int x, int y)
+
+void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
 {
   if (mp>0)
   {
-    this->condCaseDispo(unit, mp,x+1, y);
-    this->condCaseDispo(unit, mp,x-1, y);
-    this->condCaseDispo(unit, mp,x, y+1);
-    this->condCaseDispo(unit, mp,x, y-1);
+    this->condCaseDispo(unit, mp,x+1, y, a, 3, 4);
+    this->condCaseDispo(unit, mp,x-1, y, a ,4, 3);
+    this->condCaseDispo(unit, mp,x, y+1 ,a ,1, 2);
+    this->condCaseDispo(unit, mp,x, y-1 ,a ,2, 1);
 
   }
 }
 
 
-void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y){
-    if ((this->getCell(x,y)->getDisponible()) && (this->getCell(x,y)->getDeplacement()== false)){
+void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
+    if ((this->getCell(x,y)->getDisponible()) && a != b){
         std :: string cellType = this->getCell(x,y)->getType();
         int moveType = unit.getMoveType();
         int movePoint = this->dico[cellType][moveType];
         mp = mp - movePoint ;
+        a = c;
         this->getCell(x,y)->setDeplacement(true);
-        this->casesDispo(unit,mp, x, y);
+        this->casesDispo(unit,mp,a, x, y);
     }
 
 }

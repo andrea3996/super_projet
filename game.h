@@ -37,6 +37,7 @@ class Game
         std::pair<int,int> play(int x, int y);
         std::string getCellType(int x, int y);
         std::string getUnitType(int x, int y);
+        Unit* getUnitSelected();
         int getRows();
         int getColums();
         std::pair<int,int> calculer_unit(int x, int y);

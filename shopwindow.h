@@ -46,5 +46,3 @@ private:
     Cellule* cellule;
     Game* game;
 };
-
-#endif // SHOPWINDOW_H

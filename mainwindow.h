@@ -40,6 +40,9 @@ public:
 
     void keyPressEvent(QKeyEvent* event);
     void resizeEvent(QResizeEvent *event);
+    void drawCells();
+    void drawSelectableUnits();
+    void drawDestinationCells();
 
     void openShopWindow(Cellule* cellule);
 

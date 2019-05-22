@@ -1,4 +1,3 @@
-
 #include "building.h"
 
 Building::Building()
@@ -36,3 +35,4 @@ Base::Base() : Building()
 {
     type = "base";
 }
+
