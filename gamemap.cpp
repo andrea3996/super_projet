@@ -73,7 +73,18 @@ int identifier(int x, int y){
 }
 
 void GameMap::creationBoard()
-//envoit ref de l'objet donc utilise comme un objet
+/*Lit le fichier texte caractère après caractère.
+ * Concatène les caractères séparés d'une virgule,
+ * les traduit en Cell et les ajoute un à un dans
+ * un vecteur de Cell.
+ * Chaque fois qu'une ligne du fichier est lue, traduite
+ *  et inclue dans un vecteur de Cell, ce vecteur est alors
+ * ajouté dans un vecteur de vecteur de Cell.
+ * C'est le tableau du jeu.
+ */
+
+
+
 {
     std::map<string, vector<int> > dico = this->creationDico();
 
@@ -211,6 +222,7 @@ void GameMap::createBuilding(Cellule* cell,std::string type){
 
 
 string GameMap::intTypeToStringType(int value)
+// Convertit les entiers qui se réfèrent à un type de case (Cell) en un String
 {
     string type = "";
         switch(value){

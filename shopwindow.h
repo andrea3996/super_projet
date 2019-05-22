@@ -1,4 +1,4 @@
-#ifndef SHOPWINDOW_H
+//#ifndef SHOPWINDOW_H
 #define SHOPWINDOW_H
 
 #include <QDialog>
