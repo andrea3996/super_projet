@@ -1,4 +1,4 @@
-//#ifndef SHOPWINDOW_H
+#ifndef SHOPWINDOW_H
 #define SHOPWINDOW_H
 
 #include <QDialog>
@@ -46,3 +46,5 @@ private:
     Cellule* cellule;
     Game* game;
 };
+
+#endif // SHOPWINDOW_H

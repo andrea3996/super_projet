@@ -4,9 +4,9 @@
 #include <map>
 #include<iostream>
 #include <fstream>
-using std::ifstream;
 #include "cellule.h"
 #include "unit.h"
+using std::ifstream;
 
 class Game;
 
@@ -30,6 +30,9 @@ class GameMap
         void condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c);
         // Cellule[][]
         void createBuilding(Cellule* cell,std::string type);
+        void evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int pointsActuels);
+        Cellule* getCellIfExists(int x, int y);
+
 
 
     private:
@@ -40,12 +43,16 @@ class GameMap
         std::map<int, Cellule*> celluleBoard;
         std::map<std :: string, std :: vector<int> > dico;
 
+        void continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int pointsActuels);
 
 
 
 };
 
 #endif // MAP_H
+
+
+
 
 
 

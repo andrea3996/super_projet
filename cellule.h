@@ -3,7 +3,6 @@
 #include <iostream>
 #include <ostream>
 #include <map>
-
 #include "unit.h"
 #include "building.h"
 #include <vector>
@@ -48,6 +47,9 @@ public:
     int getX() const;
 
     int getY() const;
+    void resetPointsRestants();
+    void setPointsRestants(int points);
+    int getPointsRestants();
 
 private:
 
@@ -56,8 +58,6 @@ private:
     int nombre;
     std::vector<int> value;
     std ::string type; //
-    bool deplacement;
-    bool disponible;
 
     Building* building = nullptr;
 
@@ -68,7 +68,11 @@ private:
 
     int valueMP(Unit *unit);
 
+    bool deplacement;
     std::map<std::string, std::vector<int> >::iterator it;
+
+    bool disponible; // indique si la case est occupé
+    int pointsRestants; // points restant au joueur actif après capture
 
 };
 

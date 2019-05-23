@@ -21,8 +21,8 @@ Cellule::Cellule(std::string type, std::vector<int> value, int x, int y)
     this->x = x;
     this->y = y;
     this->deplacement = true;
-   //for (std::map<string, vector<int> >::iterator it = liste.begin(); it != liste.end(); it++){
-   //  std::cout << it ->first << ":"<< std::endl;
+    this->pointsRestants = -1;
+
 }
 
 
@@ -102,6 +102,24 @@ int Cellule::getX() const
 int Cellule::getY() const
 {
     return y;
+}
+
+void Cellule::resetPointsRestants()
+{
+    this->pointsRestants = -1;
+}
+
+void Cellule::setPointsRestants(int points)
+{
+    // points restants doit être maximum pour garder le chemin de moindre cout
+    if(points > pointsRestants){
+        pointsRestants = points;
+    }
+}
+
+int Cellule::getPointsRestants()
+{
+    return pointsRestants;
 }
 
 

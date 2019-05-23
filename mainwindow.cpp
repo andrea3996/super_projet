@@ -7,9 +7,10 @@
 #include <QString>
 #include <QPixmap>
 #include <QWidget>
+#include <QPoint>
 #include <QDesktopWidget>
 #include <QMainWindow>
-
+#include <map>
 
 
 MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
@@ -84,11 +85,85 @@ void MainWindow::drawCells(){
         }
     }
 }
+
+
+
 void MainWindow::drawDestinationCells(){
     if(this->game != nullptr){
         Unit* sourceUnit = this->game->getUnitSelected();
         if(sourceUnit != nullptr){
 
+
+            int max_y = game->getRows();
+            int max_x = game->getColums();
+
+            for(int x = 0; x < max_x; x++){
+                for(int y = 0; y < max_y; y++){
+                    Cellule* cell = this->game->getMap()->getCell(x, y);
+                    cell->resetPointsRestants();
+                }
+            }
+
+            int pointsActuels = 6; // points du jouer actif !
+
+            int selected_cell_x = sourceUnit->get_x();
+            int selected_cell_y = sourceUnit->get_y();
+            int x_dest, y_dest;
+
+            Cellule* source = game->getMap()->getCell(selected_cell_x, selected_cell_y);
+            Cellule* celluleDestination;
+
+            //evaluer vers le haut
+            x_dest = selected_cell_x;
+            y_dest = selected_cell_y - 1;
+            celluleDestination = game->getMap()->getCellIfExists(x_dest, y_dest);
+            if(celluleDestination != nullptr){
+                game->getMap()->evaluerDeplacement(source, celluleDestination, pointsActuels);
+            }
+
+            //evaluer vers le bas
+            x_dest = selected_cell_x;
+            y_dest = selected_cell_y + 1;
+            celluleDestination = game->getMap()->getCellIfExists(x_dest, y_dest);
+            if(celluleDestination != nullptr){
+                game->getMap()->evaluerDeplacement(source, celluleDestination, pointsActuels);
+            }
+
+            //evaluer vers la gauche
+            x_dest = selected_cell_x - 1;
+            y_dest = selected_cell_y;
+            celluleDestination = game->getMap()->getCellIfExists(x_dest, y_dest);
+            if(celluleDestination != nullptr){
+                game->getMap()->evaluerDeplacement(source, celluleDestination, pointsActuels);
+            }
+
+            //evaluer vers la droite
+            x_dest = selected_cell_x - 1;
+            y_dest = selected_cell_y;
+            celluleDestination = game->getMap()->getCellIfExists(x_dest, y_dest);
+            if(celluleDestination != nullptr){
+                game->getMap()->evaluerDeplacement(source, celluleDestination, pointsActuels);
+            }
+
+            QColor activeColor = QColor(0, 0, 0, 128);
+            QBrush brush(activeColor);
+            QPainter painter(this);
+            int squareSize = game->getTailleCellule();
+
+
+            for (int x = 0; x < game->getColums(); x++) {
+                for (int y = 0; y < game->getRows(); y++) {
+                    Cellule* cell = this->game->getMap()->getCell(x, y);
+                    if(cell->getPointsRestants() >= 0){
+                        QRect rectangle(x * squareSize, y * squareSize, squareSize, squareSize);
+                        QBrush brush(activeColor);
+                        painter.fillRect(rectangle, brush);
+
+                    }
+
+                }
+
+            }
 
         }
     }
@@ -139,6 +214,7 @@ void MainWindow::drawSelectableUnits(){
 void MainWindow::paintEvent(QPaintEvent *event) {
     drawCells();
     drawSelectableUnits();
+    drawDestinationCells();
 }
 
 
@@ -233,4 +309,3 @@ void MainWindow::openShopWindow(Cellule* cellule)
     shopWindow.setModal(true);
     shopWindow.exec();
 }
-

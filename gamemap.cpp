@@ -38,7 +38,6 @@ GameMap::~GameMap()
 
 }
 
-
 /* Création du dictionnaire dont la clef est un type
  * de case et la valeur une liste d'entiers.
  *
@@ -59,7 +58,6 @@ GameMap::~GameMap()
  *
  **/
 std::map<string, vector<int> > GameMap::creationDico(){
-
     std::map<string, vector<int> > dico;
     dico.insert({"plain", {1,1,1,2,1,0,0,0} });
     dico.insert({"mountain", {2,1,0,0,1,0,0,0}});
@@ -94,9 +92,6 @@ int identifier(int x, int y){
 }
 
 
-
-
-
 /* Lit le fichier texte caractère après caractère.
  *
  * Concatène les caractères séparés d'une virgule,
@@ -109,7 +104,6 @@ int identifier(int x, int y){
  *
  * C'est le tableau du jeu.
  */
-
 void GameMap::creationBoard()
 
 {
@@ -247,9 +241,8 @@ void GameMap::createBuilding(Cellule* cell,std::string type){
 }
 
 
-
-string GameMap::intTypeToStringType(int value)
 // Convertit les entiers qui se réfèrent à un type de case (Cell) en un String
+string GameMap::intTypeToStringType(int value)
 {
     string type = "";
         switch(value){
@@ -376,5 +369,77 @@ void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int 
         this->getCell(x,y)->setDeplacement(true);
         this->casesDispo(unit,mp,a, x, y);
     }
+}
 
+void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int pointsActuels)
+{
+    if(x_destination > 0 && y_destination > 0 && x_destination < game->getColums() && y_destination < game->getRows()){
+        Cellule* prochaineCelluleCourante = getCell(x_destination, y_destination);
+
+        if(source->getX() != x_destination && source->getY() != y_destination){
+            evaluerDeplacement(celluleCourante, prochaineCelluleCourante, pointsActuels);
+        } else {
+            printf("condition d'arret meme case\n");
+        }
+    } else {
+        printf("condition d'arret hors case\n");
+    }
+}
+
+
+Cellule* GameMap::getCellIfExists(int x, int y)
+{
+    if(x > 0 && y > 0 && x < game->getColums() && y < game->getRows()){
+        return getCell(x, y);
+    }
+    else {
+        return nullptr;
+    }
+
+}
+
+void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int pointsActuels){
+    int coutCellule = 2; // avoir une fonction qui calcule le coût de la cellule
+
+
+    // si la cellule n'est pas disponible
+    if(celluleCourante->getUnit() != nullptr || celluleCourante->getBuilding() != nullptr){
+        return;
+    }
+
+
+
+    int pointsRestants = pointsActuels - coutCellule;
+
+
+    if(pointsRestants >= 0){
+        int x = celluleCourante->getX();
+        int y = celluleCourante->getY();
+        celluleCourante->setPointsRestants(pointsRestants);
+
+        //evaluer en haut
+        int x_destination = x;
+        int y_destination = y - 1;
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+
+        //evaluer en bas
+        x_destination = x;
+        y_destination = y + 1;
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+
+        //evaluer a gauche
+        x_destination = x - 1;
+        y_destination = y;
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+
+
+        //evaluer a droite
+        x_destination = x + 1;
+        y_destination = y;
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+
+    } else {
+        printf("condition d'arret pas assez de points \n");
+
+    }
 }
