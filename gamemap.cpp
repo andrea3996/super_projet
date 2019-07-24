@@ -102,7 +102,7 @@ int identifier(int x, int y){
  * et inclue dans un vecteur de Cell, ce vecteur est alors
  * ajouté dans un vecteur de vecteur de Cell.
  *
- * C'est le tableau du jeu.
+ * C'est un tableau d'un jeu.
  */
 void GameMap::creationBoard()
 
@@ -399,6 +399,7 @@ Cellule* GameMap::getCellIfExists(int x, int y)
 }
 
 void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int pointsActuels){
+    // donne les cases dispo en fonction des points rstants
     int coutCellule = 2; // avoir une fonction qui calcule le coût de la cellule
 
 
@@ -409,7 +410,7 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
 
 
 
-    int pointsRestants = pointsActuels - coutCellule;
+    int pointsRestants = pointsActuels - coutCellule; // MovePoint
 
 
     if(pointsRestants >= 0){

@@ -121,6 +121,7 @@ int Game::getUnitCost(std::string type)
  * @param cell cellule sur laquelle se trouve l'usine quoi !
  */
 void Game::buy(std::string type, Cellule* cell){
+    // 
     int price = this->getUnitCost(type);
     Unit* u = nullptr;
     if (this->lp->hasEnoughMoney(price)) {
@@ -240,7 +241,7 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                 if( buildingClic is in caseDispo)//TODO
                     attaque();//TODO */
         }else{
-            if(this->unitSelected != nullptr){
+            if(this->unitSelected != nullptr){ // deplacement
                 if (this->map->getCell(x,y)->getPointsRestants() >= 0){
                         this->deplacement(x,y);
                         nextPlayer();
@@ -268,7 +269,7 @@ void Game::nextPlayer(){
 }
 
 void Game::deplacement(int x, int y){
-
+// action se deplacer 
     std::cout << unitSelected << std::endl;
     std::cout << unitSelected->get_x() << " --- " << unitSelected->get_y() << std::endl;
 

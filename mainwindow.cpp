@@ -104,13 +104,13 @@ void MainWindow::drawDestinationCells(){
                 }
             }
 
-            int pointsActuels = 6; // points du jouer actif !
+            int pointsActuels = 6; // points du joueur actif !
 
             int selected_cell_x = sourceUnit->get_x();
             int selected_cell_y = sourceUnit->get_y();
             int x_dest, y_dest;
 
-            Cellule* source = game->getMap()->getCell(selected_cell_x, selected_cell_y);
+            Cellule* source = game->getMap()->getCell(selected_cell_x, selected_cell_y); //sourceUnit
             Cellule* celluleDestination;
 
             //evaluer vers le haut
@@ -172,7 +172,7 @@ void MainWindow::drawDestinationCells(){
 void MainWindow::drawSelectableUnits(){
     QPainter painter(this);
     int squareSize = game->getTailleCellule();
-    int opacity = 150;
+    int opacity = 150; // opacité du voile
 
 
     if(this->game != nullptr){
@@ -180,7 +180,7 @@ void MainWindow::drawSelectableUnits(){
 
         QColor activeColor;
         if(activePlayer->getTeamColor() == "orange"){
-            activeColor = QColor(255, 128, 0, opacity);
+            activeColor = QColor(255, 128, 0, opacity); // vecteur couleur
         } else {
             activeColor = QColor(0, 204, 0, opacity);
         }

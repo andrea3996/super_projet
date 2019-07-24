@@ -1,6 +1,7 @@
 #include "unit.h"
 #include <iostream>
 
+
 Unit::Unit(int nx,int ny, Player* ow) {
         x=nx;
         y=ny;

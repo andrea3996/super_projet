@@ -3,6 +3,7 @@
 #include <iostream>
 #include "player.h"
 //polymorphisme = tableau d'objets
+#include <unordered_map>
 
 
 class Unit{
@@ -42,6 +43,8 @@ protected:
         std::string identity = std::string("");
 
         Player* owner;
+
+        std::unordered_map<const void *, const void *> listeCaseDispo;
 };
 
 
