@@ -1,4 +1,5 @@
 #include "unit.h"
+
 #include <iostream>
 
 
@@ -9,12 +10,17 @@ Unit::Unit(int nx,int ny, Player* ow) {
         pointsDeVie=10;
         maxPointsDeVie=10;
         identity = "";
+
 }
 
 
 Unit::Unit(){
 
 
+}
+
+std::unordered_map<int,CaseDispo> Unit::getMapCasesDispo(){
+     return mapCasesDispo;
 }
 
 int Unit :: getMoveType(){

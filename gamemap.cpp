@@ -345,39 +345,38 @@ Cellule* GameMap::getCell(int x, int y){
 
 
 
-
-void GameMap :: casesDispo(Unit unit, int mp,int a, int x, int y)
-{
-  if (mp>0)
-  {
-    this->condCaseDispo(unit, mp,x+1, y, a, 3, 4);
-    this->condCaseDispo(unit, mp,x-1, y, a ,4, 3);
-    this->condCaseDispo(unit, mp,x, y+1 ,a ,1, 2);
-    this->condCaseDispo(unit, mp,x, y-1 ,a ,2, 1);
-
-  }
-}
-
-
-void GameMap :: condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c){
-    if ((this->getCell(x,y)->getDisponible()) && a != b){
-        std :: string cellType = this->getCell(x,y)->getType();
-        int moveType = unit.getMoveType();
-        int movePoint = this->dico[cellType][moveType];
-        mp = mp - movePoint ;
-        a = c;
-        this->getCell(x,y)->setDeplacement(true);
-        this->casesDispo(unit,mp,a, x, y);
-    }
-}
-
-void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int pointsActuels)
+void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int distanceCourante)
 {
     if(x_destination > 0 && y_destination > 0 && x_destination < game->getColums() && y_destination < game->getRows()){
+
         Cellule* prochaineCelluleCourante = getCell(x_destination, y_destination);
 
+        int movePoint = this->dico[prochaineCelluleCourante->getType()][source->getUnit()->getMoveType()];
+
+
         if(source->getX() != x_destination && source->getY() != y_destination){
-            evaluerDeplacement(celluleCourante, prochaineCelluleCourante, pointsActuels);
+            int distanceDestination = distanceCourante + movePoint;
+            if(distanceDestination < source->getUnit()->getValueMP()){
+
+
+                if (source->getUnit()->getMapCasesDispo().find(identifier(x_destination,y_destination))==source->getUnit()->getMapCasesDispo().end()){
+
+                    CaseDispo caseDispo; //TODO allocation mémoire
+                    caseDispo.celluleDispo= prochaineCelluleCourante;
+                    caseDispo.cellulePrecedente= celluleCourante;
+                    caseDispo.distance = distanceDestination;
+                    source->getUnit()->getMapCasesDispo()[identifier(x_destination, y_destination)]=caseDispo;
+                    evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
+                }else{
+                    if(distanceDestination < source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance){
+                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].celluleDispo= prochaineCelluleCourante;
+                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].cellulePrecedente= celluleCourante;
+                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance = distanceDestination;
+                         evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
+                    } // NOT ELSE, chemin plus court déjà rencontré
+                }
+            } //NOT ELSE, on n'est pas capable d'atteindre la case convoitée
+
         } else {
             printf("condition d'arret meme case\n");
         }
@@ -398,46 +397,47 @@ Cellule* GameMap::getCellIfExists(int x, int y)
 
 }
 
-void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int pointsActuels){
+void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int distanceCourante){
     // donne les cases dispo en fonction des points rstants
     int coutCellule = 2; // avoir une fonction qui calcule le coût de la cellule
 
 
     // si la cellule n'est pas disponible
-    if(celluleCourante->getUnit() != nullptr || celluleCourante->getBuilding() != nullptr){
+
+    if(celluleCourante == source){}
+   else if(celluleCourante->getUnit() != nullptr || celluleCourante->getBuilding() != nullptr){// TODO Building disponible!
         return;
     }
 
 
 
-    int pointsRestants = pointsActuels - coutCellule; // MovePoint
 
+    int distanceMax = source->getUnit()->getValueMP();
 
-    if(pointsRestants >= 0){
+    if( distanceCourante < distanceMax){
         int x = celluleCourante->getX();
         int y = celluleCourante->getY();
-        celluleCourante->setPointsRestants(pointsRestants);
 
         //evaluer en haut
         int x_destination = x;
         int y_destination = y - 1;
-        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
         //evaluer en bas
         x_destination = x;
         y_destination = y + 1;
-        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
         //evaluer a gauche
         x_destination = x - 1;
         y_destination = y;
-        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
 
         //evaluer a droite
         x_destination = x + 1;
         y_destination = y;
-        continuerEvaluation(source, x_destination, y_destination, celluleCourante, pointsRestants);
+        continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
     } else {
         printf("condition d'arret pas assez de points \n");

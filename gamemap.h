@@ -4,9 +4,11 @@
 #include <map>
 #include<iostream>
 #include <fstream>
+#include <unordered_map>
 #include "cellule.h"
 #include "unit.h"
 using std::ifstream;
+
 
 class Game;
 
@@ -15,6 +17,7 @@ struct Location {
     int xPosition;
     int yPosition;
 };
+
 
 class GameMap
 {
@@ -30,7 +33,7 @@ class GameMap
         void condCaseDispo(Unit unit,int mp, int x, int y, int a, int b, int c);
         // Cellule[][]
         void createBuilding(Cellule* cell,std::string type);
-        void evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int pointsActuels);
+        void evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int distanceCourante);
         Cellule* getCellIfExists(int x, int y);
 
 
@@ -43,7 +46,7 @@ class GameMap
         std::map<int, Cellule*> celluleBoard;
         std::map<std :: string, std :: vector<int> > dico;
 
-        void continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int pointsActuels);
+        void continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int distanceCourante);
 
 
 

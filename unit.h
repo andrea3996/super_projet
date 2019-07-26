@@ -2,8 +2,17 @@
 #define UNITS_H
 #include <iostream>
 #include "player.h"
+#include "cellule.h"
 //polymorphisme = tableau d'objets
 #include <unordered_map>
+
+
+typedef struct CaseDispo CaseDispo;
+struct CaseDispo {
+    Cellule* celluleDispo;
+    Cellule* cellulePrecedente;
+    int distance;
+};
 
 
 class Unit{
@@ -26,6 +35,7 @@ class Unit{
         bool getActionnable() const;
         void setActionnable(bool value);
         Player* getOwner();
+        std::unordered_map<int,CaseDispo> getMapCasesDispo();
 
 protected:
         int x;
@@ -44,7 +54,7 @@ protected:
 
         Player* owner;
 
-        std::unordered_map<const void *, const void *> listeCaseDispo;
+        std::unordered_map<int,CaseDispo> mapCasesDispo;
 };
 
 
