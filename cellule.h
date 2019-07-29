@@ -7,6 +7,7 @@
 #include "building.h"
 #include <vector>
 #include <string>
+
 using std:: pair;
 
 

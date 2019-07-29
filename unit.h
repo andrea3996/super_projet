@@ -2,15 +2,15 @@
 #define UNITS_H
 #include <iostream>
 #include "player.h"
-#include "cellule.h"
+//#include "cellule.h"
 //polymorphisme = tableau d'objets
 #include <unordered_map>
 
 
 typedef struct CaseDispo CaseDispo;
 struct CaseDispo {
-    Cellule* celluleDispo;
-    Cellule* cellulePrecedente;
+    std::pair<int,int> celluleDispo;
+    std::pair<int,int> cellulePrecedente;
     int distance;
 };
 

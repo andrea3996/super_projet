@@ -35,6 +35,7 @@ class GameMap
         void createBuilding(Cellule* cell,std::string type);
         void evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int distanceCourante);
         Cellule* getCellIfExists(int x, int y);
+        int identifier(int x, int y);
 
 
 

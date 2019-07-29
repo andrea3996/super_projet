@@ -87,7 +87,7 @@ std::map<string, vector<int> > GameMap::creationDico(){
 }
 
 
-int identifier(int x, int y){
+int GameMap::identifier(int x, int y){
     return x * 1000 + y;
 }
 
@@ -362,15 +362,15 @@ void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_dest
                 if (source->getUnit()->getMapCasesDispo().find(identifier(x_destination,y_destination))==source->getUnit()->getMapCasesDispo().end()){
 
                     CaseDispo caseDispo; //TODO allocation mémoire
-                    caseDispo.celluleDispo= prochaineCelluleCourante;
-                    caseDispo.cellulePrecedente= celluleCourante;
+                    caseDispo.celluleDispo= {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
+                    caseDispo.cellulePrecedente= { celluleCourante->getX(), celluleCourante->getY()};
                     caseDispo.distance = distanceDestination;
                     source->getUnit()->getMapCasesDispo()[identifier(x_destination, y_destination)]=caseDispo;
                     evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
                 }else{
                     if(distanceDestination < source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance){
-                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].celluleDispo= prochaineCelluleCourante;
-                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].cellulePrecedente= celluleCourante;
+                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].celluleDispo= {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
+                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].cellulePrecedente= { celluleCourante->getX(), celluleCourante->getY()};
                          source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance = distanceDestination;
                          evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
                     } // NOT ELSE, chemin plus court déjà rencontré
@@ -422,6 +422,8 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
         int x_destination = x;
         int y_destination = y - 1;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
+        qDebug() << "user selected an actionable unit \n";
+
 
         //evaluer en bas
         x_destination = x;

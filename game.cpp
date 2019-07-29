@@ -221,6 +221,13 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
             } else {
                 if (unitClic->getActionnable()){
                     this->unitSelected = unitClic;
+                    if ( true ){
+                            this->unitSelected->getMapCasesDispo().clear();
+                            Cellule* cell = this->map->getCell(this->unitSelected->get_x(), this->unitSelected->get_y());
+                            this->map->evaluerDeplacement(cell,cell, 0);//TODO
+                            qDebug() << "user selected an actionable unit \n";
+
+                    }
                     qDebug() << "user selected a unit \n";
                 } else {
                     qDebug() << "yser selected a NON selectable unit\n";
@@ -242,11 +249,12 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                     attaque();//TODO */
         }else{
             if(this->unitSelected != nullptr){ // deplacement
-                if (this->map->getCell(x,y)->getPointsRestants() >= 0){
-                        this->deplacement(x,y);
-                        nextPlayer();
-                    }
-                else{
+                if ( unitSelected->getMapCasesDispo().find(this->map->identifier( unitSelected->get_x(),unitSelected->get_y())) != unitSelected->getMapCasesDispo().end()){
+                    int x =unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())].celluleDispo.first;
+                    int y = unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())].celluleDispo.second;
+                    this->deplacement(x,y);
+                    nextPlayer();
+                }else{
                     std :: cout << "not available" << std :: endl;
                 }
 

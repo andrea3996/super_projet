@@ -84,28 +84,6 @@ void MainWindow::drawCells(){
             }
         }
     }
-
-    if ( game->getUnitSelected() != nullptr){
-        if ( true ){
-            game->getUnitSelected()->getMapCasesDispo().clear();
-            Cellule* cell = game->getMap()->getCell(game->getUnitSelected()->get_x(), game->getUnitSelected()->get_y());
-            game->getMap()->evaluerDeplacement(cell,cell, 0);
-
-        }
-    }
-
-    QColor activeColor = QColor(0, 0, 0, 128);
-    QBrush brush(activeColor);
-    int squareSize = game->getTailleCellule();
-
-    std::unordered_map<int, CaseDispo>:: iterator cd;
-
-
-    for ( cd = game->getUnitSelected()->getMapCasesDispo().begin(); cd != game->getUnitSelected()->getMapCasesDispo().end(); cd++ ) {
-        QRect rectangle(cd->second.celluleDispo->getX() * squareSize,cd->second.celluleDispo->getY() * squareSize, squareSize, squareSize);
-        QBrush brush(activeColor);
-        painter.fillRect(rectangle, brush);
-    }
 }
 
 void MainWindow::drawSelectableUnits(){
@@ -147,6 +125,22 @@ void MainWindow::drawSelectableUnits(){
             }
         }
     }
+}
+
+void MainWindow::drawDestinationCells(){
+    QPainter painter(this);
+    QColor activeColor = QColor(0, 0, 0, 128);
+    QBrush brush(activeColor);
+    std::unordered_map<int, CaseDispo>:: iterator cd;
+    if ( game->getUnitSelected() != nullptr){
+        qDebug() << game->getUnitSelected()->getMapCasesDispo().size();
+        for ( cd = game->getUnitSelected()->getMapCasesDispo().begin(); cd != game->getUnitSelected()->getMapCasesDispo().end(); cd++ ) {
+            QRect rectangle( cd->second.celluleDispo.first * game->getTailleCellule(),cd->second.celluleDispo.second* game->getTailleCellule(), game->getTailleCellule(), game->getTailleCellule());
+            QBrush brush(activeColor);
+            painter.fillRect(rectangle, brush);
+        }
+    }
+
 }
 
 
