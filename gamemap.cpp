@@ -122,6 +122,7 @@ void GameMap::creationBoard()
     int y=0;
     std::vector<Cellule*> * cells = new vector<Cellule*>();
 
+
     while(! flux.atEnd())
     {
             flux >> mot;
@@ -346,6 +347,7 @@ Cellule* GameMap::getCell(int x, int y){
 
 
 void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int distanceCourante)
+// check if case available
 {
     if(x_destination > 0 && y_destination > 0 && x_destination < game->getColums() && y_destination < game->getRows()){
 
@@ -353,30 +355,43 @@ void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_dest
 
         int movePoint = this->dico[prochaineCelluleCourante->getType()][source->getUnit()->getMoveType()];
 
-
-        if(source->getX() != x_destination && source->getY() != y_destination){
+        if(source->getX() != x_destination || source->getY() != y_destination){
             int distanceDestination = distanceCourante + movePoint;
-            if(distanceDestination < source->getUnit()->getValueMP()){
+            std::pair <int, int > destination = {x_destination,y_destination};
 
+            if(distanceDestination <= source->getUnit()->getValueMP()){
+                bool isInList = false;
+                for (std::size_t i = 0; i < source->getUnit()->getListCasesDispo().size(); ++i){
+                    // vector<CaseDispo> !! logique
+                    if ( source->getUnit()->getListCasesDispo()[i]->getCelluleDispo() == destination ){
+                        isInList = true;
+                        if(distanceDestination < source->getUnit()->getListCasesDispo()[i]->getDistance()){
+                            std::cout << "size" << source->getUnit()->getListCasesDispo().size()<< std::endl;
+                             source->getUnit()->getListCasesDispo()[i]->getCelluleDispo()= {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
+                             source->getUnit()->getListCasesDispo()[i]->getCellulePrecedente()= { celluleCourante->getX(), celluleCourante->getY()};
+                             source->getUnit()->getListCasesDispo()[i]->setDistance(distanceDestination);
+                             evaluerDeplacement(source, prochaineCelluleCourante, distanceDestination);
+                        } // NOT ELSE, chemin plus court déjà rencontré
+                        break;
+                    }
+                 }
 
-                if (source->getUnit()->getMapCasesDispo().find(identifier(x_destination,y_destination))==source->getUnit()->getMapCasesDispo().end()){
+                 if (not isInList){
+                        std::cout << "size " << source->getUnit()->getListCasesDispo().size()<< std::endl;
+                        CaseDispo * caseDispo = new CaseDispo(); //TODO allocation mémoire
 
-                    CaseDispo caseDispo; //TODO allocation mémoire
-                    caseDispo.celluleDispo= {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
-                    caseDispo.cellulePrecedente= { celluleCourante->getX(), celluleCourante->getY()};
-                    caseDispo.distance = distanceDestination;
-                    source->getUnit()->getMapCasesDispo()[identifier(x_destination, y_destination)]=caseDispo;
-                    evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
-                }else{
-                    if(distanceDestination < source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance){
-                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].celluleDispo= {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
-                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].cellulePrecedente= { celluleCourante->getX(), celluleCourante->getY()};
-                         source->getUnit()->getMapCasesDispo()[identifier(x_destination,y_destination)].distance = distanceDestination;
-                         evaluerDeplacement(source, prochaineCelluleCourante, distanceCourante);
-                    } // NOT ELSE, chemin plus court déjà rencontré
-                }
+                        caseDispo->getCelluleDispo() = {prochaineCelluleCourante->getX(),prochaineCelluleCourante->getY()};
+                        caseDispo->getCellulePrecedente() = { celluleCourante->getX(), celluleCourante->getY()};
+                        caseDispo->setDistance(distanceDestination);
+                        source->getUnit()->getListCasesDispo().push_back(caseDispo);
+                        std::cout << "size ---------" << source->getUnit()->getListCasesDispo().size()<< std::endl;
+                        evaluerDeplacement(source, prochaineCelluleCourante, distanceDestination);
+                  }
+
             } //NOT ELSE, on n'est pas capable d'atteindre la case convoitée
-
+            else{
+                printf("condition d'arret distanceDestination dépassé \n");
+            }
         } else {
             printf("condition d'arret meme case\n");
         }
@@ -398,14 +413,14 @@ Cellule* GameMap::getCellIfExists(int x, int y)
 }
 
 void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int distanceCourante){
-    // donne les cases dispo en fonction des points rstants
-    int coutCellule = 2; // avoir une fonction qui calcule le coût de la cellule
-
+// faire circuler/explore ds les differentes directions si les cases sont dispo
 
     // si la cellule n'est pas disponible
 
-    if(celluleCourante == source){}
-   else if(celluleCourante->getUnit() != nullptr || celluleCourante->getBuilding() != nullptr){// TODO Building disponible!
+    if(celluleCourante == source){
+
+    }
+    else if(celluleCourante->getUnit() != nullptr || celluleCourante->getBuilding() != nullptr){// TODO Building disponible!
         return;
     }
 
@@ -413,30 +428,41 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
 
 
     int distanceMax = source->getUnit()->getValueMP();
+    std::cout << " distanceMax "<< distanceMax << std::endl;
+
 
     if( distanceCourante < distanceMax){
+
         int x = celluleCourante->getX();
         int y = celluleCourante->getY();
 
         //evaluer en haut
+        std::cout << distanceCourante << "haut" << std::endl;
+
         int x_destination = x;
         int y_destination = y - 1;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
-        qDebug() << "user selected an actionable unit \n";
 
 
         //evaluer en bas
+        std::cout << distanceCourante << "bas" << std::endl;
+
         x_destination = x;
         y_destination = y + 1;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
+
         //evaluer a gauche
+        std::cout << distanceCourante << "gauche" << std::endl;
+
         x_destination = x - 1;
         y_destination = y;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
 
         //evaluer a droite
+        std::cout << distanceCourante << "droite" << std::endl;
+
         x_destination = x + 1;
         y_destination = y;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);

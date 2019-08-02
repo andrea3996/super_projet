@@ -131,11 +131,11 @@ void MainWindow::drawDestinationCells(){
     QPainter painter(this);
     QColor activeColor = QColor(0, 0, 0, 128);
     QBrush brush(activeColor);
-    std::unordered_map<int, CaseDispo>:: iterator cd;
     if ( game->getUnitSelected() != nullptr){
-        qDebug() << game->getUnitSelected()->getMapCasesDispo().size();
-        for ( cd = game->getUnitSelected()->getMapCasesDispo().begin(); cd != game->getUnitSelected()->getMapCasesDispo().end(); cd++ ) {
-            QRect rectangle( cd->second.celluleDispo.first * game->getTailleCellule(),cd->second.celluleDispo.second* game->getTailleCellule(), game->getTailleCellule(), game->getTailleCellule());
+        qDebug() << game->getUnitSelected()->getListCasesDispo().size();
+
+        for ( size_t cd = 0; cd < game->getUnitSelected()->getListCasesDispo().size(); cd++ ) {
+            QRect rectangle( game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().first * game->getTailleCellule(),game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().second* game->getTailleCellule(), game->getTailleCellule(), game->getTailleCellule());
             QBrush brush(activeColor);
             painter.fillRect(rectangle, brush);
         }

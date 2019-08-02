@@ -34,7 +34,8 @@ SOURCES += \
     gamemap.cpp \
     unit.cpp \
     infantry.cpp \
-    shopwindow.cpp
+    shopwindow.cpp \
+    casedispo.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -45,7 +46,8 @@ HEADERS += \
     gamemap.h \
     unit.h \
     infantry.h \
-    shopwindow.h
+    shopwindow.h \
+    casedispo.h
 
 FORMS += \
         mainwindow.ui \

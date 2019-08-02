@@ -19,9 +19,7 @@ Unit::Unit(){
 
 }
 
-std::unordered_map<int,CaseDispo> Unit::getMapCasesDispo(){
-     return mapCasesDispo;
-}
+
 
 int Unit :: getMoveType(){
     return this->moveType;
@@ -65,6 +63,19 @@ void Unit::seDeplacer(int x, int y)
 Player* Unit::getOwner(){
     return owner;
 }
+
+std::vector<CaseDispo *> Unit::getListCasesDispo() const
+{
+    return listCasesDispo;
+}
+
+void Unit::setListCasesDispo(const std::vector<CaseDispo *> &value)
+{
+    listCasesDispo = value;
+}
+
+
+
 
 
 
@@ -188,3 +199,9 @@ NeoTank::NeoTank(int x, int y, Player* ow): Unit(x,y, ow)
 //T
     moveType = 2;
 }
+
+
+
+
+
+

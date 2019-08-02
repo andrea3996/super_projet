@@ -249,19 +249,23 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                     attaque();//TODO */
         }else{
             if(this->unitSelected != nullptr){ // deplacement
-                if ( unitSelected->getMapCasesDispo().find(this->map->identifier( unitSelected->get_x(),unitSelected->get_y())) != unitSelected->getMapCasesDispo().end()){
-                    int x =unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())].celluleDispo.first;
-                    int y = unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())].celluleDispo.second;
-                    this->deplacement(x,y);
-                    nextPlayer();
-                }else{
-                    std :: cout << "not available" << std :: endl;
-                }
+
+
+                for(){
+                    if ( unitSelected->getMapCasesDispo().find(this->map->identifier( unitSelected->get_x(),unitSelected->get_y())) != unitSelected->getMapCasesDispo().end()){
+                        int x =unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())]->getCelluleDispo().first;
+                        int y = unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())]->getCelluleDispo().second;
+                        this->deplacement(x,y);
+                        nextPlayer();
+                    }else{
+                        std :: cout << "not available" << std :: endl;
+                    }
 
             }else{
                 std :: cout << "select a location" << std :: endl;
             }
         }
+
 
     }
 

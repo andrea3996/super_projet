@@ -5,14 +5,8 @@
 //#include "cellule.h"
 //polymorphisme = tableau d'objets
 #include <unordered_map>
+#include "casedispo.h"
 
-
-typedef struct CaseDispo CaseDispo;
-struct CaseDispo {
-    std::pair<int,int> celluleDispo;
-    std::pair<int,int> cellulePrecedente;
-    int distance;
-};
 
 
 class Unit{
@@ -35,7 +29,11 @@ class Unit{
         bool getActionnable() const;
         void setActionnable(bool value);
         Player* getOwner();
-        std::unordered_map<int,CaseDispo> getMapCasesDispo();
+
+
+
+        std::vector<CaseDispo *> getListCasesDispo() const;
+        void setListCasesDispo(const std::vector<CaseDispo *> &value);
 
 protected:
         int x;
@@ -54,7 +52,7 @@ protected:
 
         Player* owner;
 
-        std::unordered_map<int,CaseDispo> mapCasesDispo;
+        std::vector<CaseDispo *> listCasesDispo;
 };
 
 
@@ -124,4 +122,8 @@ public:
     TankM(int x, int y, Player* ow);
 };
 
+
+
 #endif // UNITS_H
+
+
