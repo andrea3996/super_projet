@@ -66,7 +66,7 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"river", {2,1,0,0,1,0,0,0}});
     dico.insert({"hroad",{1,1,1,1,1,0,0,0}});
     dico.insert({"sea",{2,1,0,0,1,0,0,0}}); // Verifier valeur
-    dico.insert({"hsoal",{0,0,0,0,0,0,0,0}});
+    dico.insert({"hshoal",{0,0,0,0,0,0,0,0}});
     dico.insert({"reef",{0,0,0,0,1,2,2,0}});
     dico.insert({"hbridge",{0,0,0,0,1,2,2,0}});
 
@@ -75,13 +75,13 @@ std::map<string, vector<int> > GameMap::creationDico(){
     dico.insert({"airport",{1,1,1,1,1,0,0,0}});
     dico.insert({"base",{1,1,1,1,1,0,0,1}});
 
-    dico.insert({"greenearthcitycity", {1,1,1,1,1,0,0,0}}); //
-    dico.insert({"greenearthbase", {0,0,0,0,0,0,0,0}}); //
-    dico.insert({"greenearthairport", {0,0,0,0,0,0,0,0}}); //
+    dico.insert({"greenearthcity", {1,1,1,1,1,0,0,0}}); //
+    dico.insert({"greenearthbase", {1,1,1,1,1,0,0,0}}); //
+    dico.insert({"greenearthairport", {1,1,1,1,1,0,0,0}}); //
 
-    dico.insert({"orangestarcity", {0,0,0,0,0,0,0,0}}); //
-    dico.insert({"orangestarbase", {0,0,0,0,0,0,0,0}}); //
-    dico.insert({"orangestarairport", {0,0,0,0,0,0,0,0}}); //
+    dico.insert({"orangestarcity", {1,1,1,1,1,0,0,0}}); //
+    dico.insert({"orangestarbase", {1,1,1,1,1,0,0,0}}); //
+    dico.insert({"orangestarairport", {1,1,1,1,1,0,0,0}}); //
 
     return dico;
 }
@@ -144,8 +144,8 @@ void GameMap::creationBoard()
             }
             else if(mot == '\n')
             {
-                printf("max columns (x) = %d\n", x);
-                x =0;
+                // cout << "max columns (x) = " << x << endl;
+                x = 0;
 
                 int typeInteger = stoi(type);
                 string stringType = this->intTypeToStringType(typeInteger);
@@ -178,13 +178,14 @@ void GameMap::creationBoard()
         //fichier.close(); //TODO
 
     }
-    printf("max rows (y) = %d\n", y);
+    // printf("max rows (y) = %d\n", y);
 
     bool error = false;
     for (int x = 0; x < 21; x++) {
         for (int y = 0; y < 17; y++) {
             if(celluleBoard.find(identifier(x, y)) == celluleBoard.end()){
-                printf("cellule [%d,%d] is not loaded\n", x, y);
+                // printf("cellule [%d,%d] is not loaded\n", x, y);
+                // std::cout << std::flush;
                 error = true;
             }
         }
@@ -246,82 +247,82 @@ void GameMap::createBuilding(Cellule* cell,std::string type){
 string GameMap::intTypeToStringType(int value)
 {
     string type = "";
-        switch(value){
-            case 1:
-                type = "plain";
-                break;
+    switch(value){
+        case 1:
+            type = "plain";
+            break;
 
-            case 2:
-                type = "mountain";
-                break;
+        case 2:
+            type = "mountain";
+            break;
 
-            case 3:
-                type = "wood";
-                break;
+        case 3:
+            type = "wood";
+            break;
 
-            case 4: case 5: case 7: case 8: case 9: case 10:
-               type = "river";
-               break;
+        case 4: case 5: case 7: case 8: case 9: case 10:
+           type = "river";
+           break;
 
-            case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
-                type = "hpipe";
-                //hpipe Cellule(3,"hpipe.gif")
-                break;
+        case 101: case 104: case 102: case 106: case 107: case 108: case 109: case 110:
+            type = "hpipe";
+            //hpipe Cellule(3,"hpipe.gif")
+            break;
 
-            case 95: case 91:
-                type = "greenearthcity";
-                break;
-            case 92:
-                type = "greenearthbase";
-                break;
-            case 93:
-                type = "greenearthairport";
-                break;
-            case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
-                type = "hroad";
-                break;
-            case 30: //28
-                type = "sea";
-                break;
-            case 29:
-                type = "hshoal";
-                break;
-            case 33:
-                type = "reef";
-                break;
-            case 35: // neutral ////////////////
-                type = "base";
-                break;
-            case 36: // neutral
-                type = "airport";
-                break;
-            case 34:
-                type = "city";
-                // neutral city
-                break;
-            case 125: case 124: // Os city /////////////
-                type = "orangestarcity";
-                break;
-            case 123: //
-                type = "orangestarbase";
-                break;
-            case 122:
-                type = "orangestarairport";
-                break;
+        case 95: case 91:
+            type = "greenearthcity";
+            break;
+        case 92:
+            type = "greenearthbase";
+            break;
+        case 93:
+            type = "greenearthairport";
+            break;
+        case 15: case 16: case 18: case 19: case 20: case 21: case 22: case 23: case 24: case 25:
+            type = "hroad";
+            break;
+        case 30: //28
+            type = "sea";
+            break;
+        case 29:
+            type = "hshoal";
+            break;
+        case 33:
+            type = "reef";
+            break;
+        case 35: // neutral ////////////////
+            type = "base";
+            break;
+        case 36: // neutral
+            type = "airport";
+            break;
+        case 34:
+            type = "city";
+            // neutral city
+            break;
+        case 125: case 124: // Os city /////////////
+            type = "orangestarcity";
+            break;
+        case 123: //
+            type = "orangestarbase";
+            break;
+        case 122:
+            type = "orangestarairport";
+            break;
 
-            case 26:
-                type = "hbridge";
-                break;
-            /*case 125:
-                type = "city";
-            break;*/
+        case 26:
+            type = "hbridge";
+            break;
+        /*case 125:
+            type = "city";
+        break;*/
 
-            default:
-                type= "hpipe";
-        }
-        if (type=="") {
-            std::cout << "cellule mal définie pour id " << value << std::endl;
-        }
+        default:
+            type= "hpipe";
+    }
+    if (type=="") {
+        std::cout << "cellule mal définie pour id " << value << std::endl;
+    }
     return type;
 }
 
@@ -334,7 +335,7 @@ Cellule* GameMap::getCell(int x, int y){
     //std::cout << "Ca fait:"<<x+1 <<" "<< y+1 << std::endl;
 
     if(celluleBoard.find(identifier(x,y)) == celluleBoard.end()){
-        printf("cellule does not exist at location [%d, %d] for a size =%d\n", x, y, celluleBoard.size());
+        cout << "cellule does not exist at location [" << x << ", " << y << "] for a size =" << celluleBoard.size() << endl;
         exit(0);
     }
 
@@ -349,13 +350,21 @@ Cellule* GameMap::getCell(int x, int y){
 void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_destination, Cellule* celluleCourante, int distanceCourante)
 // check if case available
 {
-    if(x_destination > 0 && y_destination > 0 && x_destination < game->getColums() && y_destination < game->getRows()){
+    if(x_destination >= 0 && y_destination >= 0 && x_destination < game->getColums() && y_destination < game->getRows()){
 
         Cellule* prochaineCelluleCourante = getCell(x_destination, y_destination);
 
+        std::cout  << " " << prochaineCelluleCourante->getType() << " " << source->getUnit()->getMoveType() << endl;;
+        if(this->dico.count(prochaineCelluleCourante->getType()) == 0){
+            std::cerr << "dico ne contient pas " << prochaineCelluleCourante->getType() << endl;
+        }
         int movePoint = this->dico[prochaineCelluleCourante->getType()][source->getUnit()->getMoveType()];
+        if(movePoint == 0) {
+            return;
+        }
+        std::cout << "(" << x_destination << ", " << y_destination << ") movepoint:" << movePoint << std::endl;
 
-        if(source->getX() != x_destination || source->getY() != y_destination){
+        if(source->getX() != x_destination || source->getY() != y_destination){ // if la destination n'existe pas déjà dans la liste des cases dispos
             int distanceDestination = distanceCourante + movePoint;
             std::pair <int, int > destination = {x_destination,y_destination};
 
@@ -390,13 +399,13 @@ void GameMap::continuerEvaluation(Cellule* source, int x_destination, int y_dest
 
             } //NOT ELSE, on n'est pas capable d'atteindre la case convoitée
             else{
-                printf("condition d'arret distanceDestination dépassé \n");
+                cout << ("condition d'arret distanceDestination dépassé") << endl;;
             }
         } else {
-            printf("condition d'arret meme case\n");
+             cout << ("condition d'arret meme case") << endl;;
         }
     } else {
-        printf("condition d'arret hors case\n");
+        cout << ("condition d'arret hors case") << endl;
     }
 }
 
@@ -425,7 +434,7 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
     }
 
 
-
+    // rajouter la case dans les cases dispos
 
     int distanceMax = source->getUnit()->getValueMP();
     std::cout << " distanceMax "<< distanceMax << std::endl;
@@ -437,7 +446,7 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
         int y = celluleCourante->getY();
 
         //evaluer en haut
-        std::cout << distanceCourante << "haut" << std::endl;
+        std::cout << distanceCourante << " haut " << std::endl;
 
         int x_destination = x;
         int y_destination = y - 1;
@@ -445,7 +454,7 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
 
 
         //evaluer en bas
-        std::cout << distanceCourante << "bas" << std::endl;
+        std::cout << distanceCourante << " bas" << std::endl;
 
         x_destination = x;
         y_destination = y + 1;
@@ -453,7 +462,7 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
 
 
         //evaluer a gauche
-        std::cout << distanceCourante << "gauche" << std::endl;
+        std::cout << distanceCourante << " gauche" << std::endl;
 
         x_destination = x - 1;
         y_destination = y;
@@ -461,14 +470,14 @@ void GameMap::evaluerDeplacement(Cellule* source, Cellule* celluleCourante, int 
 
 
         //evaluer a droite
-        std::cout << distanceCourante << "droite" << std::endl;
+        std::cout << distanceCourante << " droite" << std::endl;
 
         x_destination = x + 1;
         y_destination = y;
         continuerEvaluation(source, x_destination, y_destination, celluleCourante, distanceCourante);
 
     } else {
-        printf("condition d'arret pas assez de points \n");
+        cout << ("condition d'arret pas assez de points") << endl;
 
     }
 }

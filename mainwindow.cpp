@@ -131,13 +131,24 @@ void MainWindow::drawDestinationCells(){
     QPainter painter(this);
     QColor activeColor = QColor(0, 0, 0, 128);
     QBrush brush(activeColor);
+    int tc = game->getTailleCellule();
     if ( game->getUnitSelected() != nullptr){
         qDebug() << game->getUnitSelected()->getListCasesDispo().size();
 
         for ( size_t cd = 0; cd < game->getUnitSelected()->getListCasesDispo().size(); cd++ ) {
-            QRect rectangle( game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().first * game->getTailleCellule(),game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().second* game->getTailleCellule(), game->getTailleCellule(), game->getTailleCellule());
+            int xa = game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().first;
+            int ya = game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().second;
+            QRect rectangle( xa * tc, ya * tc, tc, tc);
             QBrush brush(activeColor);
             painter.fillRect(rectangle, brush);
+
+            int xb = game->getUnitSelected()->getListCasesDispo()[cd]->getCellulePrecedente().first;
+            int yb = game->getUnitSelected()->getListCasesDispo()[cd]->getCellulePrecedente().second;
+            int dx = xb - xa;
+            int dy = yb - ya;
+            // dx = dy = 0;
+            //std::cout << "(" << dx << " " << dy << std::endl;
+            painter.fillRect(xa * tc + dx * tc/4 + tc/4, ya * tc + dy * tc/4 + tc/4, tc/2, tc/2, Qt::red);
         }
     }
 

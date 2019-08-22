@@ -175,10 +175,12 @@ void Game::buy(std::string type, Cellule* cell){
             cell->setUnit(u);
         } else {
             printf("JE NE DEVRAIS JAMAIS ETRE ICI\n");
+            std::cout << std::flush;
         }
 
 
         //printf("unite[%s] achete par %s\n", cell->getUnit()->getIdentity().c_str(), cell->getUnit()->getOwner()->getTeamColor().c_str());
+        std::cout << std::flush;
 
         this->lp->buy(price);
         nextPlayer();
@@ -203,6 +205,7 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
     cell.second= -1;
 
     printf("selected block [%d, %d]\n", x, y);
+    std::cout << std::flush;
 
     if (x >= 0 and  x < this->column  and y >= 0 and y < this->rows)
     {
@@ -222,10 +225,15 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                 if (unitClic->getActionnable()){
                     this->unitSelected = unitClic;
                     if ( true ){
-                            this->unitSelected->getMapCasesDispo().clear();
+                            this->unitSelected->getListCasesDispo().clear();
                             Cellule* cell = this->map->getCell(this->unitSelected->get_x(), this->unitSelected->get_y());
+                            // rajouter la cell aux cases dispos
+                            qDebug() << "begin evaluerDeplacement";
                             this->map->evaluerDeplacement(cell,cell, 0);//TODO
-                            qDebug() << "user selected an actionable unit \n";
+                            qDebug() << "user selected an actionable unit";
+                            for(CaseDispo* c : this->unitSelected->getListCasesDispo()) {
+                                qDebug() << c->getCelluleDispo() << c->getDistance();
+                            }
 
                     }
                     qDebug() << "user selected a unit \n";
@@ -250,18 +258,21 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
         }else{
             if(this->unitSelected != nullptr){ // deplacement
 
-
-                for(){
-                    if ( unitSelected->getMapCasesDispo().find(this->map->identifier( unitSelected->get_x(),unitSelected->get_y())) != unitSelected->getMapCasesDispo().end()){
-                        int x =unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())]->getCelluleDispo().first;
-                        int y = unitSelected->getMapCasesDispo()[this->map->identifier( unitSelected->get_x(),unitSelected->get_y())]->getCelluleDispo().second;
-                        this->deplacement(x,y);
-                        nextPlayer();
-                    }else{
-                        std :: cout << "not available" << std :: endl;
+                bool found = false;
+                int x2, y2;
+                for(std::size_t i = 0; i < unitSelected->getListCasesDispo().size(); i++){
+                    if ( unitSelected->getListCasesDispo()[i]->getCelluleDispo().first == cell.first && unitSelected->getListCasesDispo()[i]->getCelluleDispo().second == cell.second  ){
+                        x2 = unitSelected->getListCasesDispo()[i]->getCelluleDispo().first;
+                        y2 = unitSelected->getListCasesDispo()[i]->getCelluleDispo().second;
+                        found = true;
+                        break;
                     }
-
-            }else{
+                }
+                if(found) {
+                    this->deplacement(x2,y2);
+                    nextPlayer();
+                }
+            } else {
                 std :: cout << "select a location" << std :: endl;
             }
         }
@@ -274,14 +285,15 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 }
 
 void Game::nextPlayer(){
-    printf("active_player[%s] just played\n", this->lp->getTeamColor().c_str());
+    std::cout << "active_player[%s] just played" << this->lp->getTeamColor() << std::endl;;
+
     this->tour = (this->tour + 1) % static_cast<int>(players.size());
     this->lp = players.at(this->tour);
     this->mainWindow->update();
 }
 
 void Game::deplacement(int x, int y){
-// action se deplacer 
+    // action se deplacer
     std::cout << unitSelected << std::endl;
     std::cout << unitSelected->get_x() << " --- " << unitSelected->get_y() << std::endl;
 
@@ -290,7 +302,7 @@ void Game::deplacement(int x, int y){
     //1.
 
     destinationCell->setUnit(unitSelected);
-//    sourceCell->setUnit(nullptr);
+    //    sourceCell->setUnit(nullptr);
     sourceCell->clearUnit();
     this->unitSelected->seDeplacer(x,y);
     std::cout << this->map->getCell(unitSelected->get_x(),unitSelected->get_y())->getUnit() << std::endl;

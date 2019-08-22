@@ -7,10 +7,10 @@
 class CaseDispo {
     public :
         CaseDispo();
-        std::pair<int,int> getCelluleDispo();
-        std::pair<int,int> getCellulePrecedente();
+        std::pair<int,int> & getCelluleDispo();
+        std::pair<int,int> & getCellulePrecedente();
         int getDistance();
-        int setDistance(int distance);
+        void setDistance(int distance);
     private :
         std::pair<int,int> celluleDispo;
         std::pair<int,int> cellulePrecedente;

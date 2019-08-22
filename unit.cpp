@@ -64,7 +64,7 @@ Player* Unit::getOwner(){
     return owner;
 }
 
-std::vector<CaseDispo *> Unit::getListCasesDispo() const
+std::vector<CaseDispo *> & Unit::getListCasesDispo()
 {
     return listCasesDispo;
 }

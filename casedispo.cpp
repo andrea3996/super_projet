@@ -5,12 +5,12 @@ CaseDispo::CaseDispo()
 
 }
 
-std::pair<int, int> CaseDispo::getCelluleDispo()
+std::pair<int, int> & CaseDispo::getCelluleDispo()
 {
     return celluleDispo;
 }
 
-std::pair<int, int> CaseDispo::getCellulePrecedente()
+std::pair<int, int> & CaseDispo::getCellulePrecedente()
 {
     return cellulePrecedente;
 }
@@ -20,7 +20,7 @@ int CaseDispo::getDistance()
     return distance;
 }
 
-int CaseDispo::setDistance(int distance)
+void CaseDispo::setDistance(int distance)
 {
     this->distance = distance;
 }

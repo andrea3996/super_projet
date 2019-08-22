@@ -32,7 +32,7 @@ class Unit{
 
 
 
-        std::vector<CaseDispo *> getListCasesDispo() const;
+        std::vector<CaseDispo *> & getListCasesDispo();
         void setListCasesDispo(const std::vector<CaseDispo *> &value);
 
 protected:

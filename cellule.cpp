@@ -81,9 +81,8 @@ int Cellule::test()
     std::cout << "HALO" << std::endl;
     return 0 ;
 }
-std::string Cellule::getLocation(){
-    return ""; // TODO
-
+std::string Cellule::getLocation() {
+    return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
 }
 
 void Cellule:: setBuilding(Building *building){
