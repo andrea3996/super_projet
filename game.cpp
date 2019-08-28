@@ -232,7 +232,7 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                             this->map->evaluerDeplacement(cell,cell, 0);//TODO
                             qDebug() << "user selected an actionable unit";
                             for(CaseDispo* c : this->unitSelected->getListCasesDispo()) {
-                                qDebug() << c->getCelluleDispo() << c->getDistance();
+                                //qDebug() << c->getCelluleDispo() << c->getDistance();
                             }
 
                     }

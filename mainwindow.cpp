@@ -24,7 +24,7 @@ MainWindow::MainWindow(Game* game, QWidget *parent) : QMainWindow(parent), ui(ne
     tour = 0;
     QDesktopWidget dw;
 
-    setFixedSize(game->getTailleCellule()*game->getColums(), game->getTailleCellule()*game->getRows());
+    setFixedSize(game->getTailleCellule()*game->getColums()+100, game->getTailleCellule()*game->getRows());
     terrain = true;
     shopWindow = false;
     //timer.start(10);
@@ -84,6 +84,8 @@ void MainWindow::drawCells(){
             }
         }
     }
+
+
 }
 
 void MainWindow::drawSelectableUnits(){
@@ -135,6 +137,11 @@ void MainWindow::drawDestinationCells(){
     if ( game->getUnitSelected() != nullptr){
         qDebug() << game->getUnitSelected()->getListCasesDispo().size();
 
+
+        painter.drawPixmap(game->getTailleCellule()*game->getColums(),0,game->getTailleCellule()*2 ,game->getTailleCellule()*2 ,dicoQPixUnit[game->getUnitSelected()->getIdentity()]);
+        QString pointDeVie = "Points de vie: " + QString::number(game->getUnitSelected()->getPointsDeVie());
+        QPoint p(game->getTailleCellule()*game->getColums(),game->getTailleCellule()*2+5);
+        painter.drawText(p,pointDeVie);
         for ( size_t cd = 0; cd < game->getUnitSelected()->getListCasesDispo().size(); cd++ ) {
             int xa = game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().first;
             int ya = game->getUnitSelected()->getListCasesDispo()[cd]->getCelluleDispo().second;

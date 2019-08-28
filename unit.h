@@ -23,6 +23,7 @@ class Unit{
         Unit();
         int getMoveType();
         int getValueMP();
+        int getPointsDeVie();
         std::string getIdentity();
 
 

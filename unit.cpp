@@ -25,6 +25,9 @@ int Unit :: getMoveType(){
     return this->moveType;
 }
 
+int Unit :: getPointsDeVie(){
+    return this->pointsDeVie;
+}
 std::string Unit :: getIdentity(){
     return this->identity;
 }
