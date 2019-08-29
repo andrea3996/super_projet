@@ -142,8 +142,11 @@ void MainWindow::drawDestinationCells(){
     if ( game->getUnitSelected() != nullptr){
         qDebug() << game->getUnitSelected()->getListCasesDispo().size();
 
-
-        painter.drawPixmap(game->getTailleCellule()*game->getColums(),0,game->getTailleCellule()*2 ,game->getTailleCellule()*2 ,dicoQPixUnit[game->getUnitSelected()->getIdentity()]);
+        std :: string identity = game->getUnitSelected()->getIdentity();
+        if (game->getUnitSelected()->getOwner()->getTeamColor() != "green"){
+            identity = identity + "R";
+        }
+        painter.drawPixmap(game->getTailleCellule()*game->getColums(),0,game->getTailleCellule()*2 ,game->getTailleCellule()*2 ,dicoQPixUnit[identity]);
         QString pointDeVie = "Points de vie: " + QString::number(game->getUnitSelected()->getPointsDeVie());
         QPoint p(game->getTailleCellule()*game->getColums(),game->getTailleCellule()*2+5);
         painter.drawText(p,pointDeVie);
