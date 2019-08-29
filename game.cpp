@@ -40,7 +40,7 @@ Game::Game() : buildings(std::vector<Building>()), players(std::vector<Player*>(
     this->column = 21;
     this->map = new GameMap(this);
     this->tour = 0;
-
+    this->attaqueMode = false;
 
 
     players.push_back(greenPlayer);
@@ -121,7 +121,7 @@ int Game::getUnitCost(std::string type)
  * @param cell cellule sur laquelle se trouve l'usine quoi !
  */
 void Game::buy(std::string type, Cellule* cell){
-    // 
+    //
     int price = this->getUnitCost(type);
     Unit* u = nullptr;
     if (this->lp->hasEnoughMoney(price)) {
@@ -220,7 +220,14 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 
 
             if(unitClic->getOwner() != this->lp){
-                qDebug() << "It's not your turn to play \n";
+                if(this->attaqueMode == true) {
+                    unitClic->attaquer();
+                    qDebug() << "Unit has been under attack";
+                    nextPlayer();
+
+                } else {
+                    qDebug() << "It's not your turn to play \n";
+                }
             } else {
                 if (unitClic->getActionnable()){
                     this->unitSelected = unitClic;
@@ -256,7 +263,7 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                 if( buildingClic is in caseDispo)//TODO
                     attaque();//TODO */
         }else{
-            if(this->unitSelected != nullptr){ // deplacement
+            if(this->unitSelected != nullptr && this->attaqueMode == false){ // deplacement
 
                 bool found = false;
                 int x2, y2;
@@ -269,8 +276,30 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
                     }
                 }
                 if(found) {
+
+
+                    bool userCanAttack = false;
+                    for (std::size_t i = 0; i < unitSelected->getListCasesDispo().size(); i++) {
+                        int x3 = unitSelected->getListCasesDispo()[i]->getCelluleDispo().first;
+                        int y3 = unitSelected->getListCasesDispo()[i]->getCelluleDispo().second;
+
+                        if(this->getMap()->getCell(x3, y3)->getUnit() != nullptr && this->getMap()->getCell(x3, y3)->getUnit()->getOwner() != this->lp){
+                            userCanAttack = true;
+                        }
+
+                    }
+
                     this->deplacement(x2,y2);
-                    nextPlayer();
+
+
+
+                    if(userCanAttack){
+                        this->mainWindow->openAttaqueWindow();
+
+                    } else {
+                        nextPlayer();
+
+                    }
                 }
             } else {
                 std :: cout << "select a location" << std :: endl;
@@ -285,10 +314,12 @@ std:: pair<int,int>  Game::play(int xPixel, int yPixel) {
 }
 
 void Game::nextPlayer(){
-    std::cout << "active_player[%s] just played" << this->lp->getTeamColor() << std::endl;;
 
     this->tour = (this->tour + 1) % static_cast<int>(players.size());
     this->lp = players.at(this->tour);
+    this->unitSelected = nullptr;
+
+    this->attaqueMode = false;
     this->mainWindow->update();
 }
 
@@ -310,5 +341,9 @@ void Game::deplacement(int x, int y){
 
 }
 
-
-
+void Game::setAttaqueMode(bool attaqueSelected) {
+    this->attaqueMode = attaqueSelected;
+    if(this->attaqueMode == false) {
+        nextPlayer();
+    }
+}

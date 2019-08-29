@@ -17,7 +17,7 @@
 
 #include "game.h"
 #include "shopwindow.h"
-
+#include "attaquewindow.h"
 
 using std::string;
 
@@ -45,6 +45,7 @@ public:
     void drawDestinationCells();
 
     void openShopWindow(Cellule* cellule);
+    void openAttaqueWindow();
 
     void paintEventBuilding(std::string a, int i, int j);
 
@@ -70,6 +71,7 @@ private:
     bool shopWindow;
 
     ShopWindow *shopwindow;
+    AttaqueWindow *attaqueWinfow;
     int xCursor = 0;
     int yCursor  = 0;
 };

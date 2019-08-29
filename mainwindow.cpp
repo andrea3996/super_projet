@@ -54,7 +54,12 @@ void MainWindow::drawCells(){
             type = this->game->getCellType(j,i);
             unitType = this->game->getUnitType(j,i);
             if (unitType != "") {
+                if (this->game->getMap()->getCell(j, i)->getUnit()->getOwner()->getTeamColor() == "green"){
                 painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType]);
+                }
+                else {
+                painter.drawPixmap(game->getTailleCellule() *j,game->getTailleCellule() *i,game->getTailleCellule() ,game->getTailleCellule() ,dicoQPixUnit[unitType+"R"]);
+                }
             } else {
                 if(this->game->getMap()->getCell(j, i)->getBuilding() != nullptr){
 
@@ -234,15 +239,15 @@ std::map<string, QPixmap> MainWindow::creationDicoQPixUnit(){
     dicoQPixUnit.insert({"TankM", QPixmap(":/unit/TankM.png")});
 
     //OrangeStar/ Red Units #ou trouver les bonnes images ?
-    dicoQPixUnit.insert({"antiairR", QPixmap(":/unit/antiairR.png")});
-    dicoQPixUnit.insert({"bcopter", QPixmap(":/unit/bcopterR.png")});
-    dicoQPixUnit.insert({"bomberR", QPixmap(":/unit/bomberR.png")});
-    dicoQPixUnit.insert({"fighterR", QPixmap(":/unit/fighterR.png")});
-    dicoQPixUnit.insert({"osinfantry", QPixmap(":/unit/osinfantry.png")});
-    dicoQPixUnit.insert({"megatankR", QPixmap(":/unit/megatankR.png")});
-    dicoQPixUnit.insert({"neotankR", QPixmap(":/unit/neotankR.png")});
-    dicoQPixUnit.insert({"reconR", QPixmap(":/unit/reconR.png")});
-    dicoQPixUnit.insert({"tankR", QPixmap(":/unit/tankR.png")});
+    dicoQPixUnit.insert({"AntiAirR", QPixmap(":/unit/antiairR.png")});
+    dicoQPixUnit.insert({"BcopterR", QPixmap(":/unit/bcopterR.png")});
+    dicoQPixUnit.insert({"BomberR", QPixmap(":/unit/bomberR.png")});
+    dicoQPixUnit.insert({"FighterR", QPixmap(":/unit/fighterR.png")});
+    dicoQPixUnit.insert({"InfantryR", QPixmap(":/unit/osinfantry.png")});
+    dicoQPixUnit.insert({"MegaTankR", QPixmap(":/unit/megatankR.png")});
+    dicoQPixUnit.insert({"NeoTankR", QPixmap(":/unit/neotankR.png")});
+    dicoQPixUnit.insert({"ReconR", QPixmap(":/unit/reconR.png")});
+    dicoQPixUnit.insert({"TankMR", QPixmap(":/unit/tankR.png")});
 
 
     return dicoQPixUnit;
@@ -259,4 +264,10 @@ void MainWindow::openShopWindow(Cellule* cellule)
     ShopWindow shopWindow(nullptr, cellule, this->game); // variable de classe (this->)
     shopWindow.setModal(true);
     shopWindow.exec();
+}
+
+void MainWindow::openAttaqueWindow() {
+    AttaqueWindow attaqueWindow(nullptr, game);
+    attaqueWindow.setModal(true);
+    attaqueWindow.exec();
 }

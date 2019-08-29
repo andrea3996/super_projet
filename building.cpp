@@ -35,4 +35,3 @@ Base::Base() : Building()
 {
     type = "base";
 }
-

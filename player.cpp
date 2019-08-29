@@ -31,3 +31,4 @@ void Player::buy(int price){
         exit(10); // TODO: !!!!! it should never happen
     }
 }
+

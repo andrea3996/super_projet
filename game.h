@@ -27,6 +27,7 @@ class Game
         unsigned int tour;
         void deplacement(int x, int y);
         void nextPlayer();
+        bool attaqueMode;
 
 
 
@@ -54,6 +55,7 @@ class Game
 
         Player* getLp();
         void setLp(Player * value);
+        void setAttaqueMode(bool attaqueSelected);
 
         GameMap* getMap();
         Player* getOrangePlayer();

@@ -20,6 +20,13 @@ Unit::Unit(){
 }
 
 
+void Unit::attaquer() {
+    if(this->pointsDeVie > 0){
+        this->pointsDeVie = this->pointsDeVie - 1;
+    }
+    printf("Unit a perdu des points de vie! Reste %d points de vie", this->pointsDeVie);
+}
+
 
 int Unit :: getMoveType(){
     return this->moveType;
@@ -202,9 +209,6 @@ NeoTank::NeoTank(int x, int y, Player* ow): Unit(x,y, ow)
 //T
     moveType = 2;
 }
-
-
-
 
 
 

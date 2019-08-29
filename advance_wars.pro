@@ -35,7 +35,8 @@ SOURCES += \
     unit.cpp \
     infantry.cpp \
     shopwindow.cpp \
-    casedispo.cpp
+    casedispo.cpp \
+    attaquewindow.cpp
 
 HEADERS += \
     mainwindow.h \
@@ -47,11 +48,14 @@ HEADERS += \
     unit.h \
     infantry.h \
     shopwindow.h \
-    casedispo.h
+    casedispo.h \
+    attaquewindow.h
 
 FORMS += \
         mainwindow.ui \
-    shopwindow.ui
+    shopwindow.ui \
+    ../../attaquewindow.ui \
+    ../../attaquewindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
